@@ -1,0 +1,93 @@
+---
+# Model configurations for Zero-Day Detection System
+
+models:
+  ForensicAnalyst:
+    provider: "mistralai"
+    model_id: "mistralai/mixtral-8x22b-instruct"
+    description: "Large mixture-of-experts model for forensic analysis"
+    max_context: 65536
+    cost_per_1k_tokens:
+      input: 0.009
+      output: 0.009
+    capabilities:
+      - "forensic_analysis"
+      - "pattern_matching"
+      - "timeline_reconstruction"
+  
+  PatternDetector:
+    provider: "anthropic"
+    model_id: "anthropic/claude-opus-4"
+    description: "Claude Opus 4 - Most advanced pattern recognition"
+    max_context: 200000
+    cost_per_1k_tokens:
+      input: 0.015
+      output: 0.075
+    capabilities:
+      - "pattern_recognition"
+      - "linguistic_analysis"
+      - "anomaly_detection"
+  
+  TemporalAnalyst:
+    provider: "meta"
+    model_id: "meta-llama/llama-3.3-70b-instruct"
+    description: "Llama 3.3 70B - Advanced temporal reasoning"
+    max_context: 131072
+    cost_per_1k_tokens:
+      input: 0.00268
+      output: 0.00354
+    capabilities:
+      - "temporal_reasoning"
+      - "sequence_analysis"
+      - "trend_detection"
+  
+  AttributionExpert:
+    provider: "deepseek"
+    model_id: "deepseek/deepseek-r1-0528"
+    description: "DeepSeek R1 - Advanced threat attribution"
+    max_context: 32768
+    cost_per_1k_tokens:
+      input: 0.00014
+      output: 0.00028
+    capabilities:
+      - "threat_attribution"
+      - "target_analysis"
+      - "sophistication_assessment"
+  
+  MetaAnalyst:
+    provider: "google"
+    model_id: "google/gemini-2.5-pro"
+    description: "Gemini 2.5 Pro - Advanced meta-analysis"
+    max_context: 2097152
+    cost_per_1k_tokens:
+      input: 0.0025
+      output: 0.0075
+    capabilities:
+      - "meta_analysis"
+      - "evidence_synthesis"
+      - "holistic_assessment"
+
+# Fallback models in case primary models are unavailable
+fallback_models:
+  default: "openai/gpt-3.5-turbo"
+  high_performance: "openai/gpt-4-turbo-preview"
+
+# Model selection criteria
+selection_criteria:
+  cost_weight: 0.3
+  performance_weight: 0.5
+  availability_weight: 0.2
+
+# Rate limiting configuration per model
+rate_limits:
+  default:
+    requests_per_minute: 60
+    tokens_per_minute: 90000
+  
+  anthropic:
+    requests_per_minute: 50
+    tokens_per_minute: 80000
+  
+  google:
+    requests_per_minute: 30
+    tokens_per_minute: 60000

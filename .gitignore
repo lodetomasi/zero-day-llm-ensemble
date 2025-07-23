@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Logs
+logs/*.log
+*.log
+
+# Cache
+cache/
+.cache/
+*.cache
+
+# Data (except cache)
+data/dataset_*.csv
+data/*.tmp
+
+# Results
+results/
+!results/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# API Keys and Secrets
+.env
+config/secrets.py
+
+# Temporary files
+*.tmp
+*.bak
+test_*.py
+verify_*.py
+*_test_results_*.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Distribution
+dist/
+build/
+*.egg-info/

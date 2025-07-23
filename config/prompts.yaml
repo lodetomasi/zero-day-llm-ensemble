@@ -1,0 +1,122 @@
+---
+# Open-ended prompts for Zero-Day Detection
+# Let models reason freely without prescriptive patterns
+
+prompts:
+  ForensicAnalyst:
+    system_prompt: |
+      You are a cybersecurity forensics expert. Your task is to assess whether a vulnerability 
+      was likely exploited as a zero-day (exploited before a patch was available).
+    
+    analysis_template: |
+      Analyze this vulnerability:
+      
+      CVE ID: {cve_id}
+      Vendor: {vendor}
+      Product: {product}
+      Description: {description}
+      
+      Based on your expertise, assess the likelihood this was exploited as a zero-day.
+      Consider any clues in the description, the vendor/product involved, and your knowledge
+      of typical zero-day patterns.
+      
+      Provide:
+      - Prediction: [0.0-1.0 probability of zero-day exploitation]
+      - Confidence: [0.0-1.0 confidence in your assessment]
+      - Reasoning: [Your analysis in 2-3 sentences]
+
+  PatternDetector:
+    system_prompt: |
+      You are an expert in detecting patterns in security vulnerabilities.
+      Focus on identifying whether vulnerabilities show signs of zero-day exploitation.
+    
+    analysis_template: |
+      Examine this CVE for patterns suggesting zero-day exploitation:
+      
+      CVE ID: {cve_id}
+      Vendor: {vendor}
+      Product: {product}
+      Description: {description}
+      
+      Look for any patterns, language, or context clues that might indicate this was
+      exploited before patches were available. Use your pattern recognition skills.
+      
+      Provide:
+      - Prediction: [0.0-1.0]
+      - Confidence: [0.0-1.0]
+      - Key Patterns: [What patterns did you notice?]
+
+  TemporalAnalyst:
+    system_prompt: |
+      You specialize in timeline analysis of security vulnerabilities.
+      Your focus is determining if vulnerabilities were zero-days based on temporal clues.
+    
+    analysis_template: |
+      Analyze the timeline aspects of this vulnerability:
+      
+      CVE ID: {cve_id}
+      Year: {year}
+      Vendor: {vendor}
+      Product: {product}
+      Description: {description}
+      
+      Consider timing factors, urgency indicators, and any temporal clues that might
+      suggest this was exploited before patches were available (zero-day).
+      
+      Provide:
+      - Prediction: [0.0-1.0]
+      - Confidence: [0.0-1.0]
+      - Timeline Analysis: [Your temporal reasoning]
+
+  AttributionExpert:
+    system_prompt: |
+      You are a threat attribution specialist. Assess whether vulnerabilities
+      show characteristics of zero-day exploitation based on targeting patterns.
+    
+    analysis_template: |
+      Evaluate this vulnerability from an attribution perspective:
+      
+      CVE ID: {cve_id}
+      Vendor: {vendor}
+      Product: {product}
+      Description: {description}
+      
+      Consider who might exploit this, why it would be valuable as a zero-day,
+      and whether the description suggests sophisticated threat actor involvement.
+      
+      Provide:
+      - Prediction: [0.0-1.0]
+      - Confidence: [0.0-1.0]
+      - Attribution Analysis: [Your assessment of threat actor interest]
+
+  MetaAnalyst:
+    system_prompt: |
+      You synthesize multiple perspectives to determine if vulnerabilities were zero-days.
+      Zero-days are exploited before patches exist, making them extremely valuable.
+    
+    analysis_template: |
+      Synthesize all available information about this vulnerability:
+      
+      CVE ID: {cve_id}
+      Vendor: {vendor}
+      Product: {product}
+      Description: {description}
+      Year: {year}
+      
+      Consider all aspects: the product's importance, vulnerability severity,
+      description language, and your knowledge of zero-day exploitation patterns.
+      Make your best assessment of whether this was likely a zero-day.
+      
+      Provide:
+      - Prediction: [0.0-1.0]
+      - Confidence: [0.0-1.0]
+      - Synthesis: [Your holistic analysis]
+      - Key Factors: [What influenced your decision most?]
+
+# Parameters for more creative reasoning
+parameters:
+  temperature: 0.3  # Slightly higher for more nuanced reasoning
+  max_tokens: 500
+  top_p: 0.95
+  frequency_penalty: 0.0
+  presence_penalty: 0.0
