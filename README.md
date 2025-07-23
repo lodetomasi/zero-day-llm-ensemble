@@ -1,133 +1,133 @@
 # Zero-Day LLM Ensemble
 
-Sistema di rilevamento zero-day basato su ensemble di LLM che classifica vulnerabilità CVE senza data leakage.
+A sophisticated zero-day vulnerability detection system using an ensemble of specialized LLMs without data leakage.
 
-## 🎯 Caratteristiche Principali
+## 🎯 Key Features
 
-- **5 Agenti LLM Specializzati**: Analisi multi-prospettiva delle vulnerabilità
-- **Zero Data Leakage**: Classificazione basata esclusivamente sul contenuto CVE
-- **Prompt Open-Ended**: I modelli ragionano liberamente senza pattern hardcoded
-- **Visualizzazioni Automatiche**: 6 grafici di performance generati automaticamente
-- **Monitoraggio Real-time**: Statistiche live durante l'esecuzione
+- **5 Specialized LLM Agents**: Multi-perspective vulnerability analysis
+- **Zero Data Leakage**: Classification based solely on CVE content
+- **Open-Ended Prompts**: Models reason freely without hardcoded patterns
+- **Automatic Visualizations**: 6 performance charts generated automatically
+- **Real-time Monitoring**: Live statistics during execution
 
 ## 📊 Performance
 
-Su dataset bilanciato (50 CVE: 25 zero-day, 25 regular):
+On balanced dataset (50 CVEs: 25 zero-day, 25 regular):
 
 - **Accuracy**: ~70%
-- **Precision**: ~80% (basso tasso di falsi positivi)
-- **Recall**: ~45% (identifica quasi metà degli zero-day)
-- **Zero falsi positivi** su CVE regular in molti test
+- **Precision**: ~80% (low false positive rate)
+- **Recall**: ~45% (identifies nearly half of zero-days)
+- **Zero false positives** on regular CVEs in many tests
 
 ## 🚀 Quick Start
 
-### 1. Installazione
+### 1. Installation
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/zero-day-llm-ensemble.git
+git clone https://github.com/lodetomasi/zero-day-llm-ensemble.git
 cd zero-day-llm-ensemble
 
-# Installa dipendenze
+# Install dependencies
 pip install -r requirements.txt
 
-# Configura API key OpenRouter
+# Set OpenRouter API key
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
-### 2. Esegui Test
+### 2. Run Tests
 
 ```bash
-# Test veloce (20 CVE, ~5 minuti)
+# Quick test (20 CVEs, ~5 minutes)
 python run_complete_test.py --zero-days 10 --regular 10 --parallel
 
-# Test medio (50 CVE, ~15 minuti) 
+# Medium test (50 CVEs, ~15 minutes) 
 python run_complete_test.py --zero-days 25 --regular 25 --parallel
 
-# Test completo (100 CVE, ~30 minuti)
+# Full test (100 CVEs, ~30 minutes)
 python run_complete_test.py --zero-days 50 --regular 50 --parallel
 ```
 
-### 3. Output
+### 3. Results
 
-I risultati vengono salvati in:
-- `results/complete_test_TIMESTAMP.json` - Dati completi
-- `results/analysis_plots_TIMESTAMP.png` - 6 grafici di analisi
-- `results/report_TIMESTAMP.txt` - Report testuale
+Results are saved in:
+- `results/complete_test_TIMESTAMP.json` - Complete data
+- `results/analysis_plots_TIMESTAMP.png` - 6 analysis charts
+- `results/report_TIMESTAMP.txt` - Text report
 
-## 🤖 Agenti LLM
+## 🤖 LLM Agents
 
-| Agente | Modello | Specializzazione |
-|--------|---------|------------------|
-| ForensicAnalyst | Mixtral-8x22B | Analisi forense e indicatori di exploitation |
-| PatternDetector | Claude Opus 4 | Riconoscimento pattern linguistici e tecnici |
-| TemporalAnalyst | Llama 3.3 70B | Analisi temporale e urgenza |
-| AttributionExpert | DeepSeek R1 | Valutazione threat actor e targeting |
-| MetaAnalyst | Gemini 2.5 Pro | Sintesi e decisione finale |
+| Agent | Model | Specialization |
+|-------|-------|----------------|
+| ForensicAnalyst | Mixtral-8x22B | Forensic analysis and exploitation indicators |
+| PatternDetector | Claude Opus 4 | Linguistic and technical pattern recognition |
+| TemporalAnalyst | Llama 3.3 70B | Timeline analysis and urgency detection |
+| AttributionExpert | DeepSeek R1 | Threat actor and targeting assessment |
+| MetaAnalyst | Gemini 2.5 Pro | Synthesis and final decision |
 
-## 📈 Visualizzazioni Generate
+## 📈 Generated Visualizations
 
-1. **Confusion Matrix** - Mostra TP/FP/TN/FN
-2. **Performance Metrics** - Barre con Accuracy, Precision, Recall, F1
-3. **Score Distribution** - Istogramma delle probabilità per classe
-4. **ROC Curve** - Trade-off tra TPR e FPR
-5. **Prediction Timeline** - Andamento predizioni nel tempo
-6. **Accuracy by Confidence** - Performance per livello di confidenza
+1. **Confusion Matrix** - Shows TP/FP/TN/FN
+2. **Performance Metrics** - Bar chart with Accuracy, Precision, Recall, F1
+3. **Score Distribution** - Histogram of probabilities by class
+4. **ROC Curve** - Trade-off between TPR and FPR
+5. **Prediction Timeline** - Prediction trends over time
+6. **Accuracy by Confidence** - Performance by confidence level
 
-## 🔧 Architettura
+## 🔧 Architecture
 
 ```
 zero-day-llm-ensemble/
 ├── src/
-│   ├── agents/          # Implementazione dei 5 agenti LLM
-│   ├── data/            # Raccolta dati da CISA KEV e NVD
-│   ├── ensemble/        # Sistema multi-agente e voting
-│   └── utils/           # Logger e utilities
+│   ├── agents/          # 5 LLM agent implementations
+│   ├── data/            # Data collection from CISA KEV and NVD
+│   ├── ensemble/        # Multi-agent system and voting
+│   └── utils/           # Logger and utilities
 ├── config/
-│   ├── prompts.yaml     # Prompt open-ended per gli agenti
-│   └── settings.py      # Configurazione modelli e API
-├── run_complete_test.py # Script principale con visualizzazioni
-├── run_balanced_test.py # Test con bilanciamento garantito
-└── results/             # Output (gitignored)
+│   ├── prompts.yaml     # Open-ended prompts for agents
+│   └── settings.py      # Model and API configuration
+├── run_complete_test.py # Main script with visualizations
+├── run_balanced_test.py # Guaranteed balanced testing
+└── results/             # Output directory (gitignored)
 ```
 
-## 💡 Come Funziona
+## 💡 How It Works
 
-1. **Raccolta Dati**: Fetch da CISA KEV (zero-day confermati) e NVD (CVE regular)
-2. **Preprocessing**: Validazione e preparazione dati senza leakage
-3. **Analisi Multi-Agente**: Ogni agente analizza la CVE dalla sua prospettiva
-4. **Ensemble Voting**: Media pesata delle predizioni (pesi uguali)
-5. **Classificazione**: Soglia 0.5 per distinguere zero-day da regular
+1. **Data Collection**: Fetches from CISA KEV (confirmed zero-days) and NVD (regular CVEs)
+2. **Preprocessing**: Validation and data preparation without leakage
+3. **Multi-Agent Analysis**: Each agent analyzes the CVE from its perspective
+4. **Ensemble Voting**: Weighted average of predictions (equal weights)
+5. **Classification**: 0.5 threshold to distinguish zero-day from regular
 
-## 🛠️ Personalizzazione
+## 🛠️ Configuration
 
-### Cambiare Modelli LLM
+### Change LLM Models
 
-Modifica `config/settings.py`:
+Edit `config/settings.py`:
 
 ```python
 MODEL_CONFIGS = {
     'ForensicAnalyst': 'mistralai/mixtral-8x22b-instruct',
     'PatternDetector': 'anthropic/claude-opus-4',
-    # ... altri modelli
+    # ... other models
 }
 ```
 
-### Modificare Prompt
+### Modify Prompts
 
-I prompt sono in `config/prompts.yaml`. Usa prompt open-ended che permettono ai modelli di ragionare liberamente.
+Prompts are in `config/prompts.yaml`. Use open-ended prompts that allow models to reason freely.
 
-## 📝 Esempio di Utilizzo
+## 📝 Example Usage
 
 ```python
 from src.ensemble.multi_agent import MultiAgentSystem
 from src.data.preprocessor import DataPreprocessor
 
-# Inizializza
+# Initialize
 system = MultiAgentSystem(parallel_execution=True)
 preprocessor = DataPreprocessor()
 
-# Analizza una CVE
+# Analyze a CVE
 cve_data = {
     'cve_id': 'CVE-2024-1234',
     'vendor': 'Microsoft',
@@ -136,28 +136,28 @@ cve_data = {
     'year': 2024
 }
 
-# Preprocessa e analizza
+# Preprocess and analyze
 processed = preprocessor.preprocess_entry(cve_data)
 result = system.analyze_vulnerability(processed)
 
-# Risultato
+# Result
 prediction = result['ensemble']['prediction']
-print(f"Probabilità zero-day: {prediction:.1%}")
+print(f"Zero-day probability: {prediction:.1%}")
 ```
 
-## ⚠️ Note Importanti
+## ⚠️ Important Notes
 
-- **Nessun Data Leakage**: I prompt non menzionano mai la fonte dei dati
-- **Ragionamento Libero**: I modelli non cercano pattern specifici hardcoded
-- **API Key Richiesta**: Necessaria API key di OpenRouter
-- **Cache Locale**: I dati vengono cachati per ridurre le chiamate API
+- **No Data Leakage**: Prompts never mention data sources
+- **Free Reasoning**: Models don't search for specific hardcoded patterns
+- **API Key Required**: OpenRouter API key is necessary
+- **Local Cache**: Data is cached to reduce API calls
 
-## 🏆 Punti di Forza
+## 🏆 Key Strengths
 
-1. **Alta Precisione**: Quando identifica uno zero-day, raramente sbaglia
-2. **Zero Bias**: Nessun riferimento alla fonte nei prompt
-3. **Scalabile**: Supporta esecuzione parallela degli agenti
-4. **Trasparente**: Log dettagliati di ogni predizione
+1. **High Precision**: When it identifies a zero-day, it's rarely wrong
+2. **Zero Bias**: No source references in prompts
+3. **Scalable**: Supports parallel agent execution
+4. **Transparent**: Detailed logs for every prediction
 
 ## 📄 License
 
@@ -165,14 +165,23 @@ MIT License
 
 ## 🤝 Contributing
 
-1. Fork il repository
-2. Crea un branch (`git checkout -b feature/AmazingFeature`)
-3. Commit (`git commit -m 'Add AmazingFeature'`)
-4. Push (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 🙏 Acknowledgments
 
-- CISA per il catalogo Known Exploited Vulnerabilities
-- NVD per il database delle vulnerabilità
-- OpenRouter per l'accesso ai modelli LLM
+- CISA for the Known Exploited Vulnerabilities catalog
+- NVD for the National Vulnerability Database
+- OpenRouter for LLM model access
+
+## 📊 Research Paper
+
+This system demonstrates that LLMs can effectively identify zero-day vulnerabilities without data leakage by:
+- Using open-ended prompts that allow free reasoning
+- Avoiding prescriptive pattern matching
+- Leveraging ensemble diversity for robust predictions
+
+For detailed methodology and results, see our [technical report](docs/technical_report.pdf) (coming soon).
