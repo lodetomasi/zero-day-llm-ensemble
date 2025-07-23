@@ -8,10 +8,6 @@ This repository presents a novel approach to zero-day vulnerability detection le
 
 Zero-day vulnerabilities represent one of the most significant threats in cybersecurity, as they are actively exploited before vendors can develop and distribute patches. Traditional detection methods often rely on signatures, heuristics, or post-exploitation indicators, limiting their effectiveness for proactive defense. This research explores whether Large Language Models can identify linguistic and technical patterns in vulnerability descriptions that correlate with zero-day exploitation.
 
-<p align="center">
-  <img src="docs/images/system_overview.png" alt="System Overview" width="800">
-</p>
-
 ### 1.1 Research Contributions
 
 - **Novel Multi-Agent Architecture**: We introduce a specialized ensemble of five LLM agents, each analyzing vulnerabilities from distinct perspectives (forensic, pattern-based, temporal, attribution, and meta-analytical)
