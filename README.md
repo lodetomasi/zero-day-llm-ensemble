@@ -69,11 +69,74 @@ python run_complete_test.py --zero-days 50 --regular 50 --parallel
 python run_complete_test.py --zero-days 100 --regular 100 --parallel
 ```
 
-### 3.3 Output Artifacts
+#### Command-Line Parameters
+
+```bash
+python run_complete_test.py [OPTIONS]
+
+Required Arguments:
+  --zero-days N        Number of zero-day CVEs to test (from CISA KEV)
+  --regular N          Number of regular CVEs to test (from NVD)
+
+Optional Arguments:
+  --parallel           Enable parallel agent execution (recommended)
+  --sequential         Force sequential agent execution (default if not specified)
+  --output-dir PATH    Custom output directory (default: ./results)
+  --no-visualizations  Disable automatic plot generation
+  --verbose            Enable detailed logging output
+  --cache-ttl HOURS    Cache time-to-live in hours (default: 24)
+  --timeout SECONDS    API timeout per agent in seconds (default: 60)
+  --seed N             Random seed for reproducibility
+  --start-year YYYY    Filter CVEs from this year onwards (default: 2020)
+  --end-year YYYY      Filter CVEs up to this year (default: current year)
+```
+
+#### Advanced Usage Examples
+
+```bash
+# Reproducible experiment with specific seed
+python run_complete_test.py --zero-days 25 --regular 25 --parallel --seed 42
+
+# Test only recent vulnerabilities (2023-2024)
+python run_complete_test.py --zero-days 50 --regular 50 --parallel --start-year 2023
+
+# Custom output location with verbose logging
+python run_complete_test.py --zero-days 30 --regular 30 --parallel --output-dir ~/experiments/run1 --verbose
+
+# Quick test without visualizations
+python run_complete_test.py --zero-days 10 --regular 10 --parallel --no-visualizations
+
+# Extended timeout for slow connections
+python run_complete_test.py --zero-days 20 --regular 20 --parallel --timeout 120
+```
+
+### 3.3 Alternative Execution Scripts
+
+#### Balanced Test Script
+```bash
+python run_balanced_test.py [OPTIONS]
+
+# Ensures exactly 50/50 distribution
+# Automatically retries if data sources have insufficient samples
+# Same parameters as run_complete_test.py
+```
+
+#### Batch Evaluation
+```bash
+# Run multiple experiments with different configurations
+for seed in 1 2 3 4 5; do
+    python run_complete_test.py --zero-days 50 --regular 50 --parallel --seed $seed
+done
+```
+
+### 3.4 Output Artifacts
 
 - `results/complete_test_TIMESTAMP.json`: Raw prediction data and agent responses
-- `results/analysis_plots_TIMESTAMP.png`: Comprehensive visualization suite
+- `results/analysis_plots_TIMESTAMP.png`: Comprehensive visualization suite (6 subplots)
 - `results/report_TIMESTAMP.txt`: Statistical summary and performance metrics
+- `logs/experiment_TIMESTAMP.log`: Detailed execution logs (if --verbose)
+- `cache/cisa_kev_cache.json`: Cached CISA KEV data (24h TTL)
+- `cache/nvd_cache.json`: Cached NVD data (24h TTL)
 
 ## 4. Technical Architecture
 
@@ -113,6 +176,60 @@ Six automated visualizations provide comprehensive performance analysis:
 - Temporal prediction patterns
 - Confidence-calibrated accuracy assessment
 
+### 4.4 Configuration Options
+
+#### Environment Variables
+```bash
+# Required
+export OPENROUTER_API_KEY="your-api-key"
+
+# Optional
+export OPENROUTER_BASE_URL="https://openrouter.ai/api/v1"  # Custom API endpoint
+export LOG_LEVEL="INFO"                                     # DEBUG, INFO, WARNING, ERROR
+export CACHE_DIR="./cache"                                  # Custom cache directory
+export RESULTS_DIR="./results"                              # Custom results directory
+```
+
+#### Model Configuration (`config/settings.py`)
+```python
+# Modify LLM models per agent
+MODEL_CONFIGS = {
+    'ForensicAnalyst': 'mistralai/mixtral-8x22b-instruct',
+    'PatternDetector': 'anthropic/claude-opus-4',
+    'TemporalAnalyst': 'meta-llama/llama-3.3-70b-instruct',
+    'AttributionExpert': 'deepseek/deepseek-r1',
+    'MetaAnalyst': 'google/gemini-2.5-pro'
+}
+
+# API parameters
+API_TIMEOUT = 60  # seconds
+MAX_RETRIES = 3
+RETRY_DELAY = 5   # seconds
+
+# Data collection parameters
+MIN_CVE_YEAR = 2020
+MAX_SAMPLES_PER_SOURCE = 1000
+CACHE_TTL_HOURS = 24
+```
+
+#### Prompt Configuration (`config/prompts.yaml`)
+```yaml
+# Modify agent-specific prompts
+agents:
+  ForensicAnalyst:
+    role: "forensic security analyst"
+    analysis_template: |
+      # Your custom prompt here
+  
+  # Additional agents...
+
+# Global prompt settings
+prompt_settings:
+  temperature: 0.3
+  max_tokens: 1000
+  include_reasoning: true
+```
+
 ## 5. Key Findings
 
 ### 5.1 Performance Analysis
@@ -146,6 +263,73 @@ Preliminary analysis suggests differential agent effectiveness:
 ## 7. Reproducibility
 
 All code, configurations, and prompts are provided for full reproducibility. The modular architecture supports easy substitution of LLM backends and prompt strategies.
+
+### 7.1 Programmatic API Usage
+
+```python
+from src.ensemble.multi_agent import MultiAgentSystem
+from src.data.preprocessor import DataPreprocessor
+from src.data.collector import DataCollector
+
+# Initialize components
+system = MultiAgentSystem(
+    parallel_execution=True,
+    timeout=120,
+    temperature=0.3
+)
+preprocessor = DataPreprocessor()
+collector = DataCollector()
+
+# Collect data
+zero_days = collector.get_cisa_kev_data(limit=50)
+regular = collector.get_nvd_data(limit=50, exclude_kev=True)
+
+# Analyze single CVE
+cve_data = {
+    'cve_id': 'CVE-2024-1234',
+    'vendor': 'Microsoft',
+    'product': 'Windows',
+    'description': 'Remote code execution vulnerability...',
+    'year': 2024
+}
+
+processed = preprocessor.preprocess_entry(cve_data)
+result = system.analyze_vulnerability(processed)
+
+# Access detailed results
+prediction = result['ensemble']['prediction']
+confidence = result['ensemble']['confidence']
+agent_predictions = result['agent_predictions']
+
+print(f"Zero-day probability: {prediction:.1%}")
+print(f"Confidence: {confidence:.1%}")
+print("\nAgent breakdown:")
+for agent, pred in agent_predictions.items():
+    print(f"  {agent}: {pred['prediction']:.1%}")
+```
+
+### 7.2 Custom Agent Integration
+
+```python
+from src.agents.base_agent import BaseAgent
+
+class CustomAgent(BaseAgent):
+    def __init__(self):
+        super().__init__(
+            name="CustomAnalyst",
+            model="your-preferred-model",
+            role="custom security analyst"
+        )
+    
+    def analyze(self, vulnerability_data):
+        # Your custom analysis logic
+        prompt = self.build_prompt(vulnerability_data)
+        response = self.query_model(prompt)
+        return self.parse_response(response)
+
+# Add to ensemble
+system.add_agent(CustomAgent())
+```
 
 ## 8. Citation
 
