@@ -8,6 +8,10 @@ This repository presents a novel approach to zero-day vulnerability detection le
 
 Zero-day vulnerabilities represent one of the most significant threats in cybersecurity, as they are actively exploited before vendors can develop and distribute patches. Traditional detection methods often rely on signatures, heuristics, or post-exploitation indicators, limiting their effectiveness for proactive defense. This research explores whether Large Language Models can identify linguistic and technical patterns in vulnerability descriptions that correlate with zero-day exploitation.
 
+<p align="center">
+  <img src="docs/images/system_overview.png" alt="System Overview" width="800">
+</p>
+
 ### 1.1 Research Contributions
 
 - **Novel Multi-Agent Architecture**: We introduce a specialized ensemble of five LLM agents, each analyzing vulnerabilities from distinct perspectives (forensic, pattern-based, temporal, attribution, and meta-analytical)
@@ -259,65 +263,106 @@ done
 
 ### 4.1 High-Level System Architecture
 
+```mermaid
+graph TB
+    subgraph "Data Collection Layer"
+        CISA[CISA KEV API<br/>Zero-Day Ground Truth]
+        NVD[NVD API<br/>Regular CVEs ~95%]
+        Cache[(Cache Storage<br/>24h TTL)]
+        
+        CISA --> Cache
+        NVD --> Cache
+    end
+    
+    subgraph "Preprocessing Pipeline"
+        Cache --> Anon[Source Anonymization]
+        Anon --> Extract[Feature Extraction<br/>vendor, product, description]
+        Extract --> Valid[Data Validation]
+        Valid --> Norm[Temporal Normalization]
+    end
+    
+    subgraph "Multi-Agent LLM Ensemble"
+        Norm --> Control{Parallel/Sequential<br/>Controller}
+        
+        Control --> FA[ForensicAnalyst<br/>Mixtral-8x22B]
+        Control --> PD[PatternDetector<br/>Claude Opus 4]
+        Control --> TA[TemporalAnalyst<br/>Llama 3.3 70B]
+        Control --> AE[AttributionExpert<br/>DeepSeek R1]
+        Control --> MA[MetaAnalyst<br/>Gemini 2.5 Pro]
+        
+        FA --> Vote[Unweighted<br/>Average Voting]
+        PD --> Vote
+        TA --> Vote
+        AE --> Vote
+        MA --> Vote
+    end
+    
+    subgraph "Classification & Output"
+        Vote --> Ensemble[Ensemble Prediction<br/>P = Σpᵢ/5]
+        Ensemble --> Thresh{P > 0.5?}
+        
+        Thresh -->|Yes| ZD[Zero-Day<br/>Detection]
+        Thresh -->|No| Reg[Regular<br/>CVE]
+        
+        ZD --> Output[Output Layer]
+        Reg --> Output
+        
+        Output --> JSON[JSON Results]
+        Output --> Plots[6 Analysis Plots]
+        Output --> Report[Performance Report]
+        Output --> Monitor[Real-time Monitor]
+    end
+    
+    style CISA fill:#ffe6cc,stroke:#d79b00
+    style NVD fill:#ffe6cc,stroke:#d79b00
+    style Cache fill:#f5f5f5,stroke:#666666
+    style FA fill:#dae8fc,stroke:#6c8ebf
+    style PD fill:#dae8fc,stroke:#6c8ebf
+    style TA fill:#dae8fc,stroke:#6c8ebf
+    style AE fill:#dae8fc,stroke:#6c8ebf
+    style MA fill:#dae8fc,stroke:#6c8ebf
+    style Vote fill:#fff2cc,stroke:#d6b656
+    style ZD fill:#d5e8d4,stroke:#82b366
+    style Reg fill:#f8cecc,stroke:#b85450
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                           Data Collection Layer                          │
-├─────────────────────────┬───────────────────────────────────────────────┤
-│      CISA KEV API       │              NVD API                          │
-│  (Zero-Day Ground Truth)│         (Regular CVEs)                        │
-└───────────┬─────────────┴────────────────┬──────────────────────────────┘
-            │                              │
-            v                              v
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         Caching Layer (24h TTL)                         │
-└─────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  v
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     Data Preprocessing Pipeline                          │
-│  • Source anonymization (prevent data leakage)                          │
-│  • Feature extraction (vendor, product, description)                    │
-│  • Temporal normalization                                               │
-└─────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  v
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    Multi-Agent Ensemble System                           │
-├─────────────────────────────────────────────────────────────────────────┤
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐      │
-│  │  Forensic   │ │  Pattern    │ │  Temporal   │ │ Attribution │      │
-│  │  Analyst    │ │  Detector   │ │  Analyst    │ │   Expert    │      │
-│  │(Mixtral-8x22│ │(Claude Opus)│ │(Llama 3.3)  │ │(DeepSeek R1)│      │
-│  └──────┬──────┘ └──────┬──────┘ └──────┬──────┘ └──────┬──────┘      │
-│         │                │                │                │             │
-│         └────────────────┴────────────────┴────────────────┘            │
-│                                  │                                       │
-│                                  v                                       │
-│                        ┌─────────────────┐                              │
-│                        │  Meta-Analyst   │                              │
-│                        │ (Gemini 2.5 Pro)│                              │
-│                        └────────┬────────┘                              │
-└─────────────────────────────────┼───────────────────────────────────────┘
-                                  │
-                                  v
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        Ensemble Aggregation                              │
-│                    (Unweighted Average Voting)                          │
-└─────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  v
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      Binary Classification                               │
-│                    (Threshold: P > 0.5)                                 │
-└─────────────────────────────────┬───────────────────────────────────────┘
-                                  │
-                                  v
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    Output & Visualization Layer                          │
-├─────────────┬───────────────┬───────────────┬──────────────────────────┤
-│   Results   │ Performance   │ Visualization │    Real-time            │
-│    JSON     │   Report      │    Suite      │   Monitoring            │
-└─────────────┴───────────────┴───────────────┴──────────────────────────┘
+
+### 4.2 Data Flow Sequence
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant System
+    participant CISA
+    participant NVD
+    participant Cache
+    participant Agents
+    participant Ensemble
+    
+    User->>System: Request CVE Analysis
+    System->>Cache: Check for cached data
+    
+    alt Data not cached
+        System->>CISA: Fetch KEV data
+        System->>NVD: Fetch CVE data
+        CISA-->>Cache: Store with 24h TTL
+        NVD-->>Cache: Store with 24h TTL
+    end
+    
+    Cache-->>System: Return CVE data
+    System->>System: Preprocess & Anonymize
+    
+    par Parallel Agent Execution
+        System->>Agents: ForensicAnalyst
+        System->>Agents: PatternDetector
+        System->>Agents: TemporalAnalyst
+        System->>Agents: AttributionExpert
+        System->>Agents: MetaAnalyst
+    end
+    
+    Agents-->>Ensemble: Individual predictions
+    Ensemble->>Ensemble: Average voting
+    Ensemble->>System: Final classification
+    System->>User: Results + Visualizations
 ```
 
 ### 4.2 Data Pipeline
