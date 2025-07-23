@@ -331,38 +331,94 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant User
-    participant System
-    participant CISA
-    participant NVD
-    participant Cache
-    participant Agents
+    participant CLI as CLI/API
+    participant Collector as DataCollector
+    participant Preprocessor
+    participant MultiAgent as MultiAgentSystem
+    participant Agents as LLM Agents
     participant Ensemble
     
-    User->>System: Request CVE Analysis
-    System->>Cache: Check for cached data
+    User->>CLI: run_complete_test.py --zero-days 50 --regular 50
     
-    alt Data not cached
-        System->>CISA: Fetch KEV data
-        System->>NVD: Fetch CVE data
-        CISA-->>Cache: Store with 24h TTL
-        NVD-->>Cache: Store with 24h TTL
+    Note over CLI,Collector: Data Collection Phase
+    CLI->>Collector: get_cisa_kev_data(limit=50)
+    activate Collector
+    Collector->>Collector: Check cache (24h TTL)
+    
+    alt Cache miss
+        Collector->>Collector: fetch_cisa_kev()
+        Note right of Collector: GET https://cisa.gov/known-exploited-vulnerabilities
+        Collector->>Collector: Cache results
     end
     
-    Cache-->>System: Return CVE data
-    System->>System: Preprocess & Anonymize
+    Collector-->>CLI: Return zero-day CVEs
+    deactivate Collector
     
-    par Parallel Agent Execution
-        System->>Agents: ForensicAnalyst
-        System->>Agents: PatternDetector
-        System->>Agents: TemporalAnalyst
-        System->>Agents: AttributionExpert
-        System->>Agents: MetaAnalyst
+    CLI->>Collector: get_nvd_data(limit=50, exclude_kev=True)
+    activate Collector
+    Collector->>Collector: Check cache
+    
+    alt Cache miss
+        Collector->>Collector: fetch_nvd_cves()
+        Note right of Collector: GET https://services.nvd.nist.gov/rest/json/cves/2.0
+        Collector->>Collector: Filter out KEV CVEs
+        Collector->>Collector: Cache results
     end
     
-    Agents-->>Ensemble: Individual predictions
-    Ensemble->>Ensemble: Average voting
-    Ensemble->>System: Final classification
-    System->>User: Results + Visualizations
+    Collector-->>CLI: Return regular CVEs
+    deactivate Collector
+    
+    Note over CLI,Preprocessor: Preprocessing Phase
+    loop For each CVE
+        CLI->>Preprocessor: preprocess_entry(cve_data)
+        activate Preprocessor
+        Preprocessor->>Preprocessor: Source anonymization
+        Preprocessor->>Preprocessor: Extract features
+        Preprocessor->>Preprocessor: Validate data
+        Preprocessor->>Preprocessor: Normalize temporal data
+        Preprocessor-->>CLI: Preprocessed CVE
+        deactivate Preprocessor
+    end
+    
+    Note over CLI,Ensemble: Analysis Phase
+    loop For each preprocessed CVE
+        CLI->>MultiAgent: analyze_vulnerability(cve_data)
+        activate MultiAgent
+        
+        alt Parallel execution
+            par Agent Analysis
+                MultiAgent->>Agents: ForensicAnalyst.analyze()
+                MultiAgent->>Agents: PatternDetector.analyze()
+                MultiAgent->>Agents: TemporalAnalyst.analyze()
+                MultiAgent->>Agents: AttributionExpert.analyze()
+                MultiAgent->>Agents: MetaAnalyst.analyze()
+            end
+            
+            Agents-->>MultiAgent: Individual predictions
+        else Sequential execution
+            loop For each agent
+                MultiAgent->>Agents: agent.analyze()
+                Note right of Agents: Rate limit delay
+                Agents-->>MultiAgent: prediction
+            end
+        end
+        
+        MultiAgent->>Ensemble: ensemble_prediction(agent_results)
+        activate Ensemble
+        Ensemble->>Ensemble: P = (1/5) × Σ predictions
+        Ensemble->>Ensemble: Apply threshold (P > 0.5)
+        Ensemble-->>MultiAgent: Final classification
+        deactivate Ensemble
+        
+        MultiAgent-->>CLI: Analysis result
+        deactivate MultiAgent
+    end
+    
+    Note over CLI,User: Output Phase
+    CLI->>CLI: Calculate metrics
+    CLI->>CLI: Generate visualizations
+    CLI->>CLI: Save JSON results
+    CLI->>User: Display results & plots
 ```
 
 ### 4.2 Data Pipeline
