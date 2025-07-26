@@ -130,6 +130,42 @@ class MultiAgentSystem:
         
         return result
     
+    def calculate_ensemble_quality(self, predictions: np.ndarray, confidences: np.ndarray) -> Dict[str, float]:
+        """
+        Calculate quality metrics for ensemble predictions
+        
+        Args:
+            predictions: Array of agent predictions
+            confidences: Array of agent confidences
+            
+        Returns:
+            Dictionary with quality metrics
+        """
+        # Disagreement among agents (high = uncertainty)
+        disagreement = float(np.std(predictions))
+        
+        # Average confidence
+        avg_confidence = float(np.mean(confidences))
+        
+        # Coherence - are all agents on same side of 0.5?
+        binary_preds = predictions > 0.5
+        coherence = len(set(binary_preds)) == 1
+        
+        # Confidence spread
+        confidence_spread = float(np.std(confidences))
+        
+        # Decision margin - how far from 0.5 is the ensemble prediction
+        ensemble_pred = np.mean(predictions)
+        decision_margin = abs(ensemble_pred - 0.5)
+        
+        return {
+            'disagreement': disagreement,
+            'avg_confidence': avg_confidence,
+            'coherence': coherence,
+            'confidence_spread': confidence_spread,
+            'decision_margin': decision_margin
+        }
+    
     def _analyze_parallel(self, cve_data: Dict[str, Any], 
                          verbose: bool) -> Dict[str, Any]:
         """Analyze with parallel execution"""
@@ -239,6 +275,9 @@ class MultiAgentSystem:
         pred_std = np.std(predictions)
         uncertainty = pred_std * (1 - ensemble_conf)
         
+        # Calculate ensemble quality metrics
+        quality_metrics = self.calculate_ensemble_quality(predictions, confidences)
+        
         # Apply threshold manager adjustments
         if cve_data:
             source = cve_data.get('source', 'MANUAL')
@@ -260,7 +299,8 @@ class MultiAgentSystem:
             'uncertainty': float(uncertainty),
             'prediction_std': float(pred_std),
             'individual_predictions': predictions.tolist(),
-            'individual_confidences': confidences.tolist()
+            'individual_confidences': confidences.tolist(),
+            'quality_metrics': quality_metrics
         }
     
     def update_weights(self, cve_id: str, true_label: int, 

@@ -16,9 +16,12 @@ prompts:
       Product: {product}
       Description: {description}
       
-      Based on your expertise, assess the likelihood this was exploited as a zero-day.
-      Consider any clues in the description, the vendor/product involved, and your knowledge
-      of typical zero-day patterns.
+      Think step by step:
+      1. What does the description reveal about how this vulnerability was discovered?
+      2. Are there urgency indicators or language suggesting active exploitation?
+      3. Does the timeline or context suggest this was exploited before disclosure?
+      
+      Based on your forensic expertise, assess the likelihood this was exploited as a zero-day.
       
       Provide:
       - Prediction: [0.0-1.0 probability of zero-day exploitation]
@@ -38,8 +41,12 @@ prompts:
       Product: {product}
       Description: {description}
       
-      Look for any patterns, language, or context clues that might indicate this was
-      exploited before patches were available. Use your pattern recognition skills.
+      Think step by step:
+      1. What linguistic patterns are present in the description?
+      2. Are there phrases commonly associated with zero-day discoveries?
+      3. Does the technical detail level suggest pre-existing knowledge of exploitation?
+      
+      Look for patterns that distinguish zero-days from researcher-discovered vulnerabilities.
       
       Provide:
       - Prediction: [0.0-1.0]
@@ -60,8 +67,12 @@ prompts:
       Product: {product}
       Description: {description}
       
-      Consider timing factors, urgency indicators, and any temporal clues that might
-      suggest this was exploited before patches were available (zero-day).
+      Think step by step:
+      1. Does the description suggest urgency or emergency response?
+      2. Are there timeline indicators (e.g., "discovered after", "already being exploited")?
+      3. Does the disclosure pattern match typical zero-day or coordinated disclosure?
+      
+      Consider timing factors that distinguish zero-days from responsible disclosures.
       
       Provide:
       - Prediction: [0.0-1.0]
@@ -81,8 +92,12 @@ prompts:
       Product: {product}
       Description: {description}
       
-      Consider who might exploit this, why it would be valuable as a zero-day,
-      and whether the description suggests sophisticated threat actor involvement.
+      Think step by step:
+      1. What is the strategic value of this vulnerability to threat actors?
+      2. Does the target (vendor/product) suggest high-value exploitation?
+      3. Are there indicators of sophisticated threat actor involvement?
+      
+      Consider who would benefit from keeping this vulnerability secret for zero-day use.
       
       Provide:
       - Prediction: [0.0-1.0]
@@ -103,9 +118,12 @@ prompts:
       Description: {description}
       Year: {year}
       
-      Consider all aspects: the product's importance, vulnerability severity,
-      description language, and your knowledge of zero-day exploitation patterns.
-      Make your best assessment of whether this was likely a zero-day.
+      Think step by step:
+      1. What is the overall severity and impact of this vulnerability?
+      2. Does the description language suggest discovery through active exploitation?
+      3. How do all the factors combine to indicate zero-day likelihood?
+      
+      Consider all aspects holistically to determine if this was likely exploited as a zero-day.
       
       Provide:
       - Prediction: [0.0-1.0]

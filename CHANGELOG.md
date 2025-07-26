@@ -8,7 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Chain-of-Thought (CoT) prompting for all 5 agents to improve reasoning quality
+- Ensemble quality metrics (disagreement, coherence, confidence spread)
+- Enhanced error analysis in reports showing top false positives/negatives
+- Confidence pattern analysis comparing correct vs incorrect predictions
+- Dynamic threshold optimization to maximize F1 score
 - Initial changelog implementation
+
+### Changed
+- Updated all agent prompts to use step-by-step reasoning approach
+- Improved `ensemble_prediction()` to include quality metrics
+- Enhanced summary reports with detailed error and confidence analysis
 
 ## [1.0.0] - 2025-07-23
 

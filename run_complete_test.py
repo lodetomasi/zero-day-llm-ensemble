@@ -234,7 +234,52 @@ def create_summary_report(data, output_dir, timestamp):
         f.write(f"       Regular    {cm['fp']:3d}      {cm['tn']:3d}\n")
         f.write("\n")
         
-        f.write("KEY INSIGHTS\n")
+        # Error Analysis
+        predictions = data.get('predictions', [])
+        false_positives = [p for p in predictions if not p['actual'] and p['predicted']]
+        false_negatives = [p for p in predictions if p['actual'] and not p['predicted']]
+        
+        f.write("ERROR ANALYSIS\n")
+        f.write("-" * 30 + "\n")
+        f.write(f"False Positives: {len(false_positives)}\n")
+        if false_positives[:3]:
+            f.write("  Top 3 False Positives:\n")
+            for fp in sorted(false_positives, key=lambda x: x['probability'], reverse=True)[:3]:
+                f.write(f"    - {fp['cve_id']} (score: {fp['probability']:.3f}, conf: {fp['confidence']:.3f})\n")
+        
+        f.write(f"\nFalse Negatives: {len(false_negatives)}\n")
+        if false_negatives[:3]:
+            f.write("  Top 3 False Negatives:\n")
+            for fn in sorted(false_negatives, key=lambda x: x['probability'])[:3]:
+                f.write(f"    - {fn['cve_id']} (score: {fn['probability']:.3f}, conf: {fn['confidence']:.3f})\n")
+        
+        # Confidence Analysis
+        correct_preds = [p for p in predictions if p['correct']]
+        wrong_preds = [p for p in predictions if not p['correct']]
+        
+        if correct_preds:
+            avg_conf_correct = np.mean([p['confidence'] for p in correct_preds])
+        else:
+            avg_conf_correct = 0
+            
+        if wrong_preds:
+            avg_conf_wrong = np.mean([p['confidence'] for p in wrong_preds])
+        else:
+            avg_conf_wrong = 0
+        
+        f.write("\nCONFIDENCE PATTERNS\n")
+        f.write("-" * 30 + "\n")
+        f.write(f"Avg confidence when correct: {avg_conf_correct:.3f}\n")
+        f.write(f"Avg confidence when wrong: {avg_conf_wrong:.3f}\n")
+        
+        # Threshold Analysis
+        threshold, best_f1 = calculate_optimal_threshold(predictions)
+        f.write("\nTHRESHOLD ANALYSIS\n")
+        f.write("-" * 30 + "\n")
+        f.write(f"Current threshold: 0.500\n")
+        f.write(f"Optimal threshold: {threshold:.3f} (F1: {best_f1:.3f})\n")
+        
+        f.write("\nKEY INSIGHTS\n")
         f.write("-" * 30 + "\n")
         if cm['fp'] == 0:
             f.write("✓ PERFECT PRECISION: No false positives!\n")
@@ -242,10 +287,33 @@ def create_summary_report(data, output_dir, timestamp):
             f.write("✓ PERFECT RECALL: Found all zero-days!\n")
         if metrics['accuracy'] >= 0.8:
             f.write("✓ HIGH ACCURACY: System performs well overall\n")
+        if avg_conf_correct > avg_conf_wrong:
+            f.write("✓ GOOD CALIBRATION: Higher confidence when correct\n")
         
         f.write(f"\nDetailed results: {output_dir / f'complete_test_{timestamp}.json'}\n")
     
     print(f"✓ Report saved to: {report_file}")
+
+def calculate_optimal_threshold(predictions):
+    """Find threshold that maximizes F1 score"""
+    thresholds = np.arange(0.3, 0.8, 0.05)
+    best_f1 = 0
+    best_threshold = 0.5
+    
+    for t in thresholds:
+        tp = sum(1 for p in predictions if p['actual'] and p['probability'] >= t)
+        fp = sum(1 for p in predictions if not p['actual'] and p['probability'] >= t)
+        fn = sum(1 for p in predictions if p['actual'] and p['probability'] < t)
+        
+        precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+        recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+        f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
+        
+        if f1 > best_f1:
+            best_f1 = f1
+            best_threshold = t
+    
+    return best_threshold, best_f1
 
 def main():
     parser = argparse.ArgumentParser(description='Complete test with visualizations')
