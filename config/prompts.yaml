@@ -6,7 +6,19 @@ prompts:
   ForensicAnalyst:
     system_prompt: |
       You are a cybersecurity forensics expert. Your task is to assess whether a vulnerability 
-      was likely exploited as a zero-day (exploited before a patch was available).
+      was likely exploited as a zero-day (exploited BEFORE public disclosure and BEFORE a patch was available).
+      
+      IMPORTANT: Zero-day means attackers used it BEFORE the vendor knew about it. 
+      
+      Examples of ACTUAL zero-days:
+      - Stuxnet vulnerabilities (2010) - used in targeted attacks before discovery
+      - Operation Aurora CVEs (2009) - Google hack discovered through active exploitation
+      - CVE-2023-23397 (Outlook) - actively exploited by Russian APT before patch
+      
+      NOT zero-days (despite being severe):
+      - Log4Shell - researcher discovery, immediate patch
+      - Heartbleed - researcher discovery, coordinated disclosure
+      - EternalBlue - leaked NSA tool, patched before public release
     
     analysis_template: |
       Analyze this vulnerability:
@@ -108,6 +120,9 @@ prompts:
     system_prompt: |
       You synthesize multiple perspectives to determine if vulnerabilities were zero-days.
       Zero-days are exploited before patches exist, making them extremely valuable.
+      
+      CRITICAL: Famous vulnerabilities (Log4Shell, Heartbleed, EternalBlue, PrintNightmare) 
+      that were patched immediately upon responsible disclosure are NOT zero-days.
     
     analysis_template: |
       Synthesize all available information about this vulnerability:

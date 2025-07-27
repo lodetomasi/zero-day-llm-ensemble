@@ -21,6 +21,11 @@ cache/
 # Data (except cache)
 data/dataset_*.csv
 data/*.tmp
+data/scraping_cache/
+data/test_dataset/
+data/enriched_dataset/
+data/advanced_evidence/
+data/zero_day_evidence/
 
 # Results
 results/
@@ -43,6 +48,8 @@ config/secrets.py
 test_*.py
 verify_*.py
 *_test_results_*.json
+old_scripts/
+reports/
 
 # Jupyter
 .ipynb_checkpoints/
