@@ -73,7 +73,7 @@ Our ensemble consists of five specialized agents:
 | Agent | Model | Domain Expertise |
 |-------|-------|------------------|
 | **ForensicAnalyst** | Mixtral-8x22B | Exploitation indicators and attack forensics |
-| **PatternDetector** | Claude Opus 4 | Linguistic anomalies and technical patterns |
+| **PatternDetector** | Claude 3 Opus | Linguistic anomalies and technical patterns |
 | **TemporalAnalyst** | Llama 3.3 70B | Timeline analysis and disclosure patterns |
 | **AttributionExpert** | DeepSeek R1 | Threat actor behavior and targeting analysis |
 | **MetaAnalyst** | Gemini 2.5 Pro | Cross-agent synthesis and final classification |
@@ -231,9 +231,14 @@ export OPENROUTER_API_KEY="your-api-key"
 - Failed tests due to insufficient data
 
 **Recommended Solutions**:
-1. Use the pre-collected dataset: `python run_test_from_dataset.py`
+1. Use the pre-collected dataset: `python run_test_from_dataset.py --zero-days 25 --regular 25`
 2. Use the enhanced analysis with specific CVEs: `python run_analysis.py CVE-2023-23397`
-3. Implement web scraping to gather more comprehensive data
+3. Web scraping automatically collects comprehensive data when using `run_analysis.py`
+
+⚠️ **API Key Required**: All scripts require setting the OpenRouter API key:
+```bash
+export OPENROUTER_API_KEY="your-api-key-here"
+```
 
 ### 6.3 Execution
 
@@ -321,6 +326,7 @@ done
 - `logs/api_calls_TIMESTAMP.log`: API call logs with token usage
 - `data/cache/`: Cached CISA KEV and NVD data
 - `data/scraping_cache/`: Web scraping cache (7-day TTL)
+- `reports/`: Individual CVE analysis reports (run_analysis.py)
 
 ## 7. Technical Architecture
 
@@ -330,63 +336,79 @@ done
 graph TB
     subgraph "Data Collection Layer"
         CISA[CISA KEV API<br/>Zero-Day Ground Truth]
-        NVD[NVD API<br/>Regular CVEs ~95%]
-        Cache[(Cache Storage<br/>24h TTL)]
+        NVD[NVD API<br/>Regular CVEs]
+        Web[Web Scraping<br/>8 Sources]
+        Cache[(Cache Storage)]
         
         CISA --> Cache
         NVD --> Cache
+        Web --> Cache
     end
     
-    subgraph "Preprocessing Pipeline"
-        Cache --> Anon[Source Anonymization]
+    subgraph "Two Analysis Paths"
+        Cache --> Path1[LLM-Only Path<br/>68.5% accuracy]
+        Cache --> Path2[Enhanced Path<br/>83.3% accuracy]
+    end
+    
+    subgraph "LLM-Only Analysis (Original)"
+        Path1 --> Anon[Source Anonymization]
         Anon --> Extract[Feature Extraction<br/>vendor, product, description]
-        Extract --> Valid[Data Validation]
-        Valid --> Norm[Temporal Normalization]
-    end
-    
-    subgraph "Multi-Agent LLM Ensemble"
-        Norm --> Control{Parallel/Sequential<br/>Controller}
+        Extract --> Control{Parallel/Sequential<br/>Controller}
         
         Control --> FA[ForensicAnalyst<br/>Mixtral-8x22B]
-        Control --> PD[PatternDetector<br/>Claude Opus 4]
+        Control --> PD[PatternDetector<br/>Claude 3 Opus]
         Control --> TA[TemporalAnalyst<br/>Llama 3.3 70B]
-        Control --> AE[AttributionExpert<br/>DeepSeek R1]
+        Control --> AE[AttributionExpert<br/>DeepSeek R1-0528]
         Control --> MA[MetaAnalyst<br/>Gemini 2.5 Pro]
         
-        FA --> Vote[Unweighted<br/>Average Voting]
+        FA --> Vote[Unweighted<br/>Average]
         PD --> Vote
         TA --> Vote
         AE --> Vote
         MA --> Vote
+        
+        Vote --> LLMScore[LLM Score]
+    end
+    
+    subgraph "Enhanced Analysis (Web + LLM)"
+        Path2 --> Evidence[Evidence Analysis<br/>CISA, News, GitHub, etc.]
+        Evidence --> EvidScore[Evidence Score<br/>70% weight]
+        
+        Path2 --> Extract2[Feature Extraction]
+        Extract2 --> Agents[5 LLM Agents]
+        Agents --> LLMScore2[LLM Score<br/>30% weight]
+        
+        EvidScore --> Combine[Combined Score]
+        LLMScore2 --> Combine
     end
     
     subgraph "Classification & Output"
-        Vote --> Ensemble[Ensemble Prediction<br/>P = Σpᵢ/5]
-        Ensemble --> Thresh{P > 0.5?}
+        LLMScore --> Thresh1{Score > 0.5?}
+        Combine --> Thresh2{Score > 0.55?}
         
-        Thresh -->|Yes| ZD[Zero-Day<br/>Detection]
-        Thresh -->|No| Reg[Regular<br/>CVE]
+        Thresh1 -->|Yes| ZD1[Zero-Day]
+        Thresh1 -->|No| Reg1[Regular]
         
-        ZD --> Output[Output Layer]
-        Reg --> Output
+        Thresh2 -->|Yes| ZD2[Zero-Day]
+        Thresh2 -->|No| Reg2[Regular]
+        
+        ZD1 --> Output[Output Layer]
+        Reg1 --> Output
+        ZD2 --> Output
+        Reg2 --> Output
         
         Output --> JSON[JSON Results]
-        Output --> Plots[6 Analysis Plots]
-        Output --> Report[Performance Report]
-        Output --> Monitor[Real-time Monitor]
+        Output --> Report[Analysis Report]
+        Output --> Summary[Markdown Summary]
     end
     
     style CISA fill:#ffe6cc,stroke:#d79b00
     style NVD fill:#ffe6cc,stroke:#d79b00
+    style Web fill:#ffe6cc,stroke:#d79b00
     style Cache fill:#f5f5f5,stroke:#666666
-    style FA fill:#dae8fc,stroke:#6c8ebf
-    style PD fill:#dae8fc,stroke:#6c8ebf
-    style TA fill:#dae8fc,stroke:#6c8ebf
-    style AE fill:#dae8fc,stroke:#6c8ebf
-    style MA fill:#dae8fc,stroke:#6c8ebf
-    style Vote fill:#fff2cc,stroke:#d6b656
-    style ZD fill:#d5e8d4,stroke:#82b366
-    style Reg fill:#f8cecc,stroke:#b85450
+    style Path1 fill:#f8cecc,stroke:#b85450
+    style Path2 fill:#d5e8d4,stroke:#82b366
+    style Combine fill:#fff2cc,stroke:#d6b656
 ```
 
 ### 7.2 Data Flow Sequence
