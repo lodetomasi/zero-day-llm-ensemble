@@ -206,9 +206,9 @@ class BaseAgent:
         if not credit_monitor.is_available(self.model_id):
             logger.warning(f"{self.agent_name} skipped - credits exhausted for {self.model_id}")
             return {
-                'prediction': 0.3 if cve_data.get('source') == 'NVD' else 0.7,
-                'confidence': 0.2,
-                'reasoning': "Model credits exhausted - using conservative estimate",
+                'prediction': 0.5,  # Neutral prediction when no credits
+                'confidence': 0.1,  # Very low confidence
+                'reasoning': "Model credits exhausted - unable to analyze",
                 'error': True,
                 'error_type': 'credits_skip'
             }

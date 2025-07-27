@@ -43,15 +43,61 @@ def analyze_single_cve(cve_id: str, system: MultiAgentSystem, scraper: Comprehen
         if apt_groups:
             print(f"  📌 Associated with APT groups: {', '.join([a['group'] for a in apt_groups])}")
     
-    # Step 2: Prepare CVE data for LLM analysis
+    # Step 2: Prepare CVE data for LLM analysis with evidence
+    # First get basic CVE info from NVD if available
+    nvd_info = evidence['sources'].get('nvd', {})
     cve_data = {
         'cve_id': cve_id,
-        'description': f"Analyzing {cve_id} - please check available sources for details"
+        'vendor': nvd_info.get('vendor', 'Unknown'),
+        'product': nvd_info.get('product', 'Unknown'),
+        'description': nvd_info.get('description', f"CVE {cve_id}")
     }
     
-    # Add evidence summary to help LLM
-    if evidence['summary']:
-        cve_data['description'] += f"\n\nEvidence summary: {evidence['summary']}"
+    # Build comprehensive evidence context for LLM
+    evidence_context = "\n\nEVIDENCE COLLECTED:\n"
+    
+    # CISA KEV status
+    if evidence['sources'].get('cisa_kev', {}).get('in_kev'):
+        evidence_context += "- ⚠️ LISTED IN CISA KNOWN EXPLOITED VULNERABILITIES\n"
+        kev_data = evidence['sources']['cisa_kev']
+        if kev_data.get('date_added'):
+            evidence_context += f"  - Added to KEV: {kev_data['date_added']}\n"
+        if kev_data.get('short_description'):
+            evidence_context += f"  - KEV Description: {kev_data['short_description']}\n"
+    
+    # Security news mentions
+    news_data = evidence['sources'].get('security_news', {})
+    if news_data.get('zero_day_mentions', 0) > 0:
+        evidence_context += f"- 📰 Found {news_data['zero_day_mentions']} security articles mentioning zero-day exploitation\n"
+        for article in news_data.get('articles', [])[:3]:  # Top 3 articles
+            evidence_context += f"  - {article.get('source', 'News')}: {article.get('title', '')}\n"
+    
+    # APT associations
+    apt_groups = evidence['indicators'].get('apt_associations', [])
+    if apt_groups:
+        evidence_context += f"- 🎯 Associated with APT groups: {', '.join([g['group'] for g in apt_groups])}\n"
+    
+    # GitHub activity
+    github_data = evidence['sources'].get('github', {})
+    if github_data.get('poc_count', 0) > 0:
+        evidence_context += f"- 💻 Found {github_data['poc_count']} proof-of-concept repositories on GitHub\n"
+        if github_data.get('first_poc_date'):
+            evidence_context += f"  - First PoC appeared: {github_data['first_poc_date']}\n"
+    
+    # Exploitation indicators
+    if evidence['indicators'].get('exploitation_before_patch'):
+        evidence_context += "- 🚨 Evidence suggests exploitation BEFORE patch was available\n"
+    
+    if evidence['indicators'].get('emergency_patches'):
+        evidence_context += "- 🔧 Vendor released EMERGENCY/OUT-OF-BAND patches\n"
+    
+    # Threat intelligence
+    threat_intel = evidence['sources'].get('threat_intelligence', {})
+    if threat_intel.get('campaigns'):
+        evidence_context += f"- 🕵️ Linked to campaigns: {', '.join(threat_intel['campaigns'])}\n"
+    
+    # Add evidence to description
+    cve_data['description'] += evidence_context
     
     # Step 3: LLM analysis
     if verbose:

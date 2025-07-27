@@ -7,6 +7,7 @@ sys.path.append(str(Path(__file__).parent))
 
 from src.data.preprocessor import DataPreprocessor
 from src.ensemble.multi_agent import MultiAgentSystem
+from src.scraping.comprehensive_scraper import ComprehensiveZeroDayScraper
 from src.utils.logger import get_logger
 import json
 import random
@@ -140,15 +141,16 @@ def main():
     random.shuffle(all_data)
     print(f"  ✓ Total samples ready: {len(all_data)}")
     
-    # Initialize system
-    print("\n🤖 Initializing system...")
-    system = MultiAgentSystem(
+    # Initialize systems
+    print("\n🤖 Initializing enhanced system...")
+    llm_system = MultiAgentSystem(
         use_thompson_sampling=False,
         parallel_execution=args.parallel
     )
+    scraper = ComprehensiveZeroDayScraper()
     
     # Run analysis
-    print("\n🔍 Analyzing CVEs...")
+    print("\n🔍 Analyzing CVEs with web evidence + LLM...")
     print("-" * 60)
     
     results = []
@@ -159,29 +161,90 @@ def main():
         
         print(f"\n[{i}/{len(all_data)}] {cve_id} ({'Zero-day' if is_zero_day else 'Regular'})")
         
-        # Analyze
-        result = system.analyze_vulnerability(cve_data, verbose=False)
-        ensemble = result.get('ensemble', {})
-        prediction = ensemble.get('prediction', 0.5)
-        confidence = ensemble.get('confidence', 0.5)
-        
-        # Classification
-        is_zero_day_pred = prediction >= 0.5
-        
-        print(f"  → Prediction: {prediction:.3f} (conf: {confidence:.3f})")
-        
-        # Update monitor
-        monitor.update(is_zero_day, is_zero_day_pred, prediction)
-        
-        # Save result
-        results.append({
-            'cve_id': cve_id,
-            'actual': is_zero_day,
-            'predicted': is_zero_day_pred,
-            'probability': prediction,
-            'confidence': confidence,
-            'correct': is_zero_day == is_zero_day_pred
-        })
+        try:
+            # Step 1: Web scraping
+            print(f"  📡 Collecting evidence...")
+            evidence = scraper.scrape_all_sources(cve_id)
+            scraping_score = evidence['scores']['zero_day_confidence']
+            print(f"  ✓ Evidence score: {scraping_score:.1%}")
+            
+            # Step 2: Prepare enriched CVE data with evidence for LLM
+            enriched_cve_data = cve_data.copy()
+            
+            # Build evidence context
+            evidence_text = "\n\nEVIDENCE COLLECTED:\n"
+            
+            # Add key evidence points
+            if evidence['sources'].get('cisa_kev', {}).get('in_kev'):
+                evidence_text += "- ⚠️ LISTED IN CISA KNOWN EXPLOITED VULNERABILITIES\n"
+            
+            news_mentions = evidence['sources'].get('security_news', {}).get('zero_day_mentions', 0)
+            if news_mentions > 0:
+                evidence_text += f"- 📰 Found {news_mentions} security articles mentioning zero-day exploitation\n"
+            
+            apt_groups = evidence['indicators'].get('apt_associations', [])
+            if apt_groups:
+                evidence_text += f"- 🎯 Associated with APT groups: {', '.join([g['group'] for g in apt_groups])}\n"
+            
+            poc_count = evidence['sources'].get('github', {}).get('poc_count', 0)
+            if poc_count > 0:
+                evidence_text += f"- 💻 Found {poc_count} proof-of-concept repositories\n"
+            
+            if evidence['indicators'].get('exploitation_before_patch'):
+                evidence_text += "- 🚨 Evidence of exploitation BEFORE patch\n"
+            
+            if evidence['indicators'].get('emergency_patches'):
+                evidence_text += "- 🔧 Emergency patches released\n"
+            
+            # Add evidence to description
+            enriched_cve_data['description'] = enriched_cve_data.get('description', '') + evidence_text
+            
+            # Step 3: LLM analysis with evidence
+            print(f"  🤖 Running LLM analysis with evidence...")
+            llm_result = llm_system.analyze_vulnerability(enriched_cve_data, verbose=False)
+            llm_score = llm_result.get('ensemble', {}).get('prediction', 0.5)
+            print(f"  ✓ LLM score: {llm_score:.1%}")
+            
+            # Step 3: Combined score (70% evidence, 30% LLM)
+            combined_score = (0.7 * scraping_score) + (0.3 * llm_score)
+            
+            # Classification with threshold 0.55
+            is_zero_day_pred = combined_score >= 0.55
+            
+            print(f"  → Combined score: {combined_score:.1%} ({'Zero-day' if is_zero_day_pred else 'Regular'})")
+            
+            # Update monitor
+            monitor.update(is_zero_day, is_zero_day_pred, combined_score)
+            
+            # Save result
+            results.append({
+                'cve_id': cve_id,
+                'actual': is_zero_day,
+                'predicted': is_zero_day_pred,
+                'evidence_score': scraping_score,
+                'llm_score': llm_score,
+                'combined_score': combined_score,
+                'correct': is_zero_day == is_zero_day_pred
+            })
+            
+        except Exception as e:
+            logger.error(f"Error analyzing {cve_id}: {e}")
+            # Fallback to LLM-only if scraping fails
+            print(f"  ⚠️ Web scraping failed, using LLM-only")
+            llm_result = llm_system.analyze_vulnerability(cve_data, verbose=False)
+            llm_score = llm_result.get('ensemble', {}).get('prediction', 0.5)
+            is_zero_day_pred = llm_score >= 0.5
+            
+            monitor.update(is_zero_day, is_zero_day_pred, llm_score)
+            results.append({
+                'cve_id': cve_id,
+                'actual': is_zero_day,
+                'predicted': is_zero_day_pred,
+                'evidence_score': 0.0,
+                'llm_score': llm_score,
+                'combined_score': llm_score,
+                'correct': is_zero_day == is_zero_day_pred
+            })
         
         # Print real-time stats every 5 CVEs
         if i % 5 == 0:
