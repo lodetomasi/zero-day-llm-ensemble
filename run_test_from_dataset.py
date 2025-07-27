@@ -166,7 +166,7 @@ def main():
             print(f"  📡 Collecting evidence...")
             evidence = scraper.scrape_all_sources(cve_id)
             scraping_score = evidence['scores']['zero_day_confidence']
-            print(f"  ✓ Evidence score: {scraping_score:.1%}")
+            print(f"  ✓ Evidence collected successfully")
             
             # Step 2: Prepare enriched CVE data with evidence for LLM
             enriched_cve_data = cve_data.copy()
@@ -205,13 +205,13 @@ def main():
             llm_score = llm_result.get('ensemble', {}).get('prediction', 0.5)
             print(f"  ✓ LLM score: {llm_score:.1%}")
             
-            # Step 3: Combined score (70% evidence, 30% LLM)
-            combined_score = (0.7 * scraping_score) + (0.3 * llm_score)
+            # Step 3: Classification based on LLM analysis with evidence
+            final_score = llm_score  # LLMs already have all the evidence
             
-            # Classification with threshold 0.55
-            is_zero_day_pred = combined_score >= 0.55
+            # Classification with threshold 0.5
+            is_zero_day_pred = final_score >= 0.5
             
-            print(f"  → Combined score: {combined_score:.1%} ({'Zero-day' if is_zero_day_pred else 'Regular'})")
+            print(f"  → Final score: {final_score:.1%} ({'Zero-day' if is_zero_day_pred else 'Regular'})")
             
             # Update monitor
             monitor.update(is_zero_day, is_zero_day_pred, combined_score)
@@ -221,9 +221,8 @@ def main():
                 'cve_id': cve_id,
                 'actual': is_zero_day,
                 'predicted': is_zero_day_pred,
-                'evidence_score': scraping_score,
-                'llm_score': llm_score,
-                'combined_score': combined_score,
+                'final_score': final_score,
+                'evidence_collected': True,
                 'correct': is_zero_day == is_zero_day_pred
             })
             
@@ -240,9 +239,8 @@ def main():
                 'cve_id': cve_id,
                 'actual': is_zero_day,
                 'predicted': is_zero_day_pred,
-                'evidence_score': 0.0,
-                'llm_score': llm_score,
-                'combined_score': llm_score,
+                'final_score': llm_score,
+                'evidence_collected': False,
                 'correct': is_zero_day == is_zero_day_pred
             })
         

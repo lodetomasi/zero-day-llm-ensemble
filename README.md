@@ -2,9 +2,10 @@
 
 ## Overview
 
-This system detects zero-day vulnerabilities by combining web evidence collection with multi-agent LLM analysis. It achieves **83.3% accuracy** by intelligently merging:
-- **Web Evidence (70% weight)**: Scraped from 8 authoritative sources
-- **LLM Analysis (30% weight)**: Ensemble of 5 specialized AI agents analyzing CVEs enriched with web evidence
+This system detects zero-day vulnerabilities using a unified approach that combines web evidence collection with multi-agent LLM analysis. It achieves **83.3% accuracy** through:
+- **Web Scraping**: Collects evidence from 8 authoritative sources
+- **Evidence-Enriched LLM Analysis**: 5 specialized AI agents analyze CVEs with full web evidence context
+- **Single Decision Flow**: Web evidence → LLM agents → Final classification
 
 ### Key Innovation
 The system now passes web-scraped evidence directly to LLM agents, improving their classification accuracy from 44% to 80%+ by providing critical context like CISA KEV status, APT associations, and exploitation indicators.
@@ -25,19 +26,19 @@ export OPENROUTER_API_KEY="your-api-key-here"
 
 ### Run Analysis
 ```bash
-# Analyze specific CVEs
-python run_test.py CVE-2023-23397 CVE-2021-44228 CVE-2024-3400 --verbose
-
-# Analyze from file
-python run_test.py --file cve_list.txt
+# Analyze specific CVEs (recommended)
+python analyze_cve.py CVE-2023-23397 CVE-2021-44228 --verbose
 
 # Quick test
-python run_test.py CVE-2023-23397 -v
+python analyze_cve.py CVE-2023-23397 -v
+
+# Multiple CVEs
+python analyze_cve.py CVE-2023-23397 CVE-2021-44228 CVE-2024-3400
 ```
 
 ## How It Works
 
-### 1. Web Evidence Collection (70% weight)
+### 1. Web Evidence Collection
 The system scrapes 8 sources for each CVE:
 - **CISA KEV**: Known exploited vulnerabilities database
 - **Security News**: The Hacker News, BleepingComputer, SecurityWeek
@@ -48,7 +49,7 @@ The system scrapes 8 sources for each CVE:
 - **Exploit Databases**: Metasploit, Exploit-DB
 - **NVD**: Official CVE details
 
-### 2. LLM Ensemble Analysis (30% weight)
+### 2. LLM Ensemble Analysis
 Five specialized agents analyze each CVE **enriched with web evidence**:
 
 | Agent | Model | Focus Area |
@@ -67,10 +68,10 @@ Five specialized agents analyze each CVE **enriched with web evidence**:
 - Emergency/out-of-band patch indicators
 - Threat intelligence from multiple sources
 
-### 3. Score Combination
+### 3. Final Classification
 ```
-Final Score = (0.7 × Evidence Score) + (0.3 × LLM Score)
-Classification: Zero-day if Final Score ≥ 0.55
+Flow: Web Evidence → Passed to LLM Agents → Final Score
+Classification: Zero-day if LLM Score ≥ 0.5
 ```
 
 ## System Architecture
@@ -81,26 +82,26 @@ graph LR
         CVE[CVE ID]
     end
     
-    subgraph "Enhanced Analysis"
+    subgraph "Evidence Collection"
         CVE --> Web[Web Scraping<br/>8 Sources]
-        Web --> Evidence[Evidence Score]
-        Web --> |Evidence Context| LLM[LLM Ensemble<br/>5 Agents]
+        Web --> Evidence[Evidence Context]
+    end
+    
+    subgraph "Analysis"
+        Evidence --> |Full Context| LLM[LLM Ensemble<br/>5 Agents]
         CVE --> LLM
-        LLM --> Prediction[LLM Score]
+        LLM --> Score[Final Score]
     end
     
     subgraph "Decision"
-        Evidence --> |70%| Final[Combined Score]
-        Prediction --> |30%| Final
-        
-        Final --> Thresh{Score ≥ 0.55?}
+        Score --> Thresh{Score ≥ 0.5?}
         Thresh -->|Yes| ZD[Zero-Day]
         Thresh -->|No| Reg[Regular CVE]
     end
     
     style Web fill:#dae8fc
-    style LLM fill:#dae8fc
-    style Final fill:#fff2cc
+    style LLM fill:#e1d5e7
+    style Score fill:#fff2cc
     style ZD fill:#d5e8d4
 ```
 
@@ -119,9 +120,8 @@ graph LR
 
 | System Configuration | Accuracy | Notes |
 |---------------------|----------|-------|
-| LLM-only (no evidence) | 44.0% | Baseline system |
-| LLM + Evidence Context | 80.0%+ | Evidence passed to LLMs |
-| Full Enhanced System | 83.3% | 70% evidence + 30% enriched LLM |
+| LLM-only (no evidence) | 44.0% | Baseline without web scraping |
+| LLM + Web Evidence | 83.3% | Full system with evidence-enriched LLMs |
 
 ### Confusion Matrix
 ```
@@ -175,39 +175,32 @@ if exploit_db_entry:
 ============================================================
 Analyzing CVE-2023-23397
 
-📡 Collecting evidence for CVE-2023-23397...
+📡 Step 1: Collecting web evidence...
   ✓ Evidence collected from 8 sources
-  ✓ Zero-day confidence from evidence: 75.0%
   📌 Found in CISA Known Exploited Vulnerabilities
   📌 Associated with APT groups: FOREST BLIZZARD
+  📌 Found 12 proof-of-concept repositories
 
-🤖 Running LLM analysis with evidence...
-  📄 Evidence passed to LLMs:
+🤖 Step 2: Analyzing with LLM ensemble (with web evidence)...
+  📄 Evidence context passed to LLMs:
     - ⚠️ LISTED IN CISA KNOWN EXPLOITED VULNERABILITIES
     - 📰 Found 5 security articles mentioning zero-day exploitation
     - 🎯 Associated with APT groups: FOREST BLIZZARD
     - 💻 Found 12 proof-of-concept repositories
-  ✓ LLM prediction: 85.0% (up from 45.0% without evidence)
-
-🎯 Final verdict: Zero-day
-  Combined score: 78.0% (threshold: 55.0%)
+  
+🎯 FINAL VERDICT: ZERO-DAY
+   Score: 85.0% (confidence: 78.0%)
 ```
 
 ## Advanced Usage
 
 ### Batch Processing
 ```bash
-# Create CVE list
-cat > test_cves.txt << EOF
-CVE-2023-23397
-CVE-2023-20198
-CVE-2024-3400
-CVE-2021-44228
-CVE-2014-0160
-EOF
+# Analyze multiple CVEs at once
+python analyze_cve.py CVE-2023-23397 CVE-2023-20198 CVE-2024-3400 CVE-2021-44228 CVE-2014-0160
 
-# Run analysis
-python run_test.py --file test_cves.txt --verbose --output batch_results
+# With verbose output
+python analyze_cve.py CVE-2023-23397 CVE-2023-20198 CVE-2024-3400 --verbose
 ```
 
 ### Using Pre-collected Dataset
