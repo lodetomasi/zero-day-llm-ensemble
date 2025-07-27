@@ -216,7 +216,7 @@ def main():
             print(f"  → Final score: {final_score:.1%} (threshold: {threshold:.1%}) ({'Zero-day' if is_zero_day_pred else 'Regular'})")
             
             # Update monitor
-            monitor.update(is_zero_day, is_zero_day_pred, combined_score)
+            monitor.update(is_zero_day, is_zero_day_pred, llm_score)
             
             # Save result
             results.append({
