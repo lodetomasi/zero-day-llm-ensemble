@@ -5,7 +5,27 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - 2025-07-27
+
+### Added
+- Web evidence collection from 8 sources (CISA KEV, security news, GitHub, etc.)
+- Hybrid scoring system: 70% web evidence + 30% LLM analysis
+- Comprehensive web scraper with 7-day caching
+- Enhanced accuracy: 83.3% (up from 68.5%)
+- New main script: `run_test.py` for CVE analysis
+
+### Changed
+- Complete system architecture overhaul
+- Simplified README focusing on the enhanced system
+- Moved old LLM-only scripts to `old_scripts/` directory
+- Threshold adjusted to 0.55 for better accuracy
+
+### Removed
+- Deprecated `run_complete_test.py` (LLM-only approach)
+- Removed `run_balanced_test.py` 
+- Archived old documentation files
+
+## [1.1.0] - 2025-07-24
 
 ### Added
 - Chain-of-Thought (CoT) prompting for all 5 agents to improve reasoning quality
