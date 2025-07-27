@@ -14,7 +14,7 @@ class TemporalAnalyzer:
         """
         timeline = {
             'is_zero_day': False,
-            'confidence': 0.0,
+            'confidence': 0.0,  # Start at zero - require evidence
             'timeline_events': [],
             'key_dates': {},
             'analysis': ''
@@ -75,24 +75,31 @@ class TemporalAnalyzer:
         
         if kev_date and nvd_date:
             days_diff = (kev_date - nvd_date).days
-            if days_diff <= 7:  # KEV within a week of disclosure
-                timeline['confidence'] += 0.3
-                timeline['analysis'] += "KEV listing very close to disclosure suggests active exploitation. "
+            if days_diff <= 1:  # Same day or next day
+                timeline['confidence'] += 0.4
+                timeline['analysis'] += "KEV listing on disclosure day suggests pre-existing exploitation. "
+            elif days_diff <= 7:  # Within a week
+                timeline['confidence'] += 0.1  # Weak signal
+                timeline['analysis'] += "KEV listing within a week of disclosure. "
             elif days_diff < 0:  # KEV before NVD
-                timeline['confidence'] += 0.5
+                timeline['confidence'] += 0.6
                 timeline['is_zero_day'] = True
                 timeline['analysis'] += "KEV listing BEFORE public disclosure - strong zero-day indicator! "
         
-        # Pattern 2: Emergency patches
+        # Pattern 2: Emergency patches (weak signal by itself)
         if evidence.get('indicators', {}).get('emergency_patches'):
-            timeline['confidence'] += 0.2
-            timeline['analysis'] += "Emergency patches suggest exploitation pressure. "
+            timeline['confidence'] += 0.1  # Reduced from 0.2
+            timeline['analysis'] += "Emergency patches released. "
         
-        # Pattern 3: News mentions before official disclosure
+        # Pattern 3: News explicitly mentioning zero-day (strong signal)
         news_data = evidence.get('sources', {}).get('security_news', {})
-        if news_data.get('zero_day_mentions', 0) > 0:
+        zero_day_mentions = news_data.get('zero_day_mentions', 0)
+        if zero_day_mentions >= 3:
+            timeline['confidence'] += 0.4  # Multiple sources = strong
+            timeline['analysis'] += f"{zero_day_mentions} articles explicitly mention zero-day exploitation. "
+        elif zero_day_mentions > 0:
             timeline['confidence'] += 0.2
-            timeline['analysis'] += f"{news_data['zero_day_mentions']} articles mention zero-day exploitation. "
+            timeline['analysis'] += f"{zero_day_mentions} article(s) mention zero-day. "
         
         # Pattern 4: APT associations
         apt_groups = evidence.get('indicators', {}).get('apt_associations', [])
@@ -108,11 +115,15 @@ class TemporalAnalyzer:
                 timeline['confidence'] += 0.1
                 timeline['analysis'] += "Very rapid PoC development suggests prior knowledge. "
         
-        # Negative indicators
+        # Negative indicators (penalize likely false positives)
         github_data = evidence.get('sources', {}).get('github', {})
-        if github_data.get('poc_count', 0) > 50:  # Too many PoCs
+        poc_count = github_data.get('poc_count', 0)
+        if poc_count > 50:  # Massive PoC availability
+            timeline['confidence'] -= 0.4  # Strong penalty
+            timeline['analysis'] += f"{poc_count} PoCs found - suggests NOT a zero-day. "
+        elif poc_count > 20:
             timeline['confidence'] -= 0.2
-            timeline['analysis'] += "Large number of PoCs suggests NOT a zero-day (widely known). "
+            timeline['analysis'] += f"{poc_count} PoCs found - likely not zero-day. "
         
         # Final determination
         if timeline['confidence'] >= 0.5:

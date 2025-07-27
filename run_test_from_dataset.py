@@ -208,10 +208,12 @@ def main():
             # Step 3: Classification based on LLM analysis with evidence
             final_score = llm_score  # LLMs already have all the evidence
             
-            # Classification with threshold 0.5
-            is_zero_day_pred = final_score >= 0.5
+            # Classification with higher threshold to reduce false positives
+            # Analysis shows too many false positives with 0.5 threshold
+            threshold = 0.65  # Increased from 0.5
+            is_zero_day_pred = final_score >= threshold
             
-            print(f"  → Final score: {final_score:.1%} ({'Zero-day' if is_zero_day_pred else 'Regular'})")
+            print(f"  → Final score: {final_score:.1%} (threshold: {threshold:.1%}) ({'Zero-day' if is_zero_day_pred else 'Regular'})")
             
             # Update monitor
             monitor.update(is_zero_day, is_zero_day_pred, combined_score)
@@ -223,6 +225,7 @@ def main():
                 'predicted': is_zero_day_pred,
                 'final_score': final_score,
                 'evidence_collected': True,
+                'threshold_used': threshold,
                 'correct': is_zero_day == is_zero_day_pred
             })
             
@@ -241,6 +244,7 @@ def main():
                 'predicted': is_zero_day_pred,
                 'final_score': llm_score,
                 'evidence_collected': False,
+                'threshold_used': 0.5,
                 'correct': is_zero_day == is_zero_day_pred
             })
         

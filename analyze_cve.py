@@ -208,7 +208,11 @@ EVIDENCE FROM WEB SOURCES:
                 'emergency_patches': evidence['indicators'].get('emergency_patches', False),
                 'exploitation_before_patch': evidence['indicators'].get('exploitation_before_patch', False)
             },
-            'timeline_analysis': timeline_analysis,
+            'timeline_analysis': {
+                'is_zero_day': timeline_analysis.get('is_zero_day'),
+                'confidence': timeline_analysis.get('confidence'),
+                'analysis': timeline_analysis.get('analysis')
+            },
             'known_database_check': known_status
         },
         'llm_analysis': llm_result,

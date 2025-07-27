@@ -601,26 +601,28 @@ class ComprehensiveZeroDayScraper:
         """Calculate confidence scores based on all evidence"""
         scores = {
             'exploitation_likelihood': 0.5,  # Start neutral
-            'zero_day_confidence': 0.5,
+            'zero_day_confidence': 0.3,  # Start LOW - require evidence to prove zero-day
             'evidence_quality': 0.0
         }
         
-        # Factor 1: CISA KEV listing (strong indicator)
+        # Factor 1: CISA KEV listing (indicates exploitation, but NOT necessarily zero-day)
         if evidence['sources'].get('cisa_kev', {}).get('in_kev'):
             scores['exploitation_likelihood'] += 0.3
-            scores['zero_day_confidence'] += 0.2
+            # CISA KEV alone does NOT prove zero-day - many are added after disclosure
+            scores['zero_day_confidence'] += 0.05  # Reduced from 0.2
         
-        # Factor 2: Security news coverage
+        # Factor 2: Security news coverage (CRITICAL for zero-day detection)
         news = evidence['sources'].get('security_news', {})
         if news.get('zero_day_mentions', 0) > 0:
-            scores['zero_day_confidence'] += 0.1 * min(news['zero_day_mentions'], 3)
+            # News explicitly mentioning zero-day is strong evidence
+            scores['zero_day_confidence'] += 0.2 * min(news['zero_day_mentions'], 3)
         if news.get('exploitation_mentions', 0) > 0:
             scores['exploitation_likelihood'] += 0.1 * min(news['exploitation_mentions'], 3)
         
-        # Factor 3: APT associations
+        # Factor 3: APT associations (strong zero-day indicator)
         apt_count = len(evidence['indicators']['apt_associations'])
         if apt_count > 0:
-            scores['zero_day_confidence'] += 0.15 * min(apt_count, 2)
+            scores['zero_day_confidence'] += 0.2 * min(apt_count, 2)  # Increased
             scores['exploitation_likelihood'] += 0.1
         
         # Factor 4: Emergency patches
@@ -629,12 +631,21 @@ class ComprehensiveZeroDayScraper:
         
         # Factor 5: Exploit availability timeline
         github = evidence['sources'].get('github', {})
-        if github.get('poc_repositories', 0) > 10:  # Many PoCs suggest post-disclosure
-            scores['zero_day_confidence'] -= 0.1
+        poc_count = github.get('poc_repositories', 0)
+        if poc_count > 20:  # Many PoCs strongly suggest NOT zero-day
+            scores['zero_day_confidence'] -= 0.3  # Strong penalty
+        elif poc_count > 10:
+            scores['zero_day_confidence'] -= 0.15
         
-        # Factor 6: Vendor advisory
-        if evidence['sources'].get('vendor', {}).get('out_of_band'):
-            scores['zero_day_confidence'] += 0.15
+        # Factor 6: Vendor advisory timing
+        vendor = evidence['sources'].get('vendor', {})
+        if vendor.get('out_of_band'):
+            # Out-of-band patch suggests urgency, but check disclosure type
+            if vendor.get('disclosure_type') == 'coordinated':
+                # Coordinated disclosure = NOT zero-day
+                scores['zero_day_confidence'] -= 0.2
+            else:
+                scores['zero_day_confidence'] += 0.1
         
         # Normalize scores
         for key in scores:
