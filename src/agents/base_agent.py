@@ -1,6 +1,7 @@
 """
 Base agent class for Zero-Day Detection System
 """
+import os
 import time
 import yaml
 import re
@@ -30,11 +31,16 @@ class BaseAgent:
         # Load prompts
         self.prompts = self._load_prompts()
         
-        # API configuration
+        # API configuration - get fresh API key from environment
+        api_key = os.getenv("OPENROUTER_API_KEY") or OPENROUTER_API_KEY
+        if not api_key:
+            logger.error("OPENROUTER_API_KEY not found in environment")
+            raise ValueError("OPENROUTER_API_KEY is required")
+            
         self.headers = {
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "http://localhost:8888",
+            "HTTP-Referer": "https://github.com/detomasi/zero-day-llm-ensemble",
             "X-Title": "Zero-Day-Detection-Research"
         }
         

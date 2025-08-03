@@ -9,6 +9,10 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 from src.ensemble.multi_agent import MultiAgentSystem
 from src.scraping.comprehensive_scraper import ComprehensiveZeroDayScraper
 from src.utils.feature_extractor import ZeroDayFeatureExtractor

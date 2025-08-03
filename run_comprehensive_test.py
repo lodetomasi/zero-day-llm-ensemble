@@ -7,6 +7,10 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent))
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 import json
 import numpy as np
 import pandas as pd

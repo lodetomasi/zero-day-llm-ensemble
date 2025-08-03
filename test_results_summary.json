@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-08-03T18:27:03.581502",
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "avg_confidence": 0.6611040949004273
+  },
+  "test_size": 6,
+  "zero_day_count": 4,
+  "regular_cve_count": 2
+}
