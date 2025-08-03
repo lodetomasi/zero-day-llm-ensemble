@@ -190,8 +190,6 @@ class ThompsonSampler:
 
 ### 4.3 Agent Contribution Analysis
 
-![Agent Weight Evolution](figures/agent_weights_evolution.png)
-
 ```mermaid
 graph LR
     subgraph "Agent Specializations"
@@ -212,14 +210,6 @@ graph LR
 ```
 
 Thompson Sampling converged to optimal weights after ~15 examples, with AttributionExpert (26.3%) and ForensicAnalyst (24.6%) receiving highest weights.
-
-### 4.4 Performance Visualization
-
-![Performance Metrics](figures/performance_metrics.png)
-
-### 4.5 Ablation Study Visualization
-
-![Ablation Study](figures/ablation_study.png)
 
 ## 5. Implementation
 
