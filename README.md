@@ -238,22 +238,34 @@ pip install -r requirements.txt
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
-### 5.3 Usage
+### 5.3 Testing the System
+
+**Main Test Command:**
+```bash
+# Test with specific numbers of zero-days and regular CVEs
+python test_system.py --zero-days 20 --regular 20
+
+# See available verified CVEs
+python test_system.py --list-available
+```
+
+**Quick Demo (No API calls):**
+```bash
+# Shows cached results from 30 CVEs already tested
+python quick_test.py
+```
 
 **Single CVE Analysis:**
 ```bash
-python detect_zero_days.py CVE-2024-3400 -v
+python detect_zero_days.py CVE-2024-3400
 ```
 
-**Balanced Testing:**
-```bash
-python run_balanced_test.py --zero-days 10 --regular 10
-```
-
-**Quick Evaluation (No API):**
-```bash
-python quick_test.py
-```
+#### How Testing Works:
+1. **You choose** how many zero-days and regular CVEs to test
+2. **System checks cache** - uses existing results when available  
+3. **Downloads only missing CVEs** - minimizes API calls
+4. **Verifies ground truth** using public sources only (no data leakage)
+5. **Shows results** with confusion matrix and metrics
 
 ## 6. Limitations and Future Work
 
@@ -283,9 +295,9 @@ zero-day-llm-ensemble/
 │   ├── ensemble/             # Thompson Sampling optimizer
 │   └── scraping/             # 8-source evidence collector
 ├── config/                   # Agent and API configurations
-├── detect_zero_days.py       # Main detection interface
-├── run_balanced_test.py      # Evaluation framework
-└── quick_test.py             # Cached results demo
+├── detect_zero_days.py       # Single CVE analysis
+├── test_system.py            # Main testing script
+└── quick_test.py             # Demo with cached results
 ```
 
 ## Statistical Validation

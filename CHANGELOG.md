@@ -5,27 +5,33 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.6.0] - 2025-08-03 - DOCUMENTATION CLEANUP & FINALIZATION
+## [3.6.0] - 2025-08-03 - TESTING SIMPLIFICATION & CLEANUP
 
-### 🎯 Final Documentation Updates
-
-#### Added
-- Balanced test script (`run_balanced_test.py`) for custom test configurations
-- Allows user to specify exact numbers of zero-days and regular CVEs
-- Uses cache efficiently, only downloads missing CVEs
-- Verifies ground truth without data leakage
+### 🎯 Simplified Testing System
 
 #### Changed
-- Simplified README structure, removed redundant content
-- Cleaned up Key Results section (removed emoji checkmarks)
-- Streamlined testing section to show only essential commands
-- Updated CLAUDE.md to be more concise
-- Moved all JSON result files to results/ directory
+- **MAJOR**: Consolidated all testing into ONE main script: `test_system.py`
+- Renamed `run_balanced_test.py` to `test_system.py` for clarity
+- Updated README with clear, simple testing instructions
+- Added "How Testing Works" section explaining the process
+
+#### Added
+- `HOW_TO_TEST.md` - Simple, clear testing instructions
+- Explicit testing workflow in README
 
 #### Removed
-- Temporary documentation files (TEST_GUIDE.md, BALANCED_TEST_USAGE.md, etc.)
-- Redundant testing commands from README
-- Unused project requirement files
+- `run_large_scale_test.py` - too confusing
+- `create_large_dataset.py` - unnecessary complexity
+- `run_comprehensive_test.py` - redundant
+- `run_complete_evaluation.py` - not needed
+- `test_additional_cves.py` - duplicated functionality
+- All temporary documentation files
+
+#### Testing is Now Simple
+```bash
+# One command to test with your chosen numbers
+python test_system.py --zero-days 20 --regular 20
+```
 
 ## [3.5.0] - 2025-08-03 - README UPDATE & FINAL POLISH
 

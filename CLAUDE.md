@@ -25,14 +25,14 @@ export OPENROUTER_API_KEY="your-api-key"
 
 ## Main Commands
 ```bash
-# Single CVE analysis
-python detect_zero_days.py CVE-2024-3400 -v
+# Main testing command
+python test_system.py --zero-days 20 --regular 20
 
-# Balanced testing
-python run_balanced_test.py --zero-days 10 --regular 10
-
-# Quick test (cached results)
+# Quick demo (cached results)
 python quick_test.py
+
+# Single CVE analysis
+python detect_zero_days.py CVE-2024-3400
 ```
 
 ## Important Notes
