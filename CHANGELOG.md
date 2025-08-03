@@ -5,6 +5,53 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.0] - 2025-08-03 - DOCUMENTATION CLEANUP & FINALIZATION
+
+### 🎯 Final Documentation Updates
+
+#### Added
+- Balanced test script (`run_balanced_test.py`) for custom test configurations
+- Allows user to specify exact numbers of zero-days and regular CVEs
+- Uses cache efficiently, only downloads missing CVEs
+- Verifies ground truth without data leakage
+
+#### Changed
+- Simplified README structure, removed redundant content
+- Cleaned up Key Results section (removed emoji checkmarks)
+- Streamlined testing section to show only essential commands
+- Updated CLAUDE.md to be more concise
+- Moved all JSON result files to results/ directory
+
+#### Removed
+- Temporary documentation files (TEST_GUIDE.md, BALANCED_TEST_USAGE.md, etc.)
+- Redundant testing commands from README
+- Unused project requirement files
+
+## [3.5.0] - 2025-08-03 - README UPDATE & FINAL POLISH
+
+### 🎯 Documentation Updates for Academic Paper
+
+#### Changed
+- Updated README with accurate performance metrics and statistical validation
+- Added "Key Results" section highlighting main achievements
+- Corrected dataset size (30 CVEs, not 40) throughout documentation
+- Added confidence intervals and p-values to performance tables
+- Included ablation study results table
+- Updated limitations section to be transparent about issues
+- Enhanced conclusion with statistical significance emphasis
+
+#### Fixed
+- Statistical test script: Fixed deprecated scipy functions
+- Created missing results/debug directory
+- Corrected ground truth numbers (19 zero-days, 11 regular)
+
+#### Key Metrics Documented
+- Accuracy: 80% (95% CI: [62.7%, 90.5%])
+- F1-Score: 0.864 (95% CI: [0.739, 0.950])
+- Statistical significance: p < 0.001
+- Effect size: Cohen's h = 0.927 (large)
+- All agents contribute positively (+11-13% ensemble boost)
+
 ## [3.4.0] - 2025-08-03 - ACADEMIC EVALUATION SUITE
 
 ### 🎯 Complete Statistical Analysis for Academic Paper
