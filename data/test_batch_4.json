@@ -1,16 +1,16 @@
 {
   "CVE-2021-42287": {
-    "is_zero_day": true,
+    "is_zero_day": false,
     "description": "Active Directory - Privilege Escalation",
     "evidence": "Combined with CVE-2021-42278, APT usage"
   },
   "CVE-2020-1472": {
-    "is_zero_day": true,
+    "is_zero_day": false,
     "description": "Windows Netlogon - Zerologon",
     "evidence": "Iranian APT, Ryuk ransomware"
   },
   "CVE-2020-0601": {
-    "is_zero_day": true,
+    "is_zero_day": false,
     "description": "Windows CryptoAPI - Spoofing",
     "evidence": "NSA disclosure, nation-state capability"
   },

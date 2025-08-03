@@ -42,6 +42,9 @@ class ZeroDayDetector:
         self.high_confidence_threshold = 0.8
         self.low_confidence_threshold = 0.4
         
+        # Load optimized dynamic thresholds
+        self.dynamic_thresholds = self._load_dynamic_thresholds()
+        
     def detect(self, cve_id: str, verbose: bool = False) -> Dict[str, Any]:
         """
         Detect if CVE is a zero-day vulnerability
@@ -79,9 +82,17 @@ class ZeroDayDetector:
         # Step 4: Calculate detection score
         detection_score = self._calculate_detection_score(features, llm_result)
         
-        # Step 5: Make detection decision
-        is_zero_day = detection_score >= self.detection_threshold
+        # Step 5: Calculate confidence first
         confidence = self._calculate_confidence(detection_score, features, llm_result)
+        
+        # Get confidence level
+        confidence_level = self._get_confidence_level(confidence)
+        
+        # Get dynamic threshold based on confidence
+        threshold = self._get_dynamic_threshold(confidence_level)
+        
+        # Make detection decision using dynamic threshold
+        is_zero_day = detection_score >= threshold
         
         # Prepare result
         result = {
@@ -89,7 +100,8 @@ class ZeroDayDetector:
             'is_zero_day': is_zero_day,
             'detection_score': detection_score,
             'confidence': confidence,
-            'confidence_level': self._get_confidence_level(confidence),
+            'confidence_level': confidence_level,
+            'threshold_used': threshold,
             'evidence_summary': self._summarize_evidence(features, evidence),
             'agent_consensus': llm_result.get('ensemble', {}).get('agreement', 0),
             'key_indicators': self._extract_key_indicators(features),
@@ -198,6 +210,25 @@ class ZeroDayDetector:
                      0.3 * completeness)
         
         return min(confidence, 1.0)
+    
+    def _load_dynamic_thresholds(self) -> Dict[str, float]:
+        """Load optimized thresholds from config"""
+        try:
+            with open('config/optimized_thresholds.json', 'r') as f:
+                config = json.load(f)
+                return config['detection_thresholds']['by_confidence']
+        except:
+            # Fallback to default thresholds
+            return {
+                'LOW': 0.67,
+                'MEDIUM': 0.83,
+                'HIGH': 0.70,
+                'VERY_LOW': 0.65
+            }
+    
+    def _get_dynamic_threshold(self, confidence_level: str) -> float:
+        """Get threshold based on confidence level"""
+        return self.dynamic_thresholds.get(confidence_level, self.detection_threshold)
     
     def _get_confidence_level(self, confidence: float) -> str:
         """Convert confidence score to level"""

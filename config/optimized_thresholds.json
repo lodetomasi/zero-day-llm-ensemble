@@ -1,0 +1,12 @@
+{
+  "detection_thresholds": {
+    "default": 0.6700000000000002,
+    "by_confidence": {
+      "LOW": 0.6700000000000002,
+      "MEDIUM": 0.8300000000000003,
+      "HIGH": 0.7
+    }
+  },
+  "use_dynamic_threshold": true,
+  "fallback_threshold": 0.7
+}

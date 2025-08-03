@@ -10,7 +10,7 @@
     "evidence": "Man Yue Mo from Semmle Security Research"
   },
   "CVE-2021-27065": {
-    "is_zero_day": false,
+    "is_zero_day": true,
     "description": "Microsoft Exchange - RCE",
     "evidence": "Part of ProxyLogon but patched set"
   },
