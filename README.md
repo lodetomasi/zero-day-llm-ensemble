@@ -217,21 +217,41 @@ pip install -r requirements.txt
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
-### 5.3 Usage Examples
+### 5.3 Testing & Evaluation
+
+**Quick Test (No API calls):**
+```bash
+python quick_test.py
+```
+
+**Complete Evaluation Suite:**
+```bash
+python run_complete_evaluation.py
+```
+
+**Individual Tests:**
+```bash
+# Statistical significance
+python run_statistical_tests.py
+
+# Cross-validation
+python run_cross_validation.py
+
+# ML baselines
+python create_ml_baselines.py
+
+# Ablation study
+python run_ablation_study.py
+```
 
 **Single CVE Analysis:**
 ```bash
-python detect_zero_days.py CVE-2024-3400
+python detect_zero_days.py CVE-2024-3400 -v
 ```
 
-**Batch Evaluation:**
+**Large-Scale Test:**
 ```bash
-python run_large_scale_test.py --limit 50
-```
-
-**Real-time Monitoring:**
-```bash
-python acquire_dynamic_dataset.py --mixed --limit 100
+python run_large_scale_test.py --limit 40
 ```
 
 ## 6. Limitations and Future Work

@@ -62,7 +62,22 @@ python verify_ground_truth.py
 python create_verified_dataset.py
 ```
 
+## Statistical Validation (NEW)
+- **Statistical Significance**: p < 0.001 (binomial test vs random)
+- **Effect Size**: Cohen's h = 0.927 (large effect)
+- **Cross-validation**: 5-fold CV shows robust performance
+- **Ablation Study**: All agents contribute (+11-13% over single)
+- **ML Baseline Issue**: Current ML baselines use LLM features (unfair comparison)
+
+## Academic Paper Requirements
+For a serious academic study, we have completed:
+- ✅ Statistical significance testing (p < 0.001)
+- ✅ Cross-validation (5-fold stratified)
+- ✅ Ablation study (all agents tested)
+- ⚠️ ML baselines (need fair comparison without LLM features)
+
 ## Next Steps
-- Continue improving detection accuracy while maintaining 100% recall
-- Add more objective features for better discrimination
-- Expand to real-time monitoring capabilities
+- Create fair ML baseline using only objective features
+- Expand dataset to 100+ CVEs for better statistical power
+- Add confidence calibration analysis
+- Perform error analysis on the 6 false positives

@@ -5,6 +5,48 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2025-08-03 - ACADEMIC EVALUATION SUITE
+
+### 🎯 Complete Statistical Analysis for Academic Paper
+
+#### Added
+- Statistical significance testing (`run_statistical_tests.py`)
+  - Binomial test: p < 0.001 vs random baseline
+  - Effect size: Cohen's h = 0.927 (large effect)
+  - 95% CI for accuracy: [68.9%, 88.6%]
+- Cross-validation framework (`run_cross_validation.py`)
+  - 5-fold stratified cross-validation
+  - Robust performance estimation across folds
+- ML baseline comparison (`create_ml_baselines.py`)
+  - Random Forest: 90% accuracy (but uses LLM features - unfair)
+  - SVM: 83.3% accuracy
+  - Logistic Regression: 90% accuracy
+- Ablation study (`run_ablation_study.py`)
+  - Single agent performance: 66.8-68.9%
+  - Ensemble boost: +11-13% over single agents
+  - AttributionExpert most important (26.3% weight)
+
+#### Fixed
+- Identified ML baseline issue: using LLM outputs as features (circular)
+- Created analysis script to ensure fair comparison
+
+#### Added Testing Suite
+- Complete evaluation script (`run_complete_evaluation.py`)
+  - Runs all tests in sequence
+  - Generates summary report
+  - Checks prerequisites
+- Quick test script (`quick_test.py`)
+  - Uses cached results only
+  - No API calls needed
+  - Perfect for rapid testing
+
+#### Key Findings
+- System performance is statistically significant (p < 0.001)
+- All agents contribute positively to ensemble
+- Ensemble approach provides substantial improvement over single agents
+- Dynamic thresholds crucial for maintaining 100% recall
+- ML baselines show 90% accuracy but use LLM features (unfair comparison)
+
 ## [3.3.0] - 2025-08-03 - GROUND TRUTH VERIFICATION
 
 ### 🎯 Large-Scale Testing with Corrected Ground Truth
