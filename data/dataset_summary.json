@@ -1,0 +1,8 @@
+{
+  "total_cves": 40,
+  "zero_days": 20,
+  "regular_cves": 20,
+  "batches": 8,
+  "batch_size": 5,
+  "created": "2025-08-03T18:30:45.546658"
+}

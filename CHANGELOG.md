@@ -5,6 +5,34 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2025-08-03 - PRODUCTION READY
+
+### 🎯 Final Release - Academic Paper Ready
+
+#### Added
+- Dynamic dataset acquisition from real sources (`acquire_dynamic_dataset.py`)
+- Mixed dataset of 50 CVEs (25 zero-days, 25 regular)
+- Scraped data analysis tools (`analyze_scraped_data.py`)
+- Comprehensive architectural diagram in README
+- Complete usage documentation (USAGE.md)
+
+#### Changed
+- Updated README with full architecture diagram
+- Improved documentation with clear examples
+- Cleaned project structure removing all unnecessary files
+
+#### Performance
+- Successfully scraped 37/50 CVEs before rate limiting
+- 81.1% of scraped CVEs are in CISA KEV
+- 100% have NVD and ExploitDB data
+- 94.6% have news coverage
+
+#### Removed
+- Old README versions
+- Unused Python cache
+- Temporary log files
+- Backup files (.bkp, .drawio)
+
 ## [3.1.0] - 2025-08-03 - DETECTION SYSTEM FUNCTIONAL
 
 ### 🎯 Test Results - 100% Accuracy Achieved

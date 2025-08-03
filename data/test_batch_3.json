@@ -1,0 +1,27 @@
+{
+  "CVE-2022-26134": {
+    "is_zero_day": true,
+    "description": "Atlassian Confluence - OGNL Injection",
+    "evidence": "Mass exploitation, crypto miners, webshells"
+  },
+  "CVE-2022-41040": {
+    "is_zero_day": true,
+    "description": "Microsoft Exchange - SSRF (ProxyNotShell)",
+    "evidence": "APT exploitation before patches"
+  },
+  "CVE-2021-44228": {
+    "is_zero_day": true,
+    "description": "Apache Log4j - RCE (Log4Shell)",
+    "evidence": "Mass exploitation, nation-state actors"
+  },
+  "CVE-2021-34473": {
+    "is_zero_day": true,
+    "description": "Microsoft Exchange - ProxyShell",
+    "evidence": "APT groups, ransomware deployment"
+  },
+  "CVE-2021-40539": {
+    "is_zero_day": true,
+    "description": "Zoho ManageEngine - Authentication Bypass",
+    "evidence": "APT exploitation, US critical infrastructure"
+  }
+}

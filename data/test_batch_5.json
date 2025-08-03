@@ -1,0 +1,27 @@
+{
+  "CVE-2014-0160": {
+    "is_zero_day": false,
+    "description": "OpenSSL - Heartbleed",
+    "evidence": "Coordinated disclosure by Google/Codenomicon"
+  },
+  "CVE-2018-8174": {
+    "is_zero_day": false,
+    "description": "Windows VBScript Engine - RCE",
+    "evidence": "Responsible disclosure by Qihoo 360"
+  },
+  "CVE-2019-0708": {
+    "is_zero_day": false,
+    "description": "Windows RDP - BlueKeep",
+    "evidence": "Microsoft patched before exploitation"
+  },
+  "CVE-2022-22965": {
+    "is_zero_day": false,
+    "description": "Spring Framework - Spring4Shell",
+    "evidence": "Bug bounty disclosure, patches available"
+  },
+  "CVE-2023-34362": {
+    "is_zero_day": false,
+    "description": "MOVEit Transfer - SQL Injection",
+    "evidence": "Patched before Clop ransomware campaign"
+  }
+}

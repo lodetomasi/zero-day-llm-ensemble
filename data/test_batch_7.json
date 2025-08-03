@@ -1,0 +1,27 @@
+{
+  "CVE-2023-32233": {
+    "is_zero_day": false,
+    "description": "Linux Kernel - Use-after-free in Netfilter",
+    "evidence": "Patched in kernel before exploitation"
+  },
+  "CVE-2018-11776": {
+    "is_zero_day": false,
+    "description": "Apache Struts - RCE",
+    "evidence": "Man Yue Mo from Semmle Security Research"
+  },
+  "CVE-2021-27065": {
+    "is_zero_day": false,
+    "description": "Microsoft Exchange - RCE",
+    "evidence": "Part of ProxyLogon but patched set"
+  },
+  "CVE-2022-23131": {
+    "is_zero_day": false,
+    "description": "Zabbix - SAML SSO Authentication Bypass",
+    "evidence": "SonarSource research disclosure"
+  },
+  "CVE-2021-3156": {
+    "is_zero_day": false,
+    "description": "Sudo - Heap-based buffer overflow",
+    "evidence": "Qualys research team, 10-year old bug"
+  }
+}

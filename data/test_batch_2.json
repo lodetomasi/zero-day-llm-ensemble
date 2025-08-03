@@ -1,0 +1,27 @@
+{
+  "CVE-2023-2868": {
+    "is_zero_day": true,
+    "description": "Barracuda ESG - Command Injection",
+    "evidence": "Chinese APT, UNC4841 targeted attacks"
+  },
+  "CVE-2023-27350": {
+    "is_zero_day": true,
+    "description": "PaperCut MF/NG - Improper Access Control",
+    "evidence": "Clop ransomware, Bl00dy ransomware"
+  },
+  "CVE-2023-3519": {
+    "is_zero_day": true,
+    "description": "Citrix ADC - Code Injection",
+    "evidence": "Critical infrastructure targeting"
+  },
+  "CVE-2023-4966": {
+    "is_zero_day": true,
+    "description": "Citrix NetScaler - Information Disclosure",
+    "evidence": "Session hijacking in the wild, CitrixBleed"
+  },
+  "CVE-2022-30190": {
+    "is_zero_day": true,
+    "description": "Microsoft MSDT - Code Execution (Follina)",
+    "evidence": "Chinese APT, widespread exploitation"
+  }
+}
