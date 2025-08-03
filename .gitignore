@@ -59,3 +59,12 @@ reports/
 dist/
 build/
 *.egg-info/.env
+figures/
+results/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+detection_reports/
+large_scale_test_results.json

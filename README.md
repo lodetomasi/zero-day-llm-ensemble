@@ -20,77 +20,81 @@ Zero-day vulnerability detection remains a critical challenge in cybersecurity, 
 
 ## 2. System Architecture
 
-![System Architecture](figures/system_architecture.png)
-
-### Architecture Overview
-
 ```mermaid
-graph TB
-    subgraph Input
-        CVE[CVE-ID]
+graph TD
+    subgraph " "
+        CVE[CVE-ID Input]
     end
     
-    subgraph "Evidence Collection Layer"
-        CVE --> WS[Web Scraping Engine]
-        WS --> S1[NVD API]
-        WS --> S2[CISA KEV]
-        WS --> S3[GitHub API]
-        WS --> S4[ExploitDB]
-        WS --> S5[Security News]
-        WS --> S6[Threat Intel]
-        WS --> S7[Vendor Advisories]
-        WS --> S8[Social Media]
-        
-        S1 --> EC[Evidence Cache]
-        S2 --> EC
-        S3 --> EC
-        S4 --> EC
-        S5 --> EC
-        S6 --> EC
-        S7 --> EC
-        S8 --> EC
+    CVE --> SCRAPER[Web Evidence Collection]
+    
+    subgraph "Data Sources"
+        SCRAPER --> |API| NVD[NVD Database]
+        SCRAPER --> |Web| CISA[CISA KEV]
+        SCRAPER --> |API| GH[GitHub PoCs]
+        SCRAPER --> |Web| EDB[ExploitDB]
+        SCRAPER --> |RSS| NEWS[Security News]
+        SCRAPER --> |API| TI[Threat Intel]
+        SCRAPER --> |Web| VENDOR[Vendor Advisories]
+        SCRAPER --> |API| SOCIAL[Social Media]
     end
     
-    subgraph "Feature Engineering"
-        EC --> FE[Feature Extractor]
-        FE --> TF[Temporal Features<br/>• Days to KEV<br/>• PoC velocity<br/>• Patch timeline]
-        FE --> EF[Evidence Features<br/>• CISA listing<br/>• APT associations<br/>• Exploit availability]
-        FE --> SF[Statistical Features<br/>• CVSS scores<br/>• Reference counts<br/>• News mentions]
-        
-        TF --> FV[Feature Vector<br/>40+ dimensions]
-        EF --> FV
-        SF --> FV
+    NVD --> CACHE[Evidence Cache]
+    CISA --> CACHE
+    GH --> CACHE
+    EDB --> CACHE
+    NEWS --> CACHE
+    TI --> CACHE
+    VENDOR --> CACHE
+    SOCIAL --> CACHE
+    
+    CACHE --> FE[Feature Extraction<br/>40+ Objective Features]
+    
+    FE --> |Temporal| TF[Timeline Analysis<br/>• Days to KEV<br/>• PoC Emergence<br/>• Patch Delays]
+    FE --> |Evidence| EF[Exploitation Indicators<br/>• CISA Listing<br/>• APT Activity<br/>• Active Exploits]
+    FE --> |Technical| SF[Severity Metrics<br/>• CVSS Scores<br/>• Attack Complexity<br/>• Impact Analysis]
+    
+    TF --> ENSEMBLE[Multi-Agent LLM Ensemble]
+    EF --> ENSEMBLE
+    SF --> ENSEMBLE
+    
+    subgraph "Specialized Agents"
+        ENSEMBLE --> FA[ForensicAnalyst<br/>w=0.246]
+        ENSEMBLE --> PD[PatternDetector<br/>w=0.203]
+        ENSEMBLE --> TA[TemporalAnalyst<br/>w=0.170]
+        ENSEMBLE --> AE[AttributionExpert<br/>w=0.263]
+        ENSEMBLE --> MA[MetaAnalyst<br/>w=0.118]
     end
     
-    subgraph "Multi-Agent Ensemble"
-        FV --> A1[ForensicAnalyst<br/>Mixtral-8x22B]
-        FV --> A2[PatternDetector<br/>Claude 3 Opus]
-        FV --> A3[TemporalAnalyst<br/>Llama 3.3 70B]
-        FV --> A4[AttributionExpert<br/>DeepSeek R1]
-        FV --> A5[MetaAnalyst<br/>Gemini 2.5 Pro]
-        
-        A1 --> TS[Thompson Sampling<br/>Weight Optimizer]
-        A2 --> TS
-        A3 --> TS
-        A4 --> TS
-        A5 --> TS
-    end
+    FA --> THOMPSON[Dynamic Weight Optimization<br/>Thompson Sampling]
+    PD --> THOMPSON
+    TA --> THOMPSON
+    AE --> THOMPSON
+    MA --> THOMPSON
     
-    subgraph "Classification"
-        TS --> ES[Ensemble Score]
-        ES --> TH{Threshold >= 0.7?}
-        TH -->|Yes| ZD[Zero-Day Detected]
-        TH -->|No| REG[Regular CVE]
-        
-        ZD --> OUT[Output Report<br/>• Classification<br/>• Confidence Score<br/>• Evidence Summary]
-        REG --> OUT
-    end
+    THOMPSON --> CONF[Confidence Assessment]
     
-    style CVE fill:#e1f5fe
-    style ZD fill:#ffcdd2
-    style REG fill:#c8e6c9
-    style TS fill:#fff3e0
-    style FV fill:#f3e5f5
+    CONF --> |High ≥80%| TH1[Threshold: 0.70]
+    CONF --> |Medium 60-80%| TH2[Threshold: 0.83]
+    CONF --> |Low 40-60%| TH3[Threshold: 0.67]
+    CONF --> |Very Low <40%| TH4[Threshold: 0.65]
+    
+    TH1 --> DECISION{Detection Decision}
+    TH2 --> DECISION
+    TH3 --> DECISION
+    TH4 --> DECISION
+    
+    DECISION --> |Score ≥ Threshold| ZERODAY[Zero-Day Detected]
+    DECISION --> |Score < Threshold| REGULAR[Regular CVE]
+    
+    ZERODAY --> REPORT[Detection Report]
+    REGULAR --> REPORT
+    
+    style CVE fill:#2196F3,color:#fff
+    style ZERODAY fill:#F44336,color:#fff
+    style REGULAR fill:#4CAF50,color:#fff
+    style ENSEMBLE fill:#FF9800,color:#fff
+    style THOMPSON fill:#9C27B0,color:#fff
 ```
 
 The detection pipeline consists of four primary components:
@@ -194,26 +198,12 @@ Dynamic thresholds based on confidence levels improved accuracy from 62.5% to 80
 
 ### 4.3 Agent Contribution Analysis
 
-```mermaid
-graph LR
-    subgraph "Agent Specializations"
-        FA[ForensicAnalyst<br/>Technical Analysis] --> |0.246| W[Weighted<br/>Ensemble]
-        PD[PatternDetector<br/>Linguistic Patterns] --> |0.203| W
-        TA[TemporalAnalyst<br/>Timeline Anomalies] --> |0.170| W
-        AE[AttributionExpert<br/>APT Behavior] --> |0.263| W
-        MA[MetaAnalyst<br/>Cross-validation] --> |0.118| W
-    end
-    
-    W --> FS[Final Score]
-    
-    style FA fill:#bbdefb
-    style PD fill:#c5e1a5
-    style TA fill:#ffe0b2
-    style AE fill:#f8bbd0
-    style MA fill:#e1bee7
-```
-
-Thompson Sampling converged to optimal weights after ~15 examples, with AttributionExpert (26.3%) and ForensicAnalyst (24.6%) receiving highest weights.
+Thompson Sampling converged to optimal weights after ~15 examples:
+- **AttributionExpert** (26.3%): Highest weight for APT behavior analysis
+- **ForensicAnalyst** (24.6%): Technical vulnerability analysis
+- **PatternDetector** (20.3%): Zero-day linguistic patterns
+- **TemporalAnalyst** (17.0%): Timeline anomaly detection
+- **MetaAnalyst** (11.8%): Cross-agent synthesis and validation
 
 ## 5. Implementation
 
@@ -273,7 +263,6 @@ zero-day-llm-ensemble/
 ├── config/                   # Agent and API configurations
 ├── data/                     # Cached evidence and datasets
 ├── detection_reports/        # JSON analysis outputs
-├── figures/                  # Publication-ready visualizations
 ├── detect_zero_days.py       # Main detection interface
 ├── acquire_dynamic_dataset.py # Real-time data acquisition
 └── run_large_scale_test.py   # Evaluation framework
