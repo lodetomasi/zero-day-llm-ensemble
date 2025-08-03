@@ -20,6 +20,8 @@ Zero-day vulnerability detection remains a critical challenge in cybersecurity, 
 
 ## 2. System Architecture
 
+![System Architecture](figures/system_architecture.png)
+
 ### Architecture Overview
 
 ```mermaid
@@ -188,6 +190,8 @@ class ThompsonSampler:
 
 ### 4.3 Agent Contribution Analysis
 
+![Agent Weight Evolution](figures/agent_weights_evolution.png)
+
 ```mermaid
 graph LR
     subgraph "Agent Specializations"
@@ -208,6 +212,14 @@ graph LR
 ```
 
 Thompson Sampling converged to optimal weights after ~15 examples, with AttributionExpert (26.3%) and ForensicAnalyst (24.6%) receiving highest weights.
+
+### 4.4 Performance Visualization
+
+![Performance Metrics](figures/performance_metrics.png)
+
+### 4.5 Ablation Study Visualization
+
+![Ablation Study](figures/ablation_study.png)
 
 ## 5. Implementation
 
@@ -260,15 +272,28 @@ We demonstrate that multi-agent LLM ensembles can achieve high accuracy in zero-
 ```
 zero-day-llm-ensemble/
 ├── src/
-│   ├── agents/               # Agent implementations
-│   ├── ensemble/             # Ensemble and Thompson Sampling
-│   ├── scraping/             # Evidence collection
-│   └── utils/                # Feature extraction, logging
-├── config/                   # Configuration files
-├── data/                     # Datasets and cache
-├── detection_reports/        # Analysis outputs
-└── scripts/                  # Evaluation scripts
+│   ├── agents/               # Multi-agent LLM implementations
+│   ├── ensemble/             # Thompson Sampling optimizer
+│   ├── scraping/             # 8-source evidence collector
+│   └── utils/                # Feature extraction (40+ features)
+├── config/                   # Agent and API configurations
+├── data/                     # Cached evidence and datasets
+├── detection_reports/        # JSON analysis outputs
+├── figures/                  # Publication-ready visualizations
+├── detect_zero_days.py       # Main detection interface
+├── acquire_dynamic_dataset.py # Real-time data acquisition
+└── run_large_scale_test.py   # Evaluation framework
 ```
+
+## Key Publications and References
+
+1. **Thompson Sampling**: Thompson, W.R. (1933). "On the likelihood that one unknown probability exceeds another in view of the evidence of two samples". Biometrika.
+
+2. **Ensemble Methods**: Dietterich, T.G. (2000). "Ensemble methods in machine learning". Multiple Classifier Systems.
+
+3. **Zero-Day Detection**: Bilge, L., & Dumitras, T. (2012). "Before we knew it: an empirical study of zero-day attacks in the real world". CCS '12.
+
+4. **LLM Security Applications**: Pearce, H., et al. (2023). "Examining zero-shot vulnerability repair with large language models". IEEE S&P.
 
 ## Citation
 
@@ -293,4 +318,6 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) file for 
 ---
 
 **Contact:** Lorenzo De Tomasi (lorenzo.detomasi@graduate.univaq.it)  
-**Project Page:** [https://github.com/lodetomasi/zero-day-llm-ensemble](https://github.com/lodetomasi/zero-day-llm-ensemble)
+**Affiliation:** University of L'Aquila, Department of Information Engineering, Computer Science and Mathematics  
+**Project Repository:** [https://github.com/lodetomasi/zero-day-llm-ensemble](https://github.com/lodetomasi/zero-day-llm-ensemble)  
+**Dataset Analysis:** See [DATASET_ANALYSIS.md](DATASET_ANALYSIS.md) for detailed acquisition statistics
