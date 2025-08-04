@@ -591,9 +591,6 @@ zero-day-llm-ensemble/
 @inproceedings{detomasi2025zerodayensemble,
   title={Zero-Day Vulnerability Detection Using Multi-Agent LLM Ensemble},
   author={De Tomasi, Lorenzo},
-  booktitle={Proceedings of the IEEE Symposium on Security and Privacy},
-  year={2025},
-  organization={IEEE}
 }
 ```
 
