@@ -31,14 +31,14 @@ class ZeroDayDetectorCLI:
     """Main CLI interface for zero-day detection"""
     
     def __init__(self):
-        self.version = "3.12.1"
+        self.version = "3.12.2"
         
     def print_banner(self):
         """Print welcome banner"""
         print(r"""
 ╔═══════════════════════════════════════════════════════════════╗
 ║                                                               ║
-║     🎯 Zero-Day Vulnerability Detection System v3.12.1        ║
+║     🎯 Zero-Day Vulnerability Detection System v3.12.2        ║
 ║     Multi-Agent LLM Ensemble with Context Enhancement         ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝

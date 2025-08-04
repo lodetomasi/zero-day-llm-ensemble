@@ -1,8 +1,10 @@
 # System Architecture
 
+**Version 3.12.2** - Last Updated: 2025-08-04
+
 ## Overview
 
-The Zero-Day Detection System uses a multi-layered architecture combining web scraping, feature engineering, multi-agent LLM analysis, and ensemble decision-making with dynamic thresholds.
+The Zero-Day Detection System uses a multi-layered architecture combining web scraping, feature engineering (including responsible disclosure detection), multi-agent LLM analysis, and ensemble decision-making with dynamic thresholds.
 
 ## Architecture Diagram
 
@@ -155,6 +157,14 @@ graph TB
    - Underground activity
    - Media coverage
 
+5. **Responsible Disclosure Features** (6 features) - **NEW in v3.12.2**
+   - Security researcher credits
+   - Bug bounty mentions
+   - Disclosure keywords
+   - Branded vulnerability names
+   - Responsible disclosure score
+   - Timeline coordination patterns
+
 ### 3. LLM Agent Layer
 
 #### Agent Specializations
@@ -192,13 +202,14 @@ graph TB
   - Exploration vs exploitation balance
   - Real-time weight updates
 
-#### Confidence-Based Thresholds
+#### Confidence-Based Thresholds (v3.12.2)
 ```json
 {
   "HIGH": 0.50,      // ≥80% confidence
-  "MEDIUM": 0.45,    // 60-80% confidence
-  "LOW": 0.40,       // 40-60% confidence
-  "VERY_LOW": 0.65   // <40% confidence
+  "MEDIUM": 0.50,    // 60-80% confidence (increased from 0.45)
+  "LOW": 0.45,       // 40-60% confidence (increased from 0.40)
+  "VERY_LOW": 0.70,  // <40% confidence (increased from 0.65)
+  "DEFAULT": 0.55    // Default threshold (increased from 0.50)
 }
 ```
 

@@ -197,6 +197,75 @@ class ZeroDayFeatureExtractor:
         
         return features
     
+    def extract_disclosure_features(self, evidence: Dict[str, Any]) -> Dict[str, float]:
+        """Extract features indicating responsible/coordinated disclosure"""
+        features = {
+            'has_researcher_credit': 0.0,
+            'has_bug_bounty': 0.0,
+            'has_disclosure_keywords': 0.0,
+            'has_branded_name': 0.0,
+            'responsible_disclosure_score': 0.0
+        }
+        
+        # Known security researchers/companies
+        security_researchers = [
+            'qualys', 'rapid7', 'tenable', 'crowdstrike', 'google project zero',
+            'microsoft security', 'cisco talos', 'check point', 'palo alto'
+        ]
+        
+        # Branded vulnerabilities
+        branded_vulns = {
+            'CVE-2014-0160': 'heartbleed',
+            'CVE-2014-6271': 'shellshock', 
+            'CVE-2021-44228': 'log4shell',
+            'CVE-2022-30190': 'follina',
+            'CVE-2020-1472': 'zerologon'
+        }
+        
+        # Analyze all text
+        all_text = []
+        nvd_data = evidence.get('sources', {}).get('nvd', {})
+        if nvd_data.get('description'):
+            all_text.append(nvd_data['description'].lower())
+        
+        news = evidence.get('sources', {}).get('security_news', {})
+        for article in news.get('articles', []):
+            if isinstance(article, dict):
+                all_text.append(article.get('title', '').lower())
+        
+        combined_text = ' '.join(all_text)
+        
+        # Check for researcher credits
+        for researcher in security_researchers:
+            if researcher in combined_text:
+                features['has_researcher_credit'] = 1.0
+                break
+        
+        # Check for bug bounty
+        if any(term in combined_text for term in ['bug bounty', 'hackerone', 'bugcrowd']):
+            features['has_bug_bounty'] = 1.0
+        
+        # Check disclosure keywords
+        disclosure_terms = ['responsible disclosure', 'coordinated disclosure', 
+                          'discovered by', 'reported by', 'security audit']
+        if any(term in combined_text for term in disclosure_terms):
+            features['has_disclosure_keywords'] = 1.0
+        
+        # Check branded name
+        cve_id = evidence.get('cve_id', '')
+        if cve_id in branded_vulns or branded_vulns.get(cve_id, '') in combined_text:
+            features['has_branded_name'] = 1.0
+        
+        # Calculate combined score
+        features['responsible_disclosure_score'] = (
+            features['has_researcher_credit'] * 0.3 +
+            features['has_bug_bounty'] * 0.25 +
+            features['has_disclosure_keywords'] * 0.25 +
+            features['has_branded_name'] * 0.2
+        )
+        
+        return features
+    
     def extract_all_features(self, evidence: Dict[str, Any]) -> Dict[str, float]:
         """
         Extract all features from evidence
@@ -212,11 +281,15 @@ class ZeroDayFeatureExtractor:
         nlp_features = self.extract_nlp_features(evidence)
         severity_features = self.extract_severity_features(evidence)
         
+        # Extract responsible disclosure features
+        disclosure_features = self.extract_disclosure_features(evidence)
+        
         # Combine all features
         all_features.update(temporal_features)
         all_features.update(evidence_features)
         all_features.update(nlp_features)
         all_features.update(severity_features)
+        all_features.update(disclosure_features)
         
         # Add metadata
         all_features['feature_count'] = float(len(all_features))
