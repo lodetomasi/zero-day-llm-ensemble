@@ -230,36 +230,46 @@ class EnhancedZeroDayDetector:
         if features.get('exploitation_before_patch', 0) > 0:
             feature_score += 0.25
         
-        # APT associations
+        # APT associations (INCREASED WEIGHT)
         if features.get('has_apt_association', 0) > 0:
             apt_count = features.get('apt_group_count', 0)
-            feature_score += min(0.15 * apt_count, 0.3)
+            feature_score += min(0.20 * apt_count, 0.35)  # Increased from 0.15/0.3
         
-        # Government alerts (new)
+        # Government alerts (REDUCED WEIGHT)
         gov_alerts = evidence.get('sources', {}).get('government_alerts', {})
         if len(gov_alerts.get('alerts', [])) > 0:
-            feature_score += 0.1
+            feature_score += 0.05  # Reduced from 0.1
             if len(gov_alerts.get('countries_alerting', [])) > 2:
-                feature_score += 0.1
+                feature_score += 0.05  # Reduced from 0.1
         
-        # Security researcher attention (new)
+        # Security researcher attention (INCREASED WEIGHT)
         researchers = evidence.get('sources', {}).get('security_researchers', {})
         if len(researchers.get('researcher_posts', [])) > 0:
-            feature_score += 0.05
+            feature_score += 0.10  # Increased from 0.05
             if any(p.get('has_poc') for p in researchers.get('researcher_posts', [])):
-                feature_score += 0.1
+                feature_score += 0.15  # Increased from 0.1
         
-        # Honeypot activity (new)
+        # Honeypot activity (INCREASED WEIGHT)
         honeypot = evidence.get('sources', {}).get('honeypot_data', {})
         if honeypot.get('honeypot_detections', 0) > 5:
-            feature_score += 0.15
+            feature_score += 0.20  # Increased from 0.15
         elif honeypot.get('honeypot_detections', 0) > 0:
-            feature_score += 0.1
+            feature_score += 0.15  # Increased from 0.1
         
-        # Behavioral indicators (new)
+        # Bug bounty activity (NEW - NON-GOVERNMENT)
+        bug_bounty = evidence.get('sources', {}).get('bug_bounty', {})
+        if bug_bounty.get('active_exploitation_reports', 0) > 0:
+            feature_score += 0.15
+        
+        # Social media buzz (NEW - NON-GOVERNMENT)
+        social = evidence.get('sources', {}).get('social_media', {})
+        if social.get('infosec_community_buzz', False):
+            feature_score += 0.10
+        
+        # Behavioral indicators (INCREASED WEIGHT)
         behavioral = evidence.get('advanced_features', {}).get('behavioral', {})
         if behavioral.get('adoption_velocity', 0) > 0.7:
-            feature_score += 0.1
+            feature_score += 0.15  # Increased from 0.1
         
         # Negative indicators
         if features.get('coordinated_disclosure', 0) > 0:
@@ -277,14 +287,14 @@ class EnhancedZeroDayDetector:
         # LLM ensemble score
         llm_score = llm_result.get('ensemble', {}).get('prediction', 0.5)
         
-        # Enhanced score from threat intelligence
+        # Enhanced score from threat intelligence (INCREASED WEIGHT)
         threat_score = evidence.get('scores', {}).get('threat_actor_interest', 0)
         
-        # Combine scores with weights
+        # Combine scores with adjusted weights (more emphasis on non-government sources)
         combined_score = (
-            0.5 * feature_score + 
+            0.45 * feature_score +   # Reduced from 0.5
             0.35 * llm_score + 
-            0.15 * threat_score
+            0.20 * threat_score      # Increased from 0.15
         )
         
         return combined_score

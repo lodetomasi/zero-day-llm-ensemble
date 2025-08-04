@@ -5,6 +5,44 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.0] - 2025-08-04 - NON-GOVERNMENT SOURCE WEIGHTING
+
+### 🎯 Enhanced Non-Government Source Prioritization
+
+#### Changed
+- **Rebalanced Source Weights** to reduce dependency on government alerts:
+  - **Government sources** (reduced influence):
+    - NVD: 0.9 → 0.85
+    - CISA KEV: 0.95 → 0.90
+    - Government alerts: 0.1 → 0.05 per alert
+  
+  - **Non-government sources** (increased influence):
+    - Security researchers: 0.85 → 0.90 (+0.10 → +0.15 for PoCs)
+    - Honeypot detections: +0.15 → +0.20 for high activity
+    - APT associations: 0.15 → 0.20 per group (max 0.35)
+    - Bug bounty reports: NEW +0.15 for exploitation reports
+    - Social media buzz: NEW +0.10 for community activity
+    - Darkweb mentions: 0.6 → 0.75 confidence
+    - Academic papers: NEW 0.92 confidence
+
+#### Updated
+- **Detection Score Calculation**:
+  - Feature weight: 0.5 → 0.45 (slight reduction)
+  - Threat actor interest: 0.15 → 0.20 (increased)
+  - Added new signals for bug bounty and social media
+
+- **Threat Actor Interest Calculation**:
+  - Ransomware groups: 0.3 → 0.35
+  - Darkweb activity: now scales with mention count
+  - APT weight: 0.1 → 0.15 per group
+  - Added security researcher, bug bounty, and social media signals
+
+#### Why This Matters
+- Reduces single point of failure on government sources
+- Captures underground and community signals earlier
+- Better reflects real-world threat landscape
+- Improves detection of zero-days before official recognition
+
 ## [3.9.0] - 2025-08-04 - OPTIMIZED THRESHOLDS & BUG FIXES
 
 ### 🎯 Major Performance Improvements

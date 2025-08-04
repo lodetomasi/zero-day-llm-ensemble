@@ -483,18 +483,43 @@ class EnhancedZeroDayScraper(ComprehensiveZeroDayScraper):
         return scores
     
     def _calculate_threat_actor_interest(self, evidence: Dict) -> float:
-        """Calculate threat actor interest level"""
+        """Calculate threat actor interest level with emphasis on non-government sources"""
         score = 0.0
         
-        # Check various indicators
+        # Ransomware groups (NON-GOVERNMENT - INCREASED)
         if evidence.get('sources', {}).get('ransomware_groups', {}).get('ransomware_usage'):
-            score += 0.3
+            score += 0.35  # Increased from 0.3
         
-        if evidence.get('sources', {}).get('darkweb_mentions', {}).get('darkweb_mentions', 0) > 0:
-            score += 0.2
+        # Darkweb mentions (NON-GOVERNMENT - INCREASED)
+        darkweb_mentions = evidence.get('sources', {}).get('darkweb_mentions', {}).get('darkweb_mentions', 0)
+        if darkweb_mentions > 0:
+            score += min(0.3, darkweb_mentions * 0.05)  # Increased from 0.2
         
+        # APT associations (NON-GOVERNMENT - INCREASED)
         apt_count = len(evidence.get('indicators', {}).get('apt_associations', []))
-        score += min(0.3, apt_count * 0.1)
+        score += min(0.35, apt_count * 0.15)  # Increased from 0.3/0.1
+        
+        # Security researcher interest (NON-GOVERNMENT - NEW)
+        researcher_posts = len(evidence.get('sources', {}).get('security_researchers', {}).get('researcher_posts', []))
+        if researcher_posts > 0:
+            score += min(0.2, researcher_posts * 0.05)
+        
+        # Bug bounty activity (NON-GOVERNMENT - NEW)
+        bug_bounty = evidence.get('sources', {}).get('bug_bounty', {})
+        if bug_bounty.get('exploitation_discussions', 0) > 0:
+            score += 0.15
+        
+        # Social media activity (NON-GOVERNMENT - NEW)
+        social = evidence.get('sources', {}).get('social_media', {})
+        if social.get('twitter_mentions', 0) > 10:
+            score += 0.1
+        if social.get('reddit_discussions', 0) > 3:
+            score += 0.1
+        
+        # Honeypot detections (NON-GOVERNMENT - NEW)
+        honeypot = evidence.get('sources', {}).get('honeypot_data', {})
+        if honeypot.get('honeypot_detections', 0) > 0:
+            score += min(0.2, honeypot.get('honeypot_detections', 0) * 0.02)
         
         return min(1.0, score)
     
@@ -849,18 +874,28 @@ class DataQualityEnhancer:
         return evidence
     
     def _calculate_source_confidence(self, evidence: Dict) -> Dict:
-        """Calculate confidence score for each source"""
+        """Calculate confidence score for each source with emphasis on non-government sources"""
         source_confidence = {}
         
         confidence_weights = {
-            'nvd': 0.9,
-            'cisa_kev': 0.95,
-            'government_alerts': 0.9,
-            'security_researchers': 0.85,
-            'vendor': 0.8,
-            'github': 0.7,
-            'social_media': 0.5,
-            'darkweb_mentions': 0.6
+            # Government sources (SLIGHTLY REDUCED)
+            'nvd': 0.85,  # Reduced from 0.9
+            'cisa_kev': 0.90,  # Reduced from 0.95
+            'government_alerts': 0.80,  # Reduced from 0.9
+            
+            # Non-government sources (INCREASED)
+            'security_researchers': 0.90,  # Increased from 0.85
+            'bug_bounty': 0.85,  # NEW
+            'ransomware_groups': 0.85,  # NEW
+            'honeypot_data': 0.88,  # NEW
+            'vendor': 0.82,  # Slightly increased from 0.8
+            'github': 0.75,  # Increased from 0.7
+            'social_media': 0.65,  # Increased from 0.5
+            'darkweb_mentions': 0.75,  # Increased from 0.6
+            'telemetry_feeds': 0.85,  # NEW
+            'incident_reports': 0.88,  # NEW
+            'security_podcasts': 0.70,  # NEW
+            'academic_papers': 0.92  # NEW
         }
         
         for source, weight in confidence_weights.items():
