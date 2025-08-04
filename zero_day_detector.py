@@ -94,8 +94,8 @@ class ZeroDayDetectorCLI:
             max_workers=4
         )
         
-        # Display results
-        tester.display_results(results)
+        # Print summary using the results directly
+        tester.print_summary(results)
     
     def verify_scraping(self, cve_id: str, show_context: bool = False):
         """Verify data collection for a CVE"""
