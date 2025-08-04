@@ -9,9 +9,6 @@ Department of Information Engineering, Computer Science and Mathematics
 University of L'Aquila, Italy  
 lorenzo.detomasi@graduate.univaq.it
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 
 ## What's New in v3.12.2
 
