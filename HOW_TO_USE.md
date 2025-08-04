@@ -1,5 +1,7 @@
 # 🚀 How to Use Zero-Day Detector
 
+> **New in v3.12.2**: Simplified to just 5 main commands! See [EXAMPLES.md](EXAMPLES.md) for real usage examples.
+
 ## Quick Start Guide
 
 ### 1. First Time Setup

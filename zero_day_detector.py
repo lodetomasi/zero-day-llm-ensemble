@@ -104,6 +104,90 @@ class ZeroDayDetectorCLI:
         verifier = ScrapingVerifier()
         verifier.verify_cve(cve_id, full_context=show_context)
     
+    def download_cves(self, total: int = 100, balanced: bool = True):
+        """Download and balance CVEs for testing"""
+        print(f"\n📥 Downloading and preparing {total} CVEs...")
+        print("-" * 50)
+        
+        # Step 1: Download from all sources
+        print("\n🔍 Step 1: Fetching CVEs from multiple sources...")
+        print("   • CISA KEV (all known zero-days)")
+        print("   • NVD recent vulnerabilities")
+        print("   • Historical CVEs")
+        print("   • Low/medium severity CVEs (likely regular)")
+        
+        # Import and run download scripts
+        import subprocess
+        import sys
+        
+        # Download zero-days and mixed CVEs
+        print("\n📊 Downloading zero-days and recent CVEs...")
+        result = subprocess.run([
+            sys.executable, 
+            "scripts/download_more_cves.py"
+        ], capture_output=True, text=True)
+        
+        if result.returncode != 0:
+            print(f"❌ Error downloading CVEs: {result.stderr}")
+            return
+            
+        # Download more regular CVEs
+        print("\n📊 Downloading additional regular CVEs...")
+        result = subprocess.run([
+            sys.executable, 
+            "scripts/download_regular_cves.py"
+        ], capture_output=True, text=True)
+        
+        if result.returncode != 0:
+            print(f"❌ Error downloading regular CVEs: {result.stderr}")
+        
+        # Step 2: Create balanced dataset
+        print(f"\n⚖️  Step 2: Creating balanced dataset with {total} CVEs...")
+        print(f"   • Target: {total//2} zero-days + {total//2} regular CVEs")
+        
+        # Run balance script
+        result = subprocess.run([
+            sys.executable, 
+            "scripts/balance_dataset.py",
+            str(total)
+        ], capture_output=True, text=True)
+        
+        if result.returncode == 0:
+            output_file = f"data/balanced_dataset_{total}.json"
+            print(f"\n✅ Success! Balanced dataset created:")
+            print(f"   📁 File: {output_file}")
+            print(f"   📊 Contents: {total//2} zero-days + {total//2} regular CVEs")
+            print(f"\n💡 To test with this dataset:")
+            print(f"   python {sys.argv[0]} test --zero-days {total//2} --regular {total//2}")
+        else:
+            print(f"❌ Error balancing dataset: {result.stderr}")
+            
+        # Show all available datasets
+        self._show_dataset_stats()
+    
+    def _show_dataset_stats(self):
+        """Show statistics about available datasets"""
+        data_dir = Path('data')
+        datasets = list(data_dir.glob('*.json'))
+        
+        print("\n📊 Available Datasets:")
+        for dataset in sorted(datasets):
+            try:
+                with open(dataset, 'r') as f:
+                    data = json.load(f)
+                    if isinstance(data, list):
+                        total = len(data)
+                        zero_days = sum(1 for cve in data if cve.get('is_zero_day', False))
+                    else:
+                        total = 0
+                        zero_days = 0
+                    
+                    if total > 0:
+                        print(f"   • {dataset.name}: {total} CVEs "
+                              f"({zero_days} zero-days, {total-zero_days} regular)")
+            except:
+                pass
+    
     def show_status(self):
         """Show system status and configuration"""
         print("\n📊 System Status")
@@ -216,6 +300,7 @@ Examples:
   %(prog)s detect CVE-2024-3400              # Detect single CVE
   %(prog)s test --zero-days 10 --regular 10  # Test with multiple CVEs
   %(prog)s verify CVE-2024-3400              # Verify data collection
+  %(prog)s download --total 200              # Download 200 balanced CVEs
   %(prog)s status                            # Show system status
 
 Common Zero-Day CVEs for Testing:
@@ -258,6 +343,13 @@ Regular CVEs for Testing:
     # Status command
     status_parser = subparsers.add_parser('status', help='Show system status')
     
+    # Download command
+    download_parser = subparsers.add_parser('download', help='Download additional CVEs')
+    download_parser.add_argument('--total', type=int, default=100,
+                                help='Total CVEs to download (default: 100)')
+    download_parser.add_argument('--no-balance', action='store_true',
+                                help='Do not balance the dataset')
+    
     # Parse arguments
     args = parser.parse_args()
     
@@ -284,6 +376,11 @@ Regular CVEs for Testing:
         )
     elif args.command == 'status':
         cli.show_status()
+    elif args.command == 'download':
+        cli.download_cves(
+            total=args.total,
+            balanced=not args.no_balance
+        )
     else:
         parser.print_help()
         sys.exit(1)

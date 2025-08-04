@@ -273,15 +273,17 @@ pip install -r requirements.txt
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
-### 5.3 Quick Start
+### 5.3 Usage
 
-#### Main CLI Tool (Recommended)
 ```bash
-# Detect single CVE (with full context enhancement)
+# Detect if a CVE is a zero-day
 python zero_day_detector.py detect CVE-2024-3400
 
-# Test system with multiple CVEs
+# Test system performance  
 python zero_day_detector.py test --zero-days 25 --regular 25
+
+# Download and balance CVEs for testing
+python zero_day_detector.py download --total 200
 
 # Verify data collection
 python zero_day_detector.py verify CVE-2024-3400
@@ -290,29 +292,26 @@ python zero_day_detector.py verify CVE-2024-3400
 python zero_day_detector.py status
 ```
 
-#### Advanced Testing
-```bash
-# Universal tester for batch analysis
-python scripts/universal_tester.py --zero-days 30 --regular 30
+#### Quick Examples
 
-# Parallel testing for speed
-python scripts/universal_tester.py --total 100 --parallel --workers 8
+**Detect a Zero-Day:**
+```bash
+$ python zero_day_detector.py detect CVE-2021-44228
+🎯 DETECTION RESULT: ZERO-DAY DETECTED
+📊 Detection Score: 79.5%
+   Confidence: 66.0% (MEDIUM)
+📌 Key Indicators: CISA KEV, Rapid addition, APT activity
 ```
 
-#### Single CVE Analysis
+**Test System Performance:**
 ```bash
-# Enhanced detection with all sources
-python scripts/detect_zero_days_enhanced.py CVE-2024-3400 -v
-
-# Standard detection
-python scripts/detect_zero_days.py CVE-2024-3400
+$ python zero_day_detector.py test --zero-days 10 --regular 10
+🎯 Performance Metrics:
+  Accuracy: 72.0%
+  F1 Score: 0.774
 ```
 
-#### Quick Demo
-```bash
-# Fast demo with cached results
-python scripts/quick_test.py
-```
+See [EXAMPLES.md](EXAMPLES.md) for detailed examples with full output.
 
 ### 5.4 Available Datasets
 

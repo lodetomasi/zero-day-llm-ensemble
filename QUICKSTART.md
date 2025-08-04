@@ -40,17 +40,23 @@ python zero_day_detector.py test --zero-days 5 --regular 5
 # Expected: ~80% accuracy
 ```
 
-## 5. Common Commands
+## 5. All Commands
 
 ```bash
-# Check system status
-python zero_day_detector.py status
+# Detect if a CVE is a zero-day
+python zero_day_detector.py detect CVE-2024-3400
 
-# Verify data collection works
+# Test system performance
+python zero_day_detector.py test --zero-days 25 --regular 25
+
+# Download more CVEs for testing
+python zero_day_detector.py download --total 200
+
+# Verify data collection
 python zero_day_detector.py verify CVE-2024-3400
 
-# See help
-python zero_day_detector.py --help
+# Check system status
+python zero_day_detector.py status
 ```
 
 ## Next Steps

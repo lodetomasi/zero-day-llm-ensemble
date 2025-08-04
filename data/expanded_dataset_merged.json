@@ -1,4 +1,304 @@
 {
+  "CVE-2024-3400": {
+    "is_zero_day": true,
+    "description": "Palo Alto Networks PAN-OS - Command Injection",
+    "evidence": "State-sponsored actors, Operation MidnightEclipse"
+  },
+  "CVE-2024-21412": {
+    "is_zero_day": true,
+    "description": "Microsoft Defender SmartScreen - Security Feature Bypass",
+    "evidence": "Water Hydra APT campaign, DarkGate malware"
+  },
+  "CVE-2024-1709": {
+    "is_zero_day": true,
+    "description": "ConnectWise ScreenConnect - Authentication Bypass",
+    "evidence": "Mass exploitation, ransomware deployment"
+  },
+  "CVE-2023-23397": {
+    "is_zero_day": true,
+    "description": "Microsoft Outlook - Privilege Escalation",
+    "evidence": "Russian APT28, Forest Blizzard campaign"
+  },
+  "CVE-2023-20198": {
+    "is_zero_day": true,
+    "description": "Cisco IOS XE - Privilege Escalation",
+    "evidence": "Mass exploitation, 10,000+ devices compromised"
+  },
+  "CVE-2023-2868": {
+    "is_zero_day": true,
+    "description": "Barracuda ESG - Command Injection",
+    "evidence": "Chinese APT, UNC4841 targeted attacks"
+  },
+  "CVE-2023-27350": {
+    "is_zero_day": true,
+    "description": "PaperCut MF/NG - Improper Access Control",
+    "evidence": "Clop ransomware, Bl00dy ransomware"
+  },
+  "CVE-2023-3519": {
+    "is_zero_day": true,
+    "description": "Citrix ADC - Code Injection",
+    "evidence": "Critical infrastructure targeting"
+  },
+  "CVE-2023-4966": {
+    "is_zero_day": true,
+    "description": "Citrix NetScaler - Information Disclosure",
+    "evidence": "Session hijacking in the wild, CitrixBleed"
+  },
+  "CVE-2022-30190": {
+    "is_zero_day": true,
+    "description": "Microsoft MSDT - Code Execution (Follina)",
+    "evidence": "Chinese APT, widespread exploitation"
+  },
+  "CVE-2022-26134": {
+    "is_zero_day": true,
+    "description": "Atlassian Confluence - OGNL Injection",
+    "evidence": "Mass exploitation, crypto miners, webshells"
+  },
+  "CVE-2022-41040": {
+    "is_zero_day": true,
+    "description": "Microsoft Exchange - SSRF (ProxyNotShell)",
+    "evidence": "APT exploitation before patches"
+  },
+  "CVE-2021-44228": {
+    "is_zero_day": true,
+    "description": "Apache Log4j - RCE (Log4Shell)",
+    "evidence": "Mass exploitation, nation-state actors"
+  },
+  "CVE-2021-34473": {
+    "is_zero_day": true,
+    "description": "Microsoft Exchange - ProxyShell",
+    "evidence": "APT groups, ransomware deployment"
+  },
+  "CVE-2021-40539": {
+    "is_zero_day": true,
+    "description": "Zoho ManageEngine - Authentication Bypass",
+    "evidence": "APT exploitation, US critical infrastructure"
+  },
+  "CVE-2021-42287": {
+    "is_zero_day": true,
+    "description": "Active Directory - Privilege Escalation",
+    "evidence": "Combined with CVE-2021-42278, APT usage"
+  },
+  "CVE-2020-1472": {
+    "is_zero_day": true,
+    "description": "Windows Netlogon - Zerologon",
+    "evidence": "Iranian APT, Ryuk ransomware"
+  },
+  "CVE-2020-0601": {
+    "is_zero_day": true,
+    "description": "Windows CryptoAPI - Spoofing",
+    "evidence": "NSA disclosure, nation-state capability"
+  },
+  "CVE-2017-0144": {
+    "is_zero_day": true,
+    "description": "Windows SMBv1 - EternalBlue",
+    "evidence": "WannaCry, NotPetya, nation-state origin"
+  },
+  "CVE-2014-6271": {
+    "is_zero_day": true,
+    "description": "Bash - Command Injection (Shellshock)",
+    "evidence": "Immediate worldwide exploitation"
+  },
+  "CVE-2014-0160": {
+    "is_zero_day": false,
+    "description": "OpenSSL - Heartbleed",
+    "evidence": "Coordinated disclosure by Google/Codenomicon"
+  },
+  "CVE-2018-8174": {
+    "is_zero_day": false,
+    "description": "Windows VBScript Engine - RCE",
+    "evidence": "Responsible disclosure by Qihoo 360"
+  },
+  "CVE-2019-0708": {
+    "is_zero_day": false,
+    "description": "Windows RDP - BlueKeep",
+    "evidence": "Microsoft patched before exploitation"
+  },
+  "CVE-2022-22965": {
+    "is_zero_day": false,
+    "description": "Spring Framework - Spring4Shell",
+    "evidence": "Bug bounty disclosure, patches available"
+  },
+  "CVE-2023-34362": {
+    "is_zero_day": false,
+    "description": "MOVEit Transfer - SQL Injection",
+    "evidence": "Patched before Clop ransomware campaign"
+  },
+  "CVE-2024-38063": {
+    "is_zero_day": false,
+    "description": "Windows TCP/IP - Remote Code Execution",
+    "evidence": "Researcher disclosure, no exploitation"
+  },
+  "CVE-2023-35078": {
+    "is_zero_day": true,
+    "description": "Ivanti EPMM - Authentication Bypass",
+    "evidence": "Norwegian government targeting"
+  },
+  "CVE-2023-22515": {
+    "is_zero_day": true,
+    "description": "Atlassian Confluence - Privilege Escalation",
+    "evidence": "Mass exploitation, critical infrastructure"
+  },
+  "CVE-2023-38408": {
+    "is_zero_day": true,
+    "description": "OpenSSH - Remote Code Execution",
+    "evidence": "Exploited before disclosure"
+  },
+  "CVE-2023-4911": {
+    "is_zero_day": true,
+    "description": "GNU libc - Local Privilege Escalation (Looney Tunables)",
+    "evidence": "Exploited by Kinsing malware"
+  },
+  "CVE-2023-32233": {
+    "is_zero_day": true,
+    "description": "Linux Kernel - Use-After-Free",
+    "evidence": "Exploited in targeted attacks"
+  },
+  "CVE-2018-11776": {
+    "is_zero_day": false,
+    "description": "Apache Struts - RCE",
+    "evidence": "Man Yue Mo from Semmle Security Research"
+  },
+  "CVE-2021-27065": {
+    "is_zero_day": false,
+    "description": "Microsoft Exchange - RCE",
+    "evidence": "Part of ProxyLogon but patched set"
+  },
+  "CVE-2022-23131": {
+    "is_zero_day": true,
+    "description": "Zabbix - Authentication Bypass",
+    "evidence": "Mass scanning and exploitation"
+  },
+  "CVE-2021-3156": {
+    "is_zero_day": false,
+    "description": "Sudo - Heap-based buffer overflow",
+    "evidence": "Qualys research team, 10-year old bug"
+  },
+  "CVE-2021-41773": {
+    "is_zero_day": false,
+    "description": "Apache HTTP Server - Path Traversal",
+    "evidence": "Reported to Apache before exploitation"
+  },
+  "CVE-2022-1388": {
+    "is_zero_day": false,
+    "description": "F5 BIG-IP - Authentication Bypass",
+    "evidence": "Responsible disclosure, patch available"
+  },
+  "CVE-2024-21338": {
+    "is_zero_day": false,
+    "description": "Windows Kernel - Elevation of Privilege",
+    "evidence": "Microsoft Patch Tuesday, no exploitation"
+  },
+  "CVE-2024-30078": {
+    "is_zero_day": false,
+    "description": "Windows Wi-Fi Driver - RCE",
+    "evidence": "Reported through responsible disclosure"
+  },
+  "CVE-2023-36884": {
+    "is_zero_day": false,
+    "description": "Windows Search - RCE",
+    "evidence": "Microsoft internal discovery"
+  },
+  "CVE-2023-28252": {
+    "is_zero_day": true,
+    "description": "Windows CLFS - Privilege Escalation",
+    "evidence": "Nokoyawa ransomware exploitation"
+  },
+  "CVE-2023-29357": {
+    "is_zero_day": true,
+    "description": "Microsoft SharePoint - Privilege Escalation",
+    "evidence": "APT28 exploitation"
+  },
+  "CVE-2022-31626": {
+    "is_zero_day": true,
+    "description": "PHP - Local File Inclusion",
+    "evidence": "Exploited before patch"
+  },
+  "CVE-2022-22047": {
+    "is_zero_day": true,
+    "description": "Windows CSRSS - Privilege Escalation",
+    "evidence": "North Korean APT usage"
+  },
+  "CVE-2024-38080": {
+    "is_zero_day": false,
+    "description": "Windows Hyper-V - Elevation of Privilege",
+    "evidence": "Security researcher discovery"
+  },
+  "CVE-2024-38079": {
+    "is_zero_day": false,
+    "description": "Windows Remote Desktop - Denial of Service",
+    "evidence": "Responsible disclosure"
+  },
+  "CVE-2024-38076": {
+    "is_zero_day": false,
+    "description": "Windows Remote Desktop - Information Disclosure",
+    "evidence": "Bug bounty program"
+  },
+  "CVE-2024-38074": {
+    "is_zero_day": false,
+    "description": "Windows Kernel - Elevation of Privilege",
+    "evidence": "Coordinated disclosure"
+  },
+  "CVE-2024-38073": {
+    "is_zero_day": false,
+    "description": "Windows Remote Access - Denial of Service",
+    "evidence": "Vendor acknowledgment"
+  },
+  "CVE-2024-38070": {
+    "is_zero_day": false,
+    "description": "Windows LPC - Elevation of Privilege",
+    "evidence": "Security update release"
+  },
+  "CVE-2024-38069": {
+    "is_zero_day": false,
+    "description": "Windows Enroll Engine - Security Feature Bypass",
+    "evidence": "Patch Tuesday release"
+  },
+  "CVE-2024-38068": {
+    "is_zero_day": false,
+    "description": "Windows Online Certificate - Elevation of Privilege",
+    "evidence": "Responsible disclosure"
+  },
+  "CVE-2024-38066": {
+    "is_zero_day": false,
+    "description": "Windows Win32k - Elevation of Privilege",
+    "evidence": "Security researcher credit"
+  },
+  "CVE-2024-38065": {
+    "is_zero_day": false,
+    "description": "Windows Themes - Denial of Service",
+    "evidence": "Responsible disclosure"
+  },
+  "CVE-2024-38064": {
+    "is_zero_day": false,
+    "description": "Windows TCP/IP - Information Disclosure",
+    "evidence": "Microsoft acknowledgment"
+  },
+  "CVE-2024-38062": {
+    "is_zero_day": false,
+    "description": "Windows Kernel - Elevation of Privilege",
+    "evidence": "Patch Tuesday"
+  },
+  "CVE-2024-38061": {
+    "is_zero_day": false,
+    "description": "Windows NDIS - Elevation of Privilege",
+    "evidence": "Coordinated disclosure"
+  },
+  "CVE-2024-38060": {
+    "is_zero_day": false,
+    "description": "Windows Imaging - Remote Code Execution",
+    "evidence": "Bug bounty report"
+  },
+  "CVE-2024-38059": {
+    "is_zero_day": false,
+    "description": "Windows Win32k - Information Disclosure",
+    "evidence": "Security update"
+  },
+  "CVE-2024-38058": {
+    "is_zero_day": false,
+    "description": "BitLocker - Security Feature Bypass",
+    "evidence": "Researcher disclosure"
+  },
   "CVE-2023-2533": {
     "is_zero_day": true,
     "description": "PaperCut NG/MF Cross-Site Request Forgery (CSRF) Vulnerability",
@@ -2355,15 +2655,6 @@
     "date_added": "2024-07-09",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2024-38080": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Hyper-V Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows ",
-    "date_added": "2024-07-09",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2024-38112": {
     "is_zero_day": true,
     "description": "Microsoft Windows MSHTML Platform Spoofing Vulnerability",
@@ -2634,15 +2925,6 @@
     "date_added": "2024-04-23",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2024-3400": {
-    "is_zero_day": true,
-    "description": "Palo Alto Networks PAN-OS Command Injection Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Palo Alto Networks",
-    "product": "PAN-OS",
-    "date_added": "2024-04-12",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2024-3273": {
     "is_zero_day": true,
     "description": "D-Link Multiple NAS Devices Command Injection Vulnerability",
@@ -2760,15 +3042,6 @@
     "date_added": "2024-03-05",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2024-21338": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Kernel Exposed IOCTL with Insufficient Access Control Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2024-03-04",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2023-29360": {
     "is_zero_day": true,
     "description": "Microsoft Streaming Service Untrusted Pointer Dereference Vulnerability",
@@ -2776,15 +3049,6 @@
     "vendor": "Microsoft",
     "product": "Streaming Service",
     "date_added": "2024-02-29",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2024-1709": {
-    "is_zero_day": true,
-    "description": "ConnectWise ScreenConnect Authentication Bypass Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "ConnectWise",
-    "product": "ScreenConnect",
-    "date_added": "2024-02-22",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2020-3259": {
@@ -2803,15 +3067,6 @@
     "vendor": "Microsoft",
     "product": "Exchange Server",
     "date_added": "2024-02-15",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2024-21412": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Internet Shortcut Files Security Feature Bypass Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2024-02-13",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2024-21351": {
@@ -2938,15 +3193,6 @@
     "vendor": "Laravel",
     "product": "Laravel Framework",
     "date_added": "2024-01-16",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-29357": {
-    "is_zero_day": true,
-    "description": "Microsoft SharePoint Server Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "SharePoint Server",
-    "date_added": "2024-01-10",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2023-46805": {
@@ -3156,15 +3402,6 @@
     "date_added": "2023-11-30",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2023-4911": {
-    "is_zero_day": true,
-    "description": "GNU C Library Buffer Overflow Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "GNU",
-    "product": "GNU C Library",
-    "date_added": "2023-11-21",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2023-36584": {
     "is_zero_day": true,
     "description": "Microsoft Windows Mark of the Web (MOTW) Security Feature Bypass Vulnerability",
@@ -3336,24 +3573,6 @@
     "date_added": "2023-10-23",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2023-4966": {
-    "is_zero_day": true,
-    "description": "Citrix NetScaler ADC and NetScaler Gateway Buffer Overflow Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Citrix",
-    "product": "NetScaler ADC and NetScaler Gateway",
-    "date_added": "2023-10-18",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-20198": {
-    "is_zero_day": true,
-    "description": "Cisco IOS XE Web UI Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Cisco",
-    "product": "IOS XE Web UI",
-    "date_added": "2023-10-16",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2023-21608": {
     "is_zero_day": true,
     "description": "Adobe Acrobat and Reader Use-After-Free Vulnerability",
@@ -3397,15 +3616,6 @@
     "vendor": "IETF",
     "product": "HTTP/2",
     "date_added": "2023-10-10",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-22515": {
-    "is_zero_day": true,
-    "description": "Atlassian Confluence Data Center and Server Broken Access Control Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Atlassian",
-    "product": "Confluence Data Center and Server",
-    "date_added": "2023-10-05",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2023-40044": {
@@ -3732,15 +3942,6 @@
     "date_added": "2023-07-26",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2023-35078": {
-    "is_zero_day": true,
-    "description": "Ivanti Endpoint Manager Mobile Authentication Bypass Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Ivanti",
-    "product": "Endpoint Manager Mobile (EPMM)",
-    "date_added": "2023-07-25",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2023-29298": {
     "is_zero_day": true,
     "description": "Adobe ColdFusion Improper Access Control Vulnerability",
@@ -3757,24 +3958,6 @@
     "vendor": "Adobe",
     "product": "ColdFusion",
     "date_added": "2023-07-20",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-3519": {
-    "is_zero_day": true,
-    "description": "Citrix NetScaler ADC and NetScaler Gateway Code Injection Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Citrix",
-    "product": "NetScaler ADC and NetScaler Gateway",
-    "date_added": "2023-07-19",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-36884": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Search Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2023-07-17",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2022-29303": {
@@ -4056,15 +4239,6 @@
     "date_added": "2023-06-05",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2023-34362": {
-    "is_zero_day": true,
-    "description": "Progress MOVEit Transfer SQL Injection Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Progress",
-    "product": "MOVEit Transfer",
-    "date_added": "2023-06-02",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2023-28771": {
     "is_zero_day": true,
     "description": "Zyxel Multiple Firewalls OS Command Injection Vulnerability",
@@ -4072,15 +4246,6 @@
     "vendor": "Zyxel",
     "product": "Multiple Firewalls",
     "date_added": "2023-05-31",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-2868": {
-    "is_zero_day": true,
-    "description": "Barracuda Networks ESG Appliance Improper Input Validation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Barracuda Networks",
-    "product": "Email Security Gateway (ESG) Appliance",
-    "date_added": "2023-05-26",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2023-32409": {
@@ -4244,15 +4409,6 @@
     "date_added": "2023-04-21",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2023-27350": {
-    "is_zero_day": true,
-    "description": "PaperCut MF/NG Improper Access Control Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "PaperCut",
-    "product": "MF/NG",
-    "date_added": "2023-04-21",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2023-2136": {
     "is_zero_day": true,
     "description": "Google Chrome Skia Integer Overflow Vulnerability",
@@ -4304,15 +4460,6 @@
     "vendor": "Novi Survey",
     "product": "Novi Survey",
     "date_added": "2023-04-13",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-28252": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Common Log File System (CLFS) Driver Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2023-04-11",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2023-28205": {
@@ -4475,15 +4622,6 @@
     "vendor": "Adobe",
     "product": "ColdFusion",
     "date_added": "2023-03-15",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2023-23397": {
-    "is_zero_day": true,
-    "description": "Microsoft Office Outlook Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Office",
-    "date_added": "2023-03-14",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2023-24880": {
@@ -5008,15 +5146,6 @@
     "date_added": "2022-09-30",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2022-41040": {
-    "is_zero_day": true,
-    "description": "Microsoft Exchange Server Server-Side Request Forgery Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Exchange Server",
-    "date_added": "2022-09-30",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2022-36804": {
     "is_zero_day": true,
     "description": "Atlassian Bitbucket Server and Data Center Command Injection Vulnerability",
@@ -5430,15 +5559,6 @@
     "date_added": "2022-07-29",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2022-22047": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Client Server Runtime Subsystem (CSRSS) Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2022-07-12",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2022-26925": {
     "is_zero_day": true,
     "description": "Microsoft Windows LSA Spoofing Vulnerability",
@@ -5518,15 +5638,6 @@
     "vendor": "Apple",
     "product": "Multiple Products",
     "date_added": "2022-06-27",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2022-30190": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows Support Diagnostic Tool (MSDT) Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2022-06-14",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2021-38163": {
@@ -5869,15 +5980,6 @@
     "vendor": "Microsoft",
     "product": "Word",
     "date_added": "2022-06-08",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2022-26134": {
-    "is_zero_day": true,
-    "description": "Atlassian Confluence Server and Data Center Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Atlassian",
-    "product": "Confluence Server/Data Center",
-    "date_added": "2022-06-02",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2019-3010": {
@@ -6572,15 +6674,6 @@
     "date_added": "2022-05-16",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2022-1388": {
-    "is_zero_day": true,
-    "description": "F5 BIG-IP Missing Authentication Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "F5",
-    "product": "BIG-IP",
-    "date_added": "2022-05-10",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2021-1789": {
     "is_zero_day": true,
     "description": "Apple Multiple Products Type Confusion Vulnerability",
@@ -6614,15 +6707,6 @@
     "source": "CISA KEV",
     "vendor": "Microsoft",
     "product": "Internet Explorer",
-    "date_added": "2022-05-04",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2014-0160": {
-    "is_zero_day": true,
-    "description": "OpenSSL Information Disclosure Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "OpenSSL",
-    "product": "OpenSSL",
     "date_added": "2022-05-04",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
@@ -6905,15 +6989,6 @@
     "date_added": "2022-04-11",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2021-42287": {
-    "is_zero_day": true,
-    "description": "Microsoft Active Directory Domain Services Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Active Directory",
-    "date_added": "2022-04-11",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2021-42278": {
     "is_zero_day": true,
     "description": "Microsoft Active Directory Domain Services Privilege Escalation Vulnerability",
@@ -6968,15 +7043,6 @@
     "date_added": "2022-04-11",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2021-3156": {
-    "is_zero_day": true,
-    "description": "Sudo Heap-Based Buffer Overflow Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Sudo",
-    "product": "Sudo",
-    "date_added": "2022-04-06",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2021-31166": {
     "is_zero_day": true,
     "description": "Microsoft HTTP Protocol Stack Remote Code Execution Vulnerability",
@@ -6993,15 +7059,6 @@
     "vendor": "Microsoft",
     "product": "SMBv1 server",
     "date_added": "2022-04-06",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2022-22965": {
-    "is_zero_day": true,
-    "description": "Spring Framework JDK 9+ Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "VMware",
-    "product": "Spring Framework",
-    "date_added": "2022-04-04",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2022-22675": {
@@ -9094,15 +9151,6 @@
     "date_added": "2022-02-25",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2022-23131": {
-    "is_zero_day": true,
-    "description": "Zabbix Frontend Authentication Bypass Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Zabbix",
-    "product": "Frontend",
-    "date_added": "2022-02-22",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2022-23134": {
     "is_zero_day": true,
     "description": "Zabbix Frontend Improper Access Control Vulnerability",
@@ -9136,15 +9184,6 @@
     "source": "CISA KEV",
     "vendor": "Microsoft",
     "product": "Internet Explorer",
-    "date_added": "2022-02-15",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2018-8174": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows VBScript Engine Out-of-Bounds Write Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
     "date_added": "2022-02-15",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
@@ -9283,15 +9322,6 @@
     "date_added": "2022-02-10",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2017-0144": {
-    "is_zero_day": true,
-    "description": "Microsoft SMBv1 Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "SMBv1",
-    "date_added": "2022-02-10",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2016-3088": {
     "is_zero_day": true,
     "description": "Apache ActiveMQ Improper Input Validation Vulnerability",
@@ -9397,15 +9427,6 @@
     "source": "CISA KEV",
     "vendor": "Microsoft",
     "product": "Internet Explorer",
-    "date_added": "2022-01-28",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2014-6271": {
-    "is_zero_day": true,
-    "description": "GNU Bourne-Again Shell (Bash) Arbitrary Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "GNU",
-    "product": "Bourne-Again Shell (Bash)",
     "date_added": "2022-01-28",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
@@ -9832,15 +9853,6 @@
     "date_added": "2021-12-10",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2021-44228": {
-    "is_zero_day": true,
-    "description": "Apache Log4j2 Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Apache",
-    "product": "Log4j2",
-    "date_added": "2021-12-10",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2020-11261": {
     "is_zero_day": true,
     "description": "Qualcomm Multiple Chipsets Improper Input Validation Vulnerability",
@@ -10057,15 +10069,6 @@
     "date_added": "2021-11-03",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2021-41773": {
-    "is_zero_day": true,
-    "description": "Apache HTTP Server Path Traversal Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Apache",
-    "product": "HTTP Server",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2019-0211": {
     "is_zero_day": true,
     "description": "Apache HTTP Server Privilege Escalation Vulnerability",
@@ -10103,15 +10106,6 @@
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2017-5638": {
-    "is_zero_day": true,
-    "description": "Apache Struts Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Apache",
-    "product": "Struts",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2018-11776": {
     "is_zero_day": true,
     "description": "Apache Struts Remote Code Execution Vulnerability",
     "source": "CISA KEV",
@@ -11281,24 +11275,6 @@
     "date_added": "2021-11-03",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2019-0708": {
-    "is_zero_day": true,
-    "description": "Microsoft Remote Desktop Services Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Remote Desktop Services",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2021-34473": {
-    "is_zero_day": true,
-    "description": "Microsoft Exchange Server Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Exchange Server",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2020-1464": {
     "is_zero_day": true,
     "description": "Microsoft Windows Spoofing Vulnerability",
@@ -11578,15 +11554,6 @@
     "date_added": "2021-11-03",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
-  "CVE-2020-1472": {
-    "is_zero_day": true,
-    "description": "Microsoft Netlogon Privilege Escalation Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Netlogon",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
   "CVE-2021-26855": {
     "is_zero_day": true,
     "description": "Microsoft Exchange Server Remote Code Execution Vulnerability",
@@ -11597,15 +11564,6 @@
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
   "CVE-2021-26858": {
-    "is_zero_day": true,
-    "description": "Microsoft Exchange Server Remote Code Execution Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Exchange Server",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2021-27065": {
     "is_zero_day": true,
     "description": "Microsoft Exchange Server Remote Code Execution Vulnerability",
     "source": "CISA KEV",
@@ -11635,15 +11593,6 @@
   "CVE-2021-34448": {
     "is_zero_day": true,
     "description": "Microsoft Windows Scripting Engine Memory Corruption Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Microsoft",
-    "product": "Windows",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2020-0601": {
-    "is_zero_day": true,
-    "description": "Microsoft Windows CryptoAPI Spoofing Vulnerability",
     "source": "CISA KEV",
     "vendor": "Microsoft",
     "product": "Windows",
@@ -12466,15 +12415,6 @@
     "source": "CISA KEV",
     "vendor": "Yealink",
     "product": "Device Management",
-    "date_added": "2021-11-03",
-    "evidence": "Listed in CISA KEV - Known exploited in wild"
-  },
-  "CVE-2021-40539": {
-    "is_zero_day": true,
-    "description": "Zoho ManageEngine ADSelfService Plus Authentication Bypass Vulnerability",
-    "source": "CISA KEV",
-    "vendor": "Zoho",
-    "product": "ManageEngine",
     "date_added": "2021-11-03",
     "evidence": "Listed in CISA KEV - Known exploited in wild"
   },
