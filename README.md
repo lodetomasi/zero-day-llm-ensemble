@@ -318,10 +318,45 @@ python scripts/quick_test.py
 
 The system includes:
 - **verified_dataset.json**: Unified dataset with 60 CVEs (30 zero-days, 30 regular)
+- **full_dataset.json**: Large dataset with 1548+ CVEs
+- **balanced_dataset_[100/200/500/1000].json**: Pre-balanced datasets for testing
 - **CISA KEV data**: Additional known exploited vulnerabilities  
 - **Cached evidence**: Pre-collected data for faster testing
 
-### 5.5 Academic Paper Replication
+### 5.5 Dataset Management Utilities
+
+#### Download Additional CVEs
+```bash
+# Download more CVEs from multiple sources
+python scripts/download_more_cves.py
+
+# This will:
+# - Download from CISA KEV (all zero-days)
+# - Download recent CVEs from NVD
+# - Generate synthetic test CVEs
+# - Create merged dataset
+```
+
+#### Download Regular CVEs (Non Zero-Days)
+```bash
+# Download regular CVEs to balance dataset
+python scripts/download_regular_cves.py
+
+# This will:
+# - Download older CVEs (likely regular disclosures)
+# - Download low/medium severity CVEs
+# - Generate synthetic regular CVEs with researcher credits
+# - Create balanced datasets automatically
+```
+
+#### Balance Existing Dataset
+```bash
+# Create balanced dataset with specific size
+python scripts/balance_dataset.py 100  # Creates 100 CVE dataset (50/50)
+python scripts/balance_dataset.py 500  # Creates 500 CVE dataset (250/250)
+```
+
+### 5.6 Academic Paper Replication
 
 To replicate the paper results:
 ```bash

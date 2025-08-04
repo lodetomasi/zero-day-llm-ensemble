@@ -139,6 +139,25 @@ python scripts/universal_tester.py --zero-days 50 --regular 50 --parallel
 ### Custom Datasets
 Place your CVE lists in `data/` directory as JSON files.
 
+## 6. Dataset Management
+
+### Downloading More CVEs
+
+Need more CVEs for testing? Use our dataset utilities:
+
+```bash
+# Download additional CVEs (mix of zero-days and regular)
+python scripts/download_more_cves.py
+
+# Download specifically regular CVEs to balance dataset
+python scripts/download_regular_cves.py
+
+# Create balanced dataset of specific size
+python scripts/balance_dataset.py 200  # Creates 200 CVEs (100/100)
+```
+
+See [DATASET_MANAGEMENT.md](DATASET_MANAGEMENT.md) for detailed instructions.
+
 ## Common CVEs for Testing
 
 ### Known Zero-Days
