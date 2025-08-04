@@ -277,23 +277,14 @@ export OPENROUTER_API_KEY="your-api-key"
 
 #### Main CLI Tool (Recommended)
 ```bash
-# Detect single CVE
+# Detect single CVE (with full context enhancement)
 python zero_day_detector.py detect CVE-2024-3400
-
-# Verbose analysis with detailed output
-python zero_day_detector.py detect CVE-2024-3400 -v
 
 # Test system with multiple CVEs
 python zero_day_detector.py test --zero-days 25 --regular 25
 
-# Test with small dataset for quick verification
-python zero_day_detector.py test --zero-days 2 --regular 2
-
-# Verify data collection (basic)
+# Verify data collection
 python zero_day_detector.py verify CVE-2024-3400
-
-# Verify with context enhancement
-python zero_day_detector.py verify CVE-2024-3400 --context
 
 # Check system status
 python zero_day_detector.py status
@@ -325,10 +316,9 @@ python scripts/quick_test.py
 
 ### 5.4 Available Datasets
 
-The system includes multiple datasets:
-- **extended_dataset.json**: Balanced dataset of zero-days and regular CVEs
-- **expanded_dataset_60.json**: Larger balanced dataset
-- **CISA KEV data**: Additional known exploited vulnerabilities
+The system includes:
+- **verified_dataset.json**: Unified dataset with 60 CVEs (30 zero-days, 30 regular)
+- **CISA KEV data**: Additional known exploited vulnerabilities  
 - **Cached evidence**: Pre-collected data for faster testing
 
 ### 5.5 Academic Paper Replication
@@ -557,8 +547,7 @@ zero-day-llm-ensemble/
 │   ├── optimized_thresholds.json       # Dynamic thresholds
 │   └── models.yaml                     # LLM model configs
 ├── data/                    # Dataset files
-│   ├── extended_dataset.json           # 40 verified CVEs
-│   └── expanded_dataset_60.json        # 60 verified CVEs
+│   └── verified_dataset.json           # 60 verified CVEs (30 zero-days, 30 regular)
 └── reports/                 # Generated detection reports
 ```
 

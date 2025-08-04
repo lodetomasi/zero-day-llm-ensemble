@@ -97,7 +97,7 @@ class ZeroDayDetectorCLI:
         # Print summary using the results directly
         tester.print_summary(results)
     
-    def verify_scraping(self, cve_id: str, show_context: bool = False):
+    def verify_scraping(self, cve_id: str, show_context: bool = True):
         """Verify data collection for a CVE"""
         print(f"\n🔍 Verifying data collection for {cve_id}...")
         
@@ -214,7 +214,6 @@ def main():
         epilog="""
 Examples:
   %(prog)s detect CVE-2024-3400              # Detect single CVE
-  %(prog)s detect CVE-2024-3400 -v           # Verbose output
   %(prog)s test --zero-days 10 --regular 10  # Test with multiple CVEs
   %(prog)s verify CVE-2024-3400              # Verify data collection
   %(prog)s status                            # Show system status
@@ -255,8 +254,6 @@ Regular CVEs for Testing:
     # Verify command
     verify_parser = subparsers.add_parser('verify', help='Verify data collection')
     verify_parser.add_argument('cve_id', help='CVE ID to verify')
-    verify_parser.add_argument('-c', '--context', action='store_true',
-                              help='Include context enhancement verification')
     
     # Status command
     status_parser = subparsers.add_parser('status', help='Show system status')
@@ -283,7 +280,7 @@ Regular CVEs for Testing:
     elif args.command == 'verify':
         cli.verify_scraping(
             args.cve_id,
-            show_context=args.context
+            show_context=True  # Always show context
         )
     elif args.command == 'status':
         cli.show_status()

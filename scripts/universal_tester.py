@@ -46,8 +46,7 @@ class UniversalTester:
         
         # Load all dataset files
         dataset_files = [
-            'extended_dataset.json',
-            'expanded_dataset_60.json',
+            'verified_dataset.json',
             'dynamic_dataset.json'
         ]
         
