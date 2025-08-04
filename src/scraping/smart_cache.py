@@ -95,6 +95,7 @@ class DiskCache:
         try:
             with open(cache_path, 'wb') as f:
                 pickle.dump(value, f)
+        except Exception as e:
             logger.error(f"Error writing cache {key}: {e}")
     
     def clear(self):
