@@ -313,7 +313,7 @@ python zero_day_detector.py test --zero-days 25 --regular 25
 python zero_day_detector.py download --total 100
 ```
 
-See documentation for detailed usage instructions.
+See [documentation](docs/) for detailed usage instructions.
 
 ### 5.4 Evaluation Framework
 
@@ -553,7 +553,7 @@ We demonstrate that multi-agent LLM ensembles can achieve statistically signific
 - **Runtime**: ~30-60 seconds per CVE with full analysis
 - **Storage**: ~10MB cache per CVE analyzed
 
-## 11. Repository Structure
+## Repository Structure
 
 ```
 zero-day-llm-ensemble/
