@@ -1,6 +1,6 @@
 # Zero-Day Vulnerability Detection Using Multi-Agent LLM Ensemble
 
-**Version 3.12.2** - Simplified CLI with Integrated Features
+**Version 3.12.3** - Simplified CLI with Integrated Features
 
 > **TL;DR**: Multi-agent LLM ensemble for zero-day vulnerability detection using comprehensive evidence collection and dynamic optimization.
 
@@ -10,7 +10,7 @@ University of L'Aquila, Italy
 lorenzo.detomasi@graduate.univaq.it
 
 
-## What's New in v3.12.2
+## What's New in v3.12.3
 
 - **Unified CLI Interface**: Streamlined command-line tool for all operations
 - **Enhanced Data Collection**: Integrated dataset management and balancing
@@ -26,7 +26,7 @@ Zero-day vulnerability detection is critical for cybersecurity defense, yet trad
 
 - **Multi-Agent Ensemble**: Five specialized LLM agents working in parallel
 - **Comprehensive Evidence Collection**: 21+ data sources including threat intelligence
-- **Dynamic Thresholds**: Confidence-based detection thresholds (v3.12.2 optimized)
+- **Dynamic Thresholds**: Confidence-based detection thresholds (v3.12.3 optimized)
 - **Responsible Disclosure Detection**: Identifies coordinated disclosures to reduce false positives
 - **Statistical Validation**: Rigorous testing with cross-validation
 - **Unified Command Interface**: Streamlined operations through a single CLI tool
@@ -223,7 +223,7 @@ ALGORITHM: Thompson Sampling for Agent Weights
 
 ### 6.1 Performance Metrics
 
-**Latest Test Results (v3.12.2 - 50 CVEs):**
+**Latest Test Results (v3.12.3 - 50 CVEs):**
 - **Accuracy**: 72.0% (36/50 correct)
 - **Precision**: 64.9% (24/37 true positives)
 - **Recall**: 96.0% (24/25 zero-days detected)
@@ -532,7 +532,7 @@ We demonstrate that multi-agent LLM ensembles can achieve statistically signific
 ### 10.1 Code Availability
 
 - **Repository**: [https://github.com/lodetomasi/zero-day-llm-ensemble](https://github.com/lodetomasi/zero-day-llm-ensemble)
-- **Version**: 3.12.2
+- **Version**: 3.12.3
 - **License**: MIT License
 
 ### 10.2 Data Availability
@@ -570,7 +570,7 @@ zero-day-llm-ensemble/
 ├── scripts/                 # Backend scripts
 ├── config/                  # Configuration
 ├── data/                    # Datasets
-├── detection_reports/       # Analysis results
+├── reports/                 # Analysis results (generated on demand)
 └── requirements.txt         # Dependencies
 └── reports/                 # Generated detection reports
 ```
