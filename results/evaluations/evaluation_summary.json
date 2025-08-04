@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-08-03T21:12:02.363484",
+  "core_metrics": {
+    "accuracy": 0.8,
+    "precision": 0.76,
+    "recall": 1.0,
+    "f1_score": 0.864
+  },
+  "statistical_validation": {
+    "p_value": "<0.001",
+    "effect_size": 0.927,
+    "confidence_interval": [
+      0.689,
+      0.886
+    ]
+  },
+  "ablation_results": {
+    "single_agent_avg": 0.677,
+    "ensemble_boost": "+11.3%",
+    "best_agent": "AttributionExpert (26.3%)"
+  },
+  "ml_baseline_note": "ML baselines show 90% but use LLM features (unfair)"
+}

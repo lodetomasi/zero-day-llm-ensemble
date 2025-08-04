@@ -138,7 +138,7 @@ class ComprehensiveZeroDayScraper:
         }
         
         # Scrape sources in parallel
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        with ThreadPoolExecutor(max_workers=8) as executor:
             futures = {
                 executor.submit(self.scrape_nvd_details, cve_id): 'nvd',
                 executor.submit(self.scrape_cisa_kev, cve_id): 'cisa_kev',
@@ -147,7 +147,10 @@ class ComprehensiveZeroDayScraper:
                 executor.submit(self.scrape_exploit_databases, cve_id): 'exploit_db',
                 executor.submit(self.scrape_threat_intelligence, cve_id): 'threat_intel',
                 executor.submit(self.scrape_vendor_advisories, cve_id): 'vendor',
-                executor.submit(self.scrape_social_media, cve_id): 'social_media'
+                executor.submit(self.scrape_social_media, cve_id): 'social_media',
+                executor.submit(self.scrape_mitre_attack, cve_id): 'mitre_attack',
+                executor.submit(self.scrape_virustotal, cve_id): 'virustotal',
+                executor.submit(self.scrape_patch_timeline, cve_id): 'patch_timeline'
             }
             
             for future in as_completed(futures):
@@ -565,6 +568,137 @@ class ComprehensiveZeroDayScraper:
             
         return result
     
+    def scrape_mitre_attack(self, cve_id: str) -> Dict:
+        """Scrape MITRE ATT&CK for technique associations"""
+        result = {
+            'techniques': [],
+            'groups': [],
+            'campaigns': [],
+            'found': False
+        }
+        
+        # Check cache first
+        cache_key = f"mitre_{cve_id}"
+        cached = self._get_cache(cache_key)
+        if cached is not None:
+            return cached
+        
+        try:
+            # Search MITRE ATT&CK for CVE references
+            search_url = f"https://attack.mitre.org/search/?q={cve_id}"
+            self._rate_limit("attack.mitre.org")
+            
+            response = self.session.get(search_url, timeout=10)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                
+                # Look for technique associations
+                techniques = soup.find_all('a', href=re.compile(r'/techniques/T\d+'))
+                for tech in techniques[:5]:  # Limit to 5
+                    result['techniques'].append({
+                        'id': tech.get('href', '').split('/')[-1],
+                        'name': tech.text.strip()
+                    })
+                
+                # Look for group associations
+                groups = soup.find_all('a', href=re.compile(r'/groups/G\d+'))
+                for group in groups[:5]:
+                    result['groups'].append({
+                        'id': group.get('href', '').split('/')[-1],
+                        'name': group.text.strip()
+                    })
+                
+                result['found'] = bool(result['techniques'] or result['groups'])
+                
+        except Exception as e:
+            logger.error(f"Error scraping MITRE ATT&CK: {e}")
+        
+        self._set_cache(cache_key, result)
+        return result
+    
+    def scrape_virustotal(self, cve_id: str) -> Dict:
+        """Check VirusTotal for malware samples referencing this CVE"""
+        result = {
+            'malware_samples': 0,
+            'first_seen': None,
+            'campaigns': [],
+            'found': False
+        }
+        
+        # Check cache
+        cache_key = f"vt_{cve_id}"
+        cached = self._get_cache(cache_key)
+        if cached is not None:
+            return cached
+        
+        try:
+            # Search for CVE in VT (without API key, limited info)
+            search_url = f"https://www.virustotal.com/gui/search/{cve_id}"
+            self._rate_limit("virustotal.com")
+            
+            response = self.session.get(search_url, timeout=10)
+            if response.status_code == 200:
+                # Parse response for indicators
+                content = response.text.lower()
+                
+                # Look for malware indicators
+                if 'malware' in content or 'detection' in content:
+                    result['found'] = True
+                    # Extract sample count if visible
+                    sample_match = re.search(r'(\d+)\s*samples?', content)
+                    if sample_match:
+                        result['malware_samples'] = int(sample_match.group(1))
+                
+        except Exception as e:
+            logger.error(f"Error checking VirusTotal: {e}")
+        
+        self._set_cache(cache_key, result)
+        return result
+    
+    def scrape_patch_timeline(self, cve_id: str) -> Dict:
+        """Analyze patch timeline vs exploitation timeline"""
+        result = {
+            'disclosure_date': None,
+            'patch_date': None,
+            'first_exploit_date': None,
+            'days_to_patch': None,
+            'exploited_before_patch': False,
+            'patch_urgency': 'unknown'
+        }
+        
+        # Check cache
+        cache_key = f"timeline_{cve_id}"
+        cached = self._get_cache(cache_key)
+        if cached is not None:
+            return cached
+        
+        try:
+            # Get dates from existing scraped data
+            if hasattr(self, '_last_nvd_data'):
+                nvd_data = self._last_nvd_data
+            else:
+                nvd_data = {}
+            
+            if nvd_data.get('published_date'):
+                result['disclosure_date'] = nvd_data['published_date']
+            
+            # Calculate timeline metrics
+            if result['disclosure_date']:
+                # Look for patch urgency indicators
+                result['patch_urgency'] = 'normal'
+                
+                # Check CISA KEV for exploitation timeline
+                kev_data = self.scrape_cisa_kev(cve_id)
+                if kev_data.get('in_kev'):
+                    result['exploited_before_patch'] = True
+                    result['patch_urgency'] = 'emergency'
+                
+        except Exception as e:
+            logger.error(f"Error analyzing patch timeline: {e}")
+        
+        self._set_cache(cache_key, result)
+        return result
+    
     def _extract_indicators(self, source_data: Dict, indicators: Dict):
         """Extract zero-day indicators from source data"""
         
@@ -575,12 +709,27 @@ class ComprehensiveZeroDayScraper:
                 'confidence': 0.9
             })
         
+        # Check patch timeline for pre-patch exploitation
+        if source_data.get('exploited_before_patch'):
+            indicators['exploitation_before_patch'].append({
+                'source': 'timeline_analysis',
+                'confidence': 0.85
+            })
+        
         # Check for APT associations
         apt_groups = source_data.get('apt_groups', [])
         for apt in apt_groups:
             indicators['apt_associations'].append({
                 'group': apt,
                 'source': 'threat_intel'
+            })
+        
+        # Check MITRE ATT&CK groups
+        mitre_groups = source_data.get('groups', [])
+        for group in mitre_groups:
+            indicators['apt_associations'].append({
+                'group': group.get('name', 'Unknown'),
+                'source': 'mitre_attack'
             })
         
         # Check for emergency patches
@@ -590,11 +739,25 @@ class ComprehensiveZeroDayScraper:
                 'type': 'out-of-band' if source_data.get('out_of_band') else 'emergency'
             })
         
+        # Check patch urgency from timeline
+        if source_data.get('patch_urgency') == 'emergency':
+            indicators['emergency_patches'].append({
+                'source': 'patch_timeline',
+                'type': 'emergency'
+            })
+        
         # Check timeline anomalies
         if source_data.get('timeline_analysis', {}).get('rapid_update'):
             indicators['timeline_anomalies'].append({
                 'type': 'rapid_nvd_update',
                 'details': 'Updated within 24 hours of publication'
+            })
+        
+        # Check for malware samples
+        if source_data.get('malware_samples', 0) > 0:
+            indicators['active_campaigns'].append({
+                'source': 'virustotal',
+                'details': f"{source_data['malware_samples']} malware samples found"
             })
     
     def _calculate_scores(self, evidence: Dict) -> Dict:
@@ -625,6 +788,14 @@ class ComprehensiveZeroDayScraper:
             scores['zero_day_confidence'] += 0.2 * min(apt_count, 2)  # Increased
             scores['exploitation_likelihood'] += 0.1
         
+        # Factor 3b: MITRE ATT&CK associations
+        mitre = evidence['sources'].get('mitre_attack', {})
+        if mitre.get('found'):
+            if mitre.get('groups'):
+                scores['zero_day_confidence'] += 0.15
+            if mitre.get('techniques'):
+                scores['exploitation_likelihood'] += 0.1
+        
         # Factor 4: Emergency patches
         if evidence['indicators']['emergency_patches']:
             scores['zero_day_confidence'] += 0.1
@@ -645,6 +816,21 @@ class ComprehensiveZeroDayScraper:
                 # Coordinated disclosure = NOT zero-day
                 scores['zero_day_confidence'] -= 0.2
             else:
+                scores['zero_day_confidence'] += 0.1
+        
+        # Factor 7: Patch timeline analysis
+        timeline = evidence['sources'].get('patch_timeline', {})
+        if timeline.get('exploited_before_patch'):
+            scores['zero_day_confidence'] += 0.25  # Strong evidence
+            scores['exploitation_likelihood'] += 0.2
+        if timeline.get('days_to_patch') is not None and timeline['days_to_patch'] < 7:
+            scores['zero_day_confidence'] += 0.1  # Emergency patching
+        
+        # Factor 8: Malware samples (VirusTotal)
+        vt = evidence['sources'].get('virustotal', {})
+        if vt.get('malware_samples', 0) > 0:
+            scores['exploitation_likelihood'] += 0.15
+            if vt['malware_samples'] > 10:
                 scores['zero_day_confidence'] += 0.1
         
         # Normalize scores

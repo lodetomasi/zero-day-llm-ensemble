@@ -7,64 +7,116 @@ __pycache__/
 env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 .venv
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
 
-# Logs
-logs/*.log
-*.log
-
-# Cache
+# Cache and temporary files
+data/scraping_cache/
 cache/
 .cache/
 *.cache
+*.tmp
+*.temp
 
-# Data (except cache)
-data/dataset_*.csv
-data/*.tmp
-data/scraping_cache/
+# Large data files
+data/raw_evidence/
+data/test_batch_*.json
 data/test_dataset/
 data/enriched_dataset/
 data/advanced_evidence/
 data/zero_day_evidence/
+detection_reports/
 
-# Results
-results/
-!results/.gitkeep
+# Results and logs (keep important summaries)
+results/debug/
+results/batch_*_results.json
+logs/*.log
+*.log
+
+# Keep these result files
+!results/evaluation_summary.json
+!results/statistical_significance_results.json
+!results/ablation_study_results.json
+!results/cross_validation_results.json
+!results/ml_baseline_results.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+config/secrets.py
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.project
+.pydevproject
+
+# OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# API Keys and Secrets
-.env
-config/secrets.py
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
 
-# Temporary files
-*.tmp
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Documentation builds
+docs/_build/
+docs/build/
+
+# Backup and temporary files
 *.bak
-test_*.py
-verify_*.py
-*_test_results_*.json
+*.backup
+*~
 old_scripts/
 reports/
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb
-
-# Distribution
-dist/
-build/
-*.egg-info/.env
-figures/
-results/
+# Images (except documentation)
 *.png
 *.jpg
 *.jpeg
 *.gif
 *.svg
-detection_reports/
-large_scale_test_results.json
+!docs/*.png
+!docs/*.jpg
+!docs/*.svg
+
+# API Keys and Credentials (extra safety)
+*api_key*
+*secret*
+credentials/

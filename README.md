@@ -108,9 +108,11 @@ graph TD
 The detection pipeline consists of four primary components:
 
 ### 2.1 Evidence Collection Module
-- **Web Scraping Engine**: Parallel collection from 8 sources
-- **Data Sources**: NVD, CISA KEV, GitHub, ExploitDB, Security News, Threat Intelligence, Vendor Advisories, Social Media
-- **Caching Layer**: Reduces API calls and ensures reproducibility
+- **Web Scraping Engine**: Parallel collection from 11 sources
+- **Core Sources**: NVD, CISA KEV, GitHub, ExploitDB, Security News
+- **Enhanced Sources**: MITRE ATT&CK, VirusTotal, Patch Timeline Analysis
+- **Additional Sources**: Threat Intelligence, Vendor Advisories, Social Media
+- **Caching Layer**: 7-day cache reduces API calls and ensures reproducibility
 
 ### 2.2 Feature Extraction
 - **Temporal Features**: Days to KEV listing, PoC emergence velocity
@@ -150,9 +152,11 @@ def classify_zero_day(cve_id):
 ## 3. Methodology
 
 ### 3.1 Dataset Construction
-We evaluated on 30 CVEs with verified ground truth:
-- **19 confirmed zero-days**: Verified through CISA KEV, vendor acknowledgments, and threat reports
-- **11 regular vulnerabilities**: Confirmed coordinated disclosures and research findings
+We maintain verified ground truth lists totaling 106 CVEs:
+- **51 confirmed zero-days**: Verified through CISA KEV, vendor acknowledgments, and threat reports
+- **55 regular vulnerabilities**: Confirmed coordinated disclosures and research findings
+
+Testing allows flexible dataset sizes with the `test_system.py` script.
 
 Ground truth was verified using only public sources to avoid data leakage, with 6 CVEs corrected based on contemporary reports:
 - 3 incorrectly labeled as zero-days (CVE-2021-42287, CVE-2020-1472, CVE-2019-0708)
@@ -188,15 +192,19 @@ class ThompsonSampler:
 
 ### 4.1 Performance Metrics
 
-**Verified Test Results (30 CVEs with corrected ground truth):**
+**Latest Test Results (96 CVEs - 51 zero-days, 45 regular):**
 
-| Metric | Value | Statistical Validation |
-|--------|-------|-----------------------|
-| **Accuracy** | 80.0% | p < 0.001 vs random baseline |
-| **Precision** | 76.0% | 95% CI: [57.9%, 87.6%] |
-| **Recall** | 100% | All 19 zero-days detected |
-| **F1-Score** | 0.864 | 95% CI: [0.739, 0.950] |
-| **Effect Size** | Cohen's h = 0.927 | Large effect |
+| Metric | Value | 30 CVE Test | Change |
+|--------|-------|-------------|---------|
+| **Accuracy** | 76.0% | 80.0% | -4% |
+| **Precision** | 75.9% | 76.0% | ~0% |
+| **Recall** | 80.4% | 100% | -19.6% |
+| **F1-Score** | 0.781 | 0.864 | -0.083 |
+
+**Statistical Validation (30 CVE baseline):**
+- p < 0.001 vs random baseline
+- Cohen's h = 0.927 (large effect)
+- 95% CI for accuracy: [62.7%, 90.5%]
 
 ### 4.2 Dynamic Threshold Optimization
 

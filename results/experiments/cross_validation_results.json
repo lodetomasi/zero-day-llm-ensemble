@@ -1,0 +1,109 @@
+{
+  "k_folds": 5,
+  "accuracy": {
+    "mean": 0.6,
+    "std": 0.09354143466934853,
+    "values": [
+      0.625,
+      0.625,
+      0.5,
+      0.75,
+      0.5
+    ]
+  },
+  "f1_score": {
+    "mean": 0.8655555555555555,
+    "std": 0.0858077092280348,
+    "values": [
+      0.888888888888889,
+      0.7499999999999999,
+      1.0,
+      0.888888888888889,
+      0.8
+    ]
+  },
+  "precision": {
+    "mean": 0.7733333333333333,
+    "std": 0.13727506854649335,
+    "values": [
+      0.8,
+      0.6,
+      1.0,
+      0.8,
+      0.6666666666666666
+    ]
+  },
+  "recall": {
+    "mean": 1.0,
+    "std": 0.0,
+    "values": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "fold_results": [
+    {
+      "accuracy": 0.625,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1_score": 0.888888888888889,
+      "confusion_matrix": {
+        "tp": 4,
+        "fp": 1,
+        "tn": 1,
+        "fn": 0
+      }
+    },
+    {
+      "accuracy": 0.625,
+      "precision": 0.6,
+      "recall": 1.0,
+      "f1_score": 0.7499999999999999,
+      "confusion_matrix": {
+        "tp": 3,
+        "fp": 2,
+        "tn": 2,
+        "fn": 0
+      }
+    },
+    {
+      "accuracy": 0.5,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "confusion_matrix": {
+        "tp": 4,
+        "fp": 0,
+        "tn": 0,
+        "fn": 0
+      }
+    },
+    {
+      "accuracy": 0.75,
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1_score": 0.888888888888889,
+      "confusion_matrix": {
+        "tp": 4,
+        "fp": 1,
+        "tn": 2,
+        "fn": 0
+      }
+    },
+    {
+      "accuracy": 0.5,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1_score": 0.8,
+      "confusion_matrix": {
+        "tp": 4,
+        "fp": 2,
+        "tn": 0,
+        "fn": 0
+      }
+    }
+  ]
+}

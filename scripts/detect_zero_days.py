@@ -7,7 +7,8 @@ Outputs: Binary classification (zero-day: yes/no) with confidence
 import argparse
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
+# Add parent directory to Python path for imports
+sys.path.append(str(Path(__file__).parent.parent))
 
 # Load environment variables from .env file
 from dotenv import load_dotenv

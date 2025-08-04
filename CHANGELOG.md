@@ -5,6 +5,23 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.0] - 2025-08-03 - ENHANCED WEB SCRAPING & EXPANDED DATASET
+
+### 🎯 Improved Evidence Collection
+
+#### Added
+- **New data sources** for better context:
+  - MITRE ATT&CK: APT group and technique associations
+  - VirusTotal: Malware sample detection
+  - Patch Timeline Analysis: Exploitation vs patch timing
+- **Expanded dataset**: Now 106 verified CVEs (51 zero-days, 55 regular)
+- **Enhanced scoring**: New factors for timeline analysis and malware presence
+
+#### Performance Impact
+- Tested on 96 CVEs: 76% accuracy, 80.4% recall
+- More nuanced detection with additional evidence sources
+- Better handling of edge cases with timeline analysis
+
 ## [3.6.0] - 2025-08-03 - TESTING SIMPLIFICATION & CLEANUP
 
 ### 🎯 Simplified Testing System

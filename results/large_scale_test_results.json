@@ -1,0 +1,1124 @@
+{
+  "timestamp": "2025-08-03T21:46:05.761586",
+  "metrics": {
+    "accuracy": 0.725,
+    "precision": 0.6451612903225806,
+    "recall": 1.0,
+    "f1_score": 0.7843137254901961,
+    "total_tested": 40,
+    "successful": 40,
+    "errors": 0
+  },
+  "detailed_results": {
+    "CVE-2024-3400": {
+      "result": {
+        "cve_id": "CVE-2024-3400",
+        "is_zero_day": true,
+        "detection_score": 0.8484653064544949,
+        "confidence": 0.6904389118302625,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2024-21412": {
+      "result": {
+        "cve_id": "CVE-2024-21412",
+        "is_zero_day": true,
+        "detection_score": 0.8484653064544949,
+        "confidence": 0.6904389118302625,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2024-1709": {
+      "result": {
+        "cve_id": "CVE-2024-1709",
+        "is_zero_day": true,
+        "detection_score": 0.8953881835963909,
+        "confidence": 0.6679772135437794,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2023-23397": {
+      "result": {
+        "cve_id": "CVE-2023-23397",
+        "is_zero_day": true,
+        "detection_score": 0.835388183596391,
+        "confidence": 0.6199772135437794,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2023-20198": {
+      "result": {
+        "cve_id": "CVE-2023-20198",
+        "is_zero_day": true,
+        "detection_score": 0.8484653064544949,
+        "confidence": 0.6904389118302625,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2023-2868": {
+      "result": {
+        "cve_id": "CVE-2023-2868",
+        "is_zero_day": true,
+        "detection_score": 0.8953881835963909,
+        "confidence": 0.6679772135437794,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2023-27350": {
+      "result": {
+        "cve_id": "CVE-2023-27350",
+        "is_zero_day": true,
+        "detection_score": 0.835388183596391,
+        "confidence": 0.6199772135437794,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2023-3519": {
+      "result": {
+        "cve_id": "CVE-2023-3519",
+        "is_zero_day": true,
+        "detection_score": 0.8471575941686845,
+        "confidence": 0.6893927420016143,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2023-4966": {
+      "result": {
+        "cve_id": "CVE-2023-4966",
+        "is_zero_day": true,
+        "detection_score": 0.6980064195259332,
+        "confidence": 0.5100718022874132,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2022-30190": {
+      "result": {
+        "cve_id": "CVE-2022-30190",
+        "is_zero_day": true,
+        "detection_score": 0.7284653064544948,
+        "confidence": 0.5944389118302624,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2022-26134": {
+      "result": {
+        "cve_id": "CVE-2022-26134",
+        "is_zero_day": true,
+        "detection_score": 0.8484653064544949,
+        "confidence": 0.6821055784969292,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2022-41040": {
+      "result": {
+        "cve_id": "CVE-2022-41040",
+        "is_zero_day": true,
+        "detection_score": 0.8484653064544949,
+        "confidence": 0.6904389118302625,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2021-44228": {
+      "result": {
+        "cve_id": "CVE-2021-44228",
+        "is_zero_day": true,
+        "detection_score": 0.8953881835963909,
+        "confidence": 0.6679772135437794,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2021-34473": {
+      "result": {
+        "cve_id": "CVE-2021-34473",
+        "is_zero_day": true,
+        "detection_score": 0.7203197419143259,
+        "confidence": 0.5879224601981273,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2021-40539": {
+      "result": {
+        "cve_id": "CVE-2021-40539",
+        "is_zero_day": true,
+        "detection_score": 0.7232344573112532,
+        "confidence": 0.5902542325156692,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2021-42287": {
+      "result": {
+        "cve_id": "CVE-2021-42287",
+        "is_zero_day": true,
+        "detection_score": 0.8445421695970637,
+        "confidence": 0.6873004023443177,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2020-1472": {
+      "result": {
+        "cve_id": "CVE-2020-1472",
+        "is_zero_day": true,
+        "detection_score": 0.6793991566992812,
+        "confidence": 0.43518599202609154,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.4,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2020-0601": {
+      "result": {
+        "cve_id": "CVE-2020-0601",
+        "is_zero_day": false,
+        "detection_score": 0.7572160864390115,
+        "confidence": 0.6174395358178758,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2017-0144": {
+      "result": {
+        "cve_id": "CVE-2017-0144",
+        "is_zero_day": true,
+        "detection_score": 0.7105671742630398,
+        "confidence": 0.4601204060770985,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.4,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2014-6271": {
+      "result": {
+        "cve_id": "CVE-2014-6271",
+        "is_zero_day": true,
+        "detection_score": 0.8449521356016132,
+        "confidence": 0.6276283751479572,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2014-0160": {
+      "result": {
+        "cve_id": "CVE-2014-0160",
+        "is_zero_day": false,
+        "detection_score": 0.6233236810666787,
+        "confidence": 0.4930077218133237,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2018-8174": {
+      "result": {
+        "cve_id": "CVE-2018-8174",
+        "is_zero_day": true,
+        "detection_score": 0.7174050265173985,
+        "confidence": 0.5855906878805854,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2019-0708": {
+      "result": {
+        "cve_id": "CVE-2019-0708",
+        "is_zero_day": true,
+        "detection_score": 0.6738690167307331,
+        "confidence": 0.43076188005125304,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.4,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2022-22965": {
+      "result": {
+        "cve_id": "CVE-2022-22965",
+        "is_zero_day": true,
+        "detection_score": 0.855694108215432,
+        "confidence": 0.6362219532390122,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2023-34362": {
+      "result": {
+        "cve_id": "CVE-2023-34362",
+        "is_zero_day": true,
+        "detection_score": 0.8595255863915913,
+        "confidence": 0.6992871357799396,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2024-38063": {
+      "result": {
+        "cve_id": "CVE-2024-38063",
+        "is_zero_day": false,
+        "detection_score": 0.43699551113983115,
+        "confidence": 0.6337369244214685,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": false,
+          "apt_groups": 1,
+          "exploitation_evidence": false,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2023-35078": {
+      "result": {
+        "cve_id": "CVE-2023-35078",
+        "is_zero_day": true,
+        "detection_score": 0.8377043173427052,
+        "confidence": 0.6818301205408308,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2023-22515": {
+      "result": {
+        "cve_id": "CVE-2023-22515",
+        "is_zero_day": true,
+        "detection_score": 0.8484653064544949,
+        "confidence": 0.6904389118302625,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2023-38408": {
+      "result": {
+        "cve_id": "CVE-2023-38408",
+        "is_zero_day": false,
+        "detection_score": 0.2701529623095205,
+        "confidence": 0.8272109634857169,
+        "confidence_level": "HIGH",
+        "threshold_used": 0.7,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": false,
+          "apt_groups": 0,
+          "exploitation_evidence": false,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2023-4911": {
+      "result": {
+        "cve_id": "CVE-2023-4911",
+        "is_zero_day": false,
+        "detection_score": 0.8243279036592945,
+        "confidence": 0.6111289895941022,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2023-32233": {
+      "result": {
+        "cve_id": "CVE-2023-32233",
+        "is_zero_day": false,
+        "detection_score": 0.4357093014001886,
+        "confidence": 0.6347658922131825,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": false,
+          "apt_groups": 1,
+          "exploitation_evidence": false,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2018-11776": {
+      "result": {
+        "cve_id": "CVE-2018-11776",
+        "is_zero_day": false,
+        "detection_score": 0.6567947468691215,
+        "confidence": 0.41710246416196384,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.4,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2021-27065": {
+      "result": {
+        "cve_id": "CVE-2021-27065",
+        "is_zero_day": true,
+        "detection_score": 0.7050449764512579,
+        "confidence": 0.5157026478276729,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": true,
+      "correct": true
+    },
+    "CVE-2022-23131": {
+      "result": {
+        "cve_id": "CVE-2022-23131",
+        "is_zero_day": true,
+        "detection_score": 0.8602513250017945,
+        "confidence": 0.6998677266681022,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2021-3156": {
+      "result": {
+        "cve_id": "CVE-2021-3156",
+        "is_zero_day": true,
+        "detection_score": 0.7121698703375607,
+        "confidence": 0.5214025629367152,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2021-41773": {
+      "result": {
+        "cve_id": "CVE-2021-41773",
+        "is_zero_day": true,
+        "detection_score": 0.8444898901300368,
+        "confidence": 0.6872585787706961,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 1,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "APT association (1 groups)",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation, APT group activity"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2022-1388": {
+      "result": {
+        "cve_id": "CVE-2022-1388",
+        "is_zero_day": false,
+        "detection_score": 0.8240790514843945,
+        "confidence": 0.6109299078541822,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2024-21338": {
+      "result": {
+        "cve_id": "CVE-2024-21338",
+        "is_zero_day": true,
+        "detection_score": 0.6827923984021051,
+        "confidence": 0.4979005853883507,
+        "confidence_level": "LOW",
+        "threshold_used": 0.6700000000000002,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.6,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    },
+    "CVE-2024-30078": {
+      "result": {
+        "cve_id": "CVE-2024-30078",
+        "is_zero_day": false,
+        "detection_score": 0.2690710539187045,
+        "confidence": 0.8280764901983698,
+        "confidence_level": "HIGH",
+        "threshold_used": 0.7,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": false,
+          "apt_groups": 0,
+          "exploitation_evidence": false,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Not detected as zero-day due to: insufficient evidence"
+      },
+      "ground_truth": false,
+      "correct": true
+    },
+    "CVE-2023-36884": {
+      "result": {
+        "cve_id": "CVE-2023-36884",
+        "is_zero_day": true,
+        "detection_score": 0.8518452264035237,
+        "confidence": 0.6931428477894855,
+        "confidence_level": "MEDIUM",
+        "threshold_used": 0.8300000000000003,
+        "evidence_summary": {
+          "sources_checked": 8,
+          "cisa_kev": true,
+          "apt_groups": 0,
+          "exploitation_evidence": true,
+          "poc_repositories": 0,
+          "news_mentions": 0
+        },
+        "agent_consensus": 0.8,
+        "key_indicators": [
+          "Listed in CISA KEV",
+          "Rapid KEV addition (<7 days)",
+          "Exploitation before patch",
+          "Emergency patches released"
+        ],
+        "detection_reasoning": "Detected as zero-day based on: CISA KEV listing, pre-patch exploitation"
+      },
+      "ground_truth": false,
+      "correct": false
+    }
+  },
+  "dataset_summary": {
+    "total_cves": 40,
+    "zero_days": 20,
+    "regular_cves": 20,
+    "batches": 8,
+    "batch_size": 5,
+    "created": "2025-08-03T18:30:45.546658",
+    "ground_truth_verified": "2025-08-03T20:15:00.000000",
+    "corrections_applied": 6,
+    "note": "Ground truth corrected based on public sources to avoid data leakage"
+  }
+}

@@ -5,7 +5,7 @@ This creates a dataset with actual scraped evidence for each CVE
 """
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
+sys.path.append(str(Path(__file__).parent.parent))
 
 from dotenv import load_dotenv
 load_dotenv()

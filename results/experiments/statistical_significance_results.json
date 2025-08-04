@@ -1,0 +1,9 @@
+{
+  "binomial_p_value": 0.0007154531776905061,
+  "accuracy_ci": [
+    0.689,
+    0.886
+  ],
+  "effect_size": 0.643501108793284,
+  "sample_size": 30
+}

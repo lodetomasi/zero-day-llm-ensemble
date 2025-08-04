@@ -1,0 +1,297 @@
+[
+  {
+    "removed_agents": [
+      "ForensicAnalyst"
+    ],
+    "active_agents": [
+      "PatternDetector",
+      "TemporalAnalyst",
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "PatternDetector": 0.2692307692307693,
+      "TemporalAnalyst": 0.2254641909814324,
+      "AttributionExpert": 0.3488063660477454,
+      "MetaAnalyst": 0.15649867374005305
+    },
+    "estimated_accuracy": 0.7631,
+    "accuracy_drop": 0.036900000000000044
+  },
+  {
+    "removed_agents": [
+      "PatternDetector"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "TemporalAnalyst",
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.3086574654956085,
+      "TemporalAnalyst": 0.21329987452948557,
+      "AttributionExpert": 0.3299874529485571,
+      "MetaAnalyst": 0.1480552070263488
+    },
+    "estimated_accuracy": 0.7695500000000001,
+    "accuracy_drop": 0.030449999999999977
+  },
+  {
+    "removed_agents": [
+      "TemporalAnalyst"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "PatternDetector",
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.2963855421686747,
+      "PatternDetector": 0.24457831325301205,
+      "AttributionExpert": 0.3168674698795181,
+      "MetaAnalyst": 0.14216867469879516
+    },
+    "estimated_accuracy": 0.7745000000000001,
+    "accuracy_drop": 0.025499999999999967
+  },
+  {
+    "removed_agents": [
+      "AttributionExpert"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "PatternDetector",
+      "TemporalAnalyst",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.3337856173677069,
+      "PatternDetector": 0.27544097693351427,
+      "TemporalAnalyst": 0.2306648575305292,
+      "MetaAnalyst": 0.16010854816824965
+    },
+    "estimated_accuracy": 0.7605500000000001,
+    "accuracy_drop": 0.039449999999999985
+  },
+  {
+    "removed_agents": [
+      "MetaAnalyst"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "PatternDetector",
+      "TemporalAnalyst",
+      "AttributionExpert"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.2789115646258503,
+      "PatternDetector": 0.23015873015873017,
+      "TemporalAnalyst": 0.1927437641723356,
+      "AttributionExpert": 0.29818594104308394
+    },
+    "estimated_accuracy": 0.7823,
+    "accuracy_drop": 0.01770000000000005
+  },
+  {
+    "removed_agents": [
+      "ForensicAnalyst",
+      "PatternDetector"
+    ],
+    "active_agents": [
+      "TemporalAnalyst",
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "TemporalAnalyst": 0.308529945553539,
+      "AttributionExpert": 0.47731397459165154,
+      "MetaAnalyst": 0.21415607985480942
+    },
+    "estimated_accuracy": 0.73265,
+    "accuracy_drop": 0.06735000000000002
+  },
+  {
+    "removed_agents": [
+      "ForensicAnalyst",
+      "TemporalAnalyst"
+    ],
+    "active_agents": [
+      "PatternDetector",
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "PatternDetector": 0.3476027397260274,
+      "AttributionExpert": 0.4503424657534246,
+      "MetaAnalyst": 0.20205479452054792
+    },
+    "estimated_accuracy": 0.7376,
+    "accuracy_drop": 0.06240000000000001
+  },
+  {
+    "removed_agents": [
+      "ForensicAnalyst",
+      "AttributionExpert"
+    ],
+    "active_agents": [
+      "PatternDetector",
+      "TemporalAnalyst",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "PatternDetector": 0.4134419551934827,
+      "TemporalAnalyst": 0.3462321792260693,
+      "MetaAnalyst": 0.24032586558044805
+    },
+    "estimated_accuracy": 0.72365,
+    "accuracy_drop": 0.07635000000000003
+  },
+  {
+    "removed_agents": [
+      "ForensicAnalyst",
+      "MetaAnalyst"
+    ],
+    "active_agents": [
+      "PatternDetector",
+      "TemporalAnalyst",
+      "AttributionExpert"
+    ],
+    "new_weights": {
+      "PatternDetector": 0.31918238993710696,
+      "TemporalAnalyst": 0.2672955974842767,
+      "AttributionExpert": 0.41352201257861637
+    },
+    "estimated_accuracy": 0.7454000000000001,
+    "accuracy_drop": 0.05459999999999998
+  },
+  {
+    "removed_agents": [
+      "PatternDetector",
+      "TemporalAnalyst"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.3923444976076555,
+      "AttributionExpert": 0.419457735247209,
+      "MetaAnalyst": 0.18819776714513556
+    },
+    "estimated_accuracy": 0.7440500000000001,
+    "accuracy_drop": 0.055949999999999944
+  },
+  {
+    "removed_agents": [
+      "PatternDetector",
+      "AttributionExpert"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "TemporalAnalyst",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.46067415730337075,
+      "TemporalAnalyst": 0.31835205992509363,
+      "MetaAnalyst": 0.22097378277153557
+    },
+    "estimated_accuracy": 0.7301000000000001,
+    "accuracy_drop": 0.06989999999999996
+  },
+  {
+    "removed_agents": [
+      "PatternDetector",
+      "MetaAnalyst"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "TemporalAnalyst",
+      "AttributionExpert"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.36229749631811486,
+      "TemporalAnalyst": 0.2503681885125184,
+      "AttributionExpert": 0.3873343151693667
+    },
+    "estimated_accuracy": 0.75185,
+    "accuracy_drop": 0.048150000000000026
+  },
+  {
+    "removed_agents": [
+      "TemporalAnalyst",
+      "AttributionExpert"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "PatternDetector",
+      "MetaAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.4338624338624339,
+      "PatternDetector": 0.3580246913580247,
+      "MetaAnalyst": 0.20811287477954146
+    },
+    "estimated_accuracy": 0.73505,
+    "accuracy_drop": 0.06495000000000006
+  },
+  {
+    "removed_agents": [
+      "TemporalAnalyst",
+      "MetaAnalyst"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "PatternDetector",
+      "AttributionExpert"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.3455056179775281,
+      "PatternDetector": 0.28511235955056186,
+      "AttributionExpert": 0.36938202247191015
+    },
+    "estimated_accuracy": 0.7568,
+    "accuracy_drop": 0.043200000000000016
+  },
+  {
+    "removed_agents": [
+      "AttributionExpert",
+      "MetaAnalyst"
+    ],
+    "active_agents": [
+      "ForensicAnalyst",
+      "PatternDetector",
+      "TemporalAnalyst"
+    ],
+    "new_weights": {
+      "ForensicAnalyst": 0.3974151857835218,
+      "PatternDetector": 0.32794830371567046,
+      "TemporalAnalyst": 0.2746365105008078
+    },
+    "estimated_accuracy": 0.74285,
+    "accuracy_drop": 0.057150000000000034
+  },
+  {
+    "only_agent": "ForensicAnalyst",
+    "estimated_accuracy": 0.6869000000000001
+  },
+  {
+    "only_agent": "PatternDetector",
+    "estimated_accuracy": 0.68045
+  },
+  {
+    "only_agent": "TemporalAnalyst",
+    "estimated_accuracy": 0.6755
+  },
+  {
+    "only_agent": "AttributionExpert",
+    "estimated_accuracy": 0.68945
+  },
+  {
+    "only_agent": "MetaAnalyst",
+    "estimated_accuracy": 0.6677000000000001
+  }
+]
