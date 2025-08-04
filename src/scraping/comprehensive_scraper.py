@@ -10,7 +10,7 @@ import time
 from datetime import datetime, timedelta
 from pathlib import Path
 import re
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 import logging
 from urllib.parse import quote_plus, urlparse
 import hashlib
@@ -110,6 +110,30 @@ class ComprehensiveZeroDayScraper:
         except Exception as e:
             logger.error(f"Error fetching {url}: {e}")
             return None
+    
+    def _get_cache(self, cache_key: str) -> Optional[Dict]:
+        """Get cached data for a specific key"""
+        cache_path = self.cache_dir / f"{cache_key}.json"
+        if cache_path.exists() and self._is_cache_valid(cache_path):
+            try:
+                with open(cache_path, 'r') as f:
+                    data = json.load(f)
+                    return data.get('content')
+            except Exception as e:
+                logger.error(f"Error reading cache {cache_key}: {e}")
+        return None
+    
+    def _set_cache(self, cache_key: str, data: Any) -> None:
+        """Set cache data for a specific key"""
+        cache_path = self.cache_dir / f"{cache_key}.json"
+        try:
+            with open(cache_path, 'w') as f:
+                json.dump({
+                    'content': data,
+                    'cached_at': datetime.now().isoformat()
+                }, f)
+        except Exception as e:
+            logger.error(f"Error writing cache {cache_key}: {e}")
     
     def scrape_all_sources(self, cve_id: str) -> Dict:
         """

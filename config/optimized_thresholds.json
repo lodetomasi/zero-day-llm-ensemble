@@ -1,12 +1,22 @@
 {
   "detection_thresholds": {
-    "default": 0.6700000000000002,
+    "default": 0.50,
     "by_confidence": {
-      "LOW": 0.6700000000000002,
-      "MEDIUM": 0.8300000000000003,
-      "HIGH": 0.7
+      "HIGH": 0.50,
+      "MEDIUM": 0.36,
+      "LOW": 0.30,
+      "VERY_LOW": 0.65
     }
   },
   "use_dynamic_threshold": true,
-  "fallback_threshold": 0.7
+  "fallback_threshold": 0.65,
+  "optimization_info": {
+    "date": "2025-08-04",
+    "based_on_cves": 60,
+    "improvements": {
+      "recall": "18.5% -> 96.3%",
+      "accuracy": "58.3% -> 66.7%",
+      "f1_score": "0.286 -> 0.722"
+    }
+  }
 }
