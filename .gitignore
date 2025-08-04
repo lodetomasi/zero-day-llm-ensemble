@@ -120,3 +120,18 @@ reports/
 *api_key*
 *secret*
 credentials/
+
+# Development files
+.claude*
+CLAUDE*
+*TODO*
+*todo*
+development/
+dev_notes/
+scratch/
+UPDATE_SUMMARY*
+PERFORMANCE*
+
+# Internal documentation
+*internal*
+*INTERNAL*

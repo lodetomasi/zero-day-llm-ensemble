@@ -273,9 +273,9 @@ python zero_day_detector.py detect CVE-2024-3401
 python zero_day_detector.py detect CVE-2024-3402
 ```
 
-## Performance Tips
+## Usage Notes
 
-1. **Use Cache**: Results are cached for 7 days to speed up repeated queries
-2. **Parallel Testing**: The test command uses 4 workers by default
-3. **Download Once**: Download datasets once and reuse for multiple tests
-4. **Check Status**: Ensure API key is configured before running detections
+1. **Caching**: System implements intelligent caching for efficiency
+2. **Parallel Processing**: Supports concurrent analysis for batch operations
+3. **Dataset Management**: Efficient dataset handling for large-scale testing
+4. **Configuration**: Ensure proper API configuration before use
