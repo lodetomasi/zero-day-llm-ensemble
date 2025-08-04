@@ -31,11 +31,11 @@ class UniversalTester:
         
         # Import appropriate detector
         if use_enhanced:
-            from detect_zero_days_enhanced import EnhancedZeroDayDetector
+            from scripts.detect_zero_days_enhanced import EnhancedZeroDayDetector
             self.detector = EnhancedZeroDayDetector()
             self.detector_type = "Enhanced"
         else:
-            from detect_zero_days import ZeroDayDetector
+            from scripts.detect_zero_days import ZeroDayDetector
             self.detector = ZeroDayDetector()
             self.detector_type = "Standard"
     

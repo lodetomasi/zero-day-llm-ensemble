@@ -33,9 +33,11 @@ Zero-day vulnerability detection remains a critical challenge in cybersecurity, 
 graph TD
     CVE[CVE Input] --> SCRAPER[Evidence Collection]
     
-    SCRAPER --> SOURCES[Multiple Sources<br/>• NVD & CISA KEV<br/>• Security News<br/>• GitHub & ExploitDB<br/>• Threat Intelligence]
+    SCRAPER --> SOURCES[21+ Data Sources<br/>• NVD & CISA KEV<br/>• Security Research<br/>• GitHub & ExploitDB<br/>• Honeypot Data]
     
-    SOURCES --> FEATURES[Feature Extraction]
+    SOURCES --> CONTEXT[Context Enhancement<br/>• Documentation<br/>• Code Analysis<br/>• Full Discussions<br/>• Incident Reports]
+    
+    CONTEXT --> FEATURES[Feature Extraction<br/>40+ Indicators]
     
     FEATURES --> AGENTS[5 LLM Agents<br/>Analyze in Parallel]
     
@@ -52,15 +54,17 @@ graph TD
     style ZERODAY fill:#F44336,color:#fff
     style REGULAR fill:#4CAF50,color:#fff
     style ENSEMBLE fill:#FF9800,color:#fff
+    style CONTEXT fill:#9C27B0,color:#fff
 ```
 
 The detection pipeline consists of four primary components:
 
 ### 2.1 Evidence Collection Module
-- **Web Scraping Engine**: Parallel collection from 11 sources
+- **Web Scraping Engine**: Parallel collection from 21+ sources
 - **Core Sources**: NVD, CISA KEV, GitHub, ExploitDB, Security News
 - **Enhanced Sources**: MITRE ATT&CK, VirusTotal, Patch Timeline Analysis
-- **Additional Sources**: Threat Intelligence, Vendor Advisories, Social Media
+- **Context Sources**: Documentation, Code Repositories, Technical Discussions
+- **Security Sources**: Honeypot Data, Government Alerts, Security Researchers
 - **Caching Layer**: 7-day cache reduces API calls and ensures reproducibility
 
 ### 2.2 Feature Extraction
@@ -189,18 +193,36 @@ export OPENROUTER_API_KEY="your-api-key"
 
 ### 5.3 Quick Start
 
-#### Test with Universal Tester (Recommended)
+#### 🚀 Main CLI Tool (Recommended)
 ```bash
-# Test with balanced dataset
+# Detect single CVE
+python zero_day_detector.py detect CVE-2024-3400
+
+# Verbose analysis with detailed output
+python zero_day_detector.py detect CVE-2024-3400 -v
+
+# Test system with multiple CVEs
+python zero_day_detector.py test --zero-days 25 --regular 25
+
+# Test with small dataset for quick verification
+python zero_day_detector.py test --zero-days 2 --regular 2
+
+# Verify data collection (basic)
+python zero_day_detector.py verify CVE-2024-3400
+
+# Verify with context enhancement
+python zero_day_detector.py verify CVE-2024-3400 --context
+
+# Check system status
+python zero_day_detector.py status
+```
+
+#### Advanced Testing
+```bash
+# Universal tester for batch analysis
 python scripts/universal_tester.py --zero-days 30 --regular 30
 
-# Fast test with 20 random CVEs
-python scripts/universal_tester.py --total 20
-
-# Test all CVEs from 2024
-python scripts/universal_tester.py --pattern "CVE-2024-.*"
-
-# Parallel testing for large datasets
+# Parallel testing for speed
 python scripts/universal_tester.py --total 100 --parallel --workers 8
 ```
 
@@ -266,30 +288,36 @@ graph LR
         CVE[CVE ID]
     end
     
-    subgraph "Evidence Collection"
-        CVE --> COLLECT[Gather Evidence<br/>from Multiple Sources]
+    subgraph "Phase 1: Basic Evidence"
+        CVE --> BASIC[11 Core Sources<br/>NVD, CISA, GitHub, etc.]
     end
     
-    subgraph "Feature Extraction"
-        COLLECT --> FEATURES[Extract Features<br/>Temporal, Technical, Behavioral]
+    subgraph "Phase 2: Context Enhancement"
+        BASIC --> CONTEXT[15+ Context Sources<br/>Docs, Code, Discussions]
     end
     
-    subgraph "LLM Analysis"
-        FEATURES --> AGENTS[5 Specialized Agents<br/>Analyze in Parallel]
+    subgraph "Phase 3: Feature Engineering"
+        CONTEXT --> FEATURES[40+ Features<br/>Temporal, Technical, Behavioral]
     end
     
-    subgraph "Decision"
-        AGENTS --> ENSEMBLE[Ensemble Score<br/>+ Confidence]
-        ENSEMBLE --> DECISION{Zero-Day Detection}
+    subgraph "Phase 4: LLM Analysis"
+        FEATURES --> AGENTS[5 Specialized Agents<br/>Parallel Analysis]
+    end
+    
+    subgraph "Phase 5: Decision"
+        AGENTS --> ENSEMBLE[Thompson Sampling<br/>Weighted Ensemble]
+        ENSEMBLE --> THRESHOLD[Dynamic Threshold<br/>By Confidence]
+        THRESHOLD --> DECISION{Zero-Day?}
     end
     
     subgraph "Output"
-        DECISION --> REPORT[Detection Report]
+        DECISION --> REPORT[Detailed Report<br/>+ Confidence Score]
     end
     
     style CVE fill:#2196F3,color:#fff
     style DECISION fill:#FF9800,color:#fff
     style REPORT fill:#4CAF50,color:#fff
+    style CONTEXT fill:#9C27B0,color:#fff
 ```
 
 ### Detection Process Details
@@ -349,14 +377,25 @@ We demonstrate that multi-agent LLM ensembles can achieve statistically signific
 
 ```
 zero-day-llm-ensemble/
-├── src/                      # Core detection system
-│   ├── agents/               # Multi-agent LLM implementations
-│   ├── ensemble/             # Thompson Sampling optimizer
-│   └── scraping/             # 8-source evidence collector
-├── config/                   # Agent and API configurations
-├── detect_zero_days.py       # Single CVE analysis
-├── test_system.py            # Main testing script
-└── quick_test.py             # Demo with cached results
+├── zero_day_detector.py      # 🚀 Main CLI interface
+├── HOW_TO_USE.md            # 📖 User guide with examples
+├── src/                     # Core detection system
+│   ├── agents/              # 5 specialized LLM agents
+│   ├── ensemble/            # Thompson Sampling & multi-agent system
+│   ├── scraping/            # 21+ source scrapers with context enhancement
+│   └── utils/               # Feature extraction & utilities
+├── scripts/                 # Detection and testing scripts
+│   ├── detect_zero_days_enhanced.py    # Enhanced detection
+│   ├── detect_zero_days_context.py     # Context-aware detection
+│   ├── universal_tester.py             # Flexible testing system
+│   └── verify_scraping.py              # Scraping verification
+├── config/                  # Configuration files
+│   ├── optimized_thresholds.json       # Dynamic thresholds
+│   └── models.yaml                     # LLM model configs
+├── data/                    # Dataset files
+│   ├── extended_dataset.json           # 40 verified CVEs
+│   └── expanded_dataset_60.json        # 60 verified CVEs
+└── reports/                 # Generated detection reports
 ```
 
 ## Statistical Validation

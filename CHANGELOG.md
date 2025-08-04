@@ -5,6 +5,94 @@ All notable changes to the Zero-Day LLM Ensemble project will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.1] - 2025-08-04 - USER-FRIENDLY CLI & SYSTEM IMPROVEMENTS
+
+### 🎯 Enhanced User Experience
+
+#### Added
+- **Main CLI Interface** (`zero_day_detector.py`):
+  - Clean, structured output with emojis for better readability
+  - Subcommands: `detect`, `test`, `verify`, `status`
+  - Banner display showing system version
+  - Progress indicators and clear result formatting
+  - Automatic report saving to `reports/` directory
+
+- **Comprehensive User Guide** (`HOW_TO_USE.md`):
+  - Quick start examples
+  - Common CVEs for testing
+  - Troubleshooting section
+  - Tips for best results
+
+#### Improved
+- **Scraping Verification**:
+  - Two modes: basic and context-enhanced
+  - Detailed breakdown of data collected per source
+  - Performance metrics and data volume statistics
+  - Visual comparison between basic and enhanced scraping
+
+- **Detection Output**:
+  - Clear ZERO-DAY DETECTED / NOT A ZERO-DAY result
+  - Detection score with confidence level
+  - Key indicators listed with bullet points
+  - Evidence summary with source counts
+  - Automatic report generation with timestamp
+
+#### Fixed
+- Import errors in `universal_tester.py` for module paths
+- Missing `_apply_rate_limit()` method in context enhanced scraper
+- Incorrect method names (`detect_zero_day` → `detect`)
+- Configuration import issues (`config.agents` removed)
+
+#### Performance
+- Parallel testing support with `--parallel` flag
+- Configurable worker count for batch processing
+- Smart caching to reduce API calls
+- Rate limiting implementation for stability
+
+## [3.12.0] - 2025-08-04 - MASSIVE CONTEXT COLLECTION FOR LLMS
+
+### 🚀 Context-Enhanced Detection System
+
+#### Added
+- **ContextEnhancedScraper** - Collects 15+ additional context sources:
+  - Full documentation and man pages
+  - Complete code repositories with vulnerable snippets
+  - Entire discussion threads (Stack Overflow, Reddit, mailing lists)
+  - Technical blog posts and analyses
+  - Patch commits with full diffs
+  - Historical vulnerability patterns
+  - Exploit tutorials and walkthroughs
+  - Configuration examples (Docker, K8s, Terraform)
+  - Incident reports and forensic data
+  - Attack patterns and IOCs
+  - Mitigation strategies
+
+- **Context-Aware Detection** (`detect_zero_days_context.py`):
+  - Builds massive prompts with all collected context
+  - Context quality scoring (0-100%)
+  - Context-aware confidence calculation
+  - Enhanced feature extraction from discussions
+
+#### Features
+- **Rich Context for LLMs**:
+  - Up to 2000+ lines of code context per CVE
+  - Complete discussion threads with all comments
+  - Full technical documentation
+  - Historical analysis of similar vulnerabilities
+  
+- **Context Metrics**:
+  - Total context sources tracked
+  - Code snippet counting
+  - Discussion volume measurement
+  - Documentation coverage
+  - Context quality scoring
+
+#### Why This Matters
+- LLMs perform significantly better with more context
+- Reduces hallucination by providing concrete evidence
+- Enables deeper pattern recognition
+- Provides comprehensive view of each vulnerability
+
 ## [3.11.0] - 2025-08-04 - OPTIMIZED THRESHOLDS FOR BETTER PRECISION
 
 ### 🎯 Threshold Recalibration
