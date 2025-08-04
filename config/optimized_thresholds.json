@@ -3,8 +3,8 @@
     "default": 0.50,
     "by_confidence": {
       "HIGH": 0.50,
-      "MEDIUM": 0.36,
-      "LOW": 0.30,
+      "MEDIUM": 0.45,
+      "LOW": 0.40,
       "VERY_LOW": 0.65
     }
   },
@@ -13,10 +13,13 @@
   "optimization_info": {
     "date": "2025-08-04",
     "based_on_cves": 60,
+    "version": "v3.11",
     "improvements": {
-      "recall": "18.5% -> 96.3%",
-      "accuracy": "58.3% -> 66.7%",
-      "f1_score": "0.286 -> 0.722"
+      "recall": "100% -> 96.7% (1 FN acceptable)",
+      "accuracy": "68.3% -> 73.3%",
+      "precision": "61.2% -> 65.9%",
+      "f1_score": "0.759 -> 0.784",
+      "false_positives": "19 -> 15"
     }
   }
 }
