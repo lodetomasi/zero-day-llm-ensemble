@@ -1,0 +1,25 @@
+X-Ua-Compatible: IE=edge
+Content-Type: application/json; charset=UTF-8
+Expires: -1
+Cache-Control: private, s-maxage=0, max-age=0, must-revalidate, no-store
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: X-Moose
+X-Ratelimit-Used: 9
+X-Ratelimit-Remaining: 91.0
+X-Ratelimit-Reset: 319
+Content-Encoding: gzip
+Accept-Ranges: bytes
+Date: Tue, 05 Aug 2025 16:54:40 GMT
+Via: 1.1 varnish
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=31536000; includeSubdomains
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+Set-Cookie: loid=000000001v1tt95nez.2.1754412880690.Z0FBQUFBQm9ramRRbWlpUW5oRDZmQkVxTS1WOXhxQXdSR0FRV18ybG9lNUtVMTBUTC1ZNUpGU1c2LVFWVS1LcnRDd0ZJOFpHaHRBa3NLNWtzWDBYeURVWjVtWUNXREJVdXQ5X0NBLWp3MFo3cWgzczdrSEtOZnBFX2RHY0I5cF9IaGNZQjU3d3FJb0c; Domain=reddit.com; Max-Age=63071999; Path=/; expires=Thu, 05-Aug-2027 16:54:40 GMT; secure; SameSite=None; Secure
+Set-Cookie: session_tracker=jibeoqrgrfalljocbl.0.1754412880699.Z0FBQUFBQm9ramRRMmRLYVV1aWpkUkVBSG1ValpzblZ2a0xJRXdTN0ZyNWc4aC1qZGtuQ1dLbWlzSXdBbmd1UUhYaWwzclJkbHFlNm5CUGpPb2JCSUp2MDhKMzQzeXJ5Yk5XR1F5RDZ2SXV2Mlk3NGJjSWFMZXJ6YXV4T25teFFvMU05aU5na3hjR1k; Domain=reddit.com; Max-Age=7199; Path=/; expires=Tue, 05-Aug-2025 18:54:40 GMT; secure; SameSite=None; Secure
+Set-Cookie: csv=2; Max-Age=63072000; Domain=.reddit.com; Path=/; Secure; SameSite=None
+Set-Cookie: edgebucket=1ZyTptff9Ww8hEWgYR; Domain=reddit.com; Max-Age=63071999; Path=/;  secure
+Server: snooserv
+Report-To: {"group": "w3-reporting-nel", "max_age": 14400, "include_subdomains": true,  "endpoints": [{ "url": "https://w3-reporting-nel.reddit.com/reports" }]}, {"group": "w3-reporting", "max_age": 14400, "include_subdomains": true, "endpoints": [{ "url": "https://w3-reporting.reddit.com/reports" }]}, {"group": "w3-reporting-csp", "max_age": 14400, "include_subdomains": true, "endpoints": [{ "url": "https://w3-reporting-csp.reddit.com/reports" }]}
+Nel: {"report_to": "w3-reporting-nel", "max_age": 14400, "include_subdomains": false, "success_fraction": 1.0, "failure_fraction": 1.0}

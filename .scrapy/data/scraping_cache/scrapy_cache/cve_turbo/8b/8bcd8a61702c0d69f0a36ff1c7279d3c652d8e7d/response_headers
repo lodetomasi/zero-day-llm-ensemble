@@ -1,0 +1,26 @@
+Content-Length: 32759
+X-Ua-Compatible: IE=edge
+Content-Type: application/json; charset=UTF-8
+Expires: -1
+Cache-Control: private, s-maxage=0, max-age=0, must-revalidate, no-store
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: X-Moose
+Content-Encoding: gzip
+X-Ratelimit-Used: 6
+X-Ratelimit-Remaining: 94.0
+X-Ratelimit-Reset: 392
+Accept-Ranges: bytes
+Date: Tue, 05 Aug 2025 16:23:28 GMT
+Via: 1.1 varnish
+Vary: accept-encoding
+Strict-Transport-Security: max-age=31536000; includeSubdomains
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+Set-Cookie: loid=000000001v1rwcr2ta.2.1754411007667.Z0FBQUFBQm9raV9fcDFibGpvbW9Yc1pJNF9fa3p3N29pTGo3TzZ5QmYtUFVpeWl6S0wzbmV1ZGRhajBtUU9fcmVwSlhTS2Q0VDU3Nl9QRlBsTllaelRQc0VnamNIODNyaU1GcU1RWHQ0R3BMYnNhR0h6ZThrOXl2QzZtelpHb0lpNmY2c1VOaHVFbWs; Domain=reddit.com; Max-Age=63071999; Path=/; expires=Thu, 05-Aug-2027 16:23:27 GMT; secure; SameSite=None; Secure
+Set-Cookie: session_tracker=crboimjdlmmibdgfgn.0.1754411007675.Z0FBQUFBQm9raV9fTTFocDFtbjVjTkh3LXZyamd3NmZETGc4RGs0UE9ieDJSSGh5OWRKbjk4Nmc4ZE0xNUQ3NWRZWXMzLWZRSENKZmF6LWpfUGU5YkdVVmRVb192VlBfdzN1T1JPZHNOYkw2YWh6Y3lYcW1iRGZxWlFlYjB2ckRQRVJPUm04bXFiMGE; Domain=reddit.com; Max-Age=7199; Path=/; expires=Tue, 05-Aug-2025 18:23:27 GMT; secure; SameSite=None; Secure
+Set-Cookie: csv=2; Max-Age=63072000; Domain=.reddit.com; Path=/; Secure; SameSite=None
+Set-Cookie: edgebucket=opbkpHv5gOwowsFn3p; Domain=reddit.com; Max-Age=63071999; Path=/;  secure
+Server: snooserv
+Report-To: {"group": "w3-reporting-nel", "max_age": 14400, "include_subdomains": true,  "endpoints": [{ "url": "https://w3-reporting-nel.reddit.com/reports" }]}, {"group": "w3-reporting", "max_age": 14400, "include_subdomains": true, "endpoints": [{ "url": "https://w3-reporting.reddit.com/reports" }]}, {"group": "w3-reporting-csp", "max_age": 14400, "include_subdomains": true, "endpoints": [{ "url": "https://w3-reporting-csp.reddit.com/reports" }]}
+Nel: {"report_to": "w3-reporting-nel", "max_age": 14400, "include_subdomains": false, "success_fraction": 1.0, "failure_fraction": 1.0}

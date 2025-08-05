@@ -1,0 +1,23 @@
+Date: Tue, 05 Aug 2025 16:42:53 GMT
+Content-Type: text/html;charset=UTF-8
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Content-Language: en-
+Expires: 0
+X-Xss-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors 'self'
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: accept, content-type, origin, x-requested-with
+Access-Control-Allow-Methods: GET, POST, HEAD
+Access-Control-Allow-Credentials: false
+X-Content-Type-Options: nosniff
+Strict-Transport-Security: max-age=31536000
+Cf-Cache-Status: DYNAMIC
+Set-Cookie: __cf_bm=Sig8VCg_3.wjfdIj1Q3P3RIEU_dzysWcesjWvSx7IKU-1754412173-1.0.1.1-UJo7JocjufYxY6yGHYJzN9Rz6pqNvz9Q_62o0.BTajneePqbiU1Dr96sniAbhhictHIQHb5FrLiYj2T6HrW7QrSW0sJDmXo41t4UdKK4lkU; path=/; expires=Tue, 05-Aug-25 17:12:53 GMT; domain=.nist.gov; HttpOnly; Secure; SameSite=None
+Set-Cookie: _cfuvid=vBJlCctnqt9IRLrzx12JwURhN.ZVftIqT9HRk_DNFnc-1754412173501-0.0.1.1-604800000; path=/; domain=.nist.gov; HttpOnly; Secure; SameSite=None
+Server-Timing: cfCacheStatus;desc="DYNAMIC"
+Server-Timing: cfOrigin;dur=115,cfEdge;dur=47
+Server: cloudflare
+Cf-Ray: 96a7c0135f8e6a56-EWR
+Content-Encoding: gzip

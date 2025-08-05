@@ -1,0 +1,17 @@
+Content-Length: 450
+Location: https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3D%2522CVE-2022-1388%2522%2Bnews%2Bsecurity%2B-site:nvd.nist.gov%26tbm%3Dnws&q=EgRdLHEuGKXgyMQGIjAtgON9nhK9ZwFJAp3bQmMBFfgHLRFNkI7-T3yM1HT-RAkbIeP75sD6lQZDFCHzBLsyAnJSWgFD
+X-Hallmonitor-Challenge: CgsIpeDIxAYQ-PufURIEXSxxLg
+Content-Type: text/html; charset=UTF-8
+Strict-Transport-Security: max-age=31536000
+Content-Security-Policy: object-src 'none';base-uri 'self';script-src 'nonce-QdMgrbwNNhO4DyhuaEMiDQ' 'strict-dynamic' 'report-sample' 'unsafe-eval' 'unsafe-inline' https: http:;report-uri https://csp.withgoogle.com/csp/gws/other
+Cross-Origin-Opener-Policy: same-origin-allow-popups; report-to="gws"
+Report-To: {"group":"gws","max_age":2592000,"endpoints":[{"url":"https://csp.withgoogle.com/csp/report-to/gws/other"}]}
+Permissions-Policy: unload=()
+P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+Date: Tue, 05 Aug 2025 16:24:05 GMT
+Server: gws
+X-Xss-Protection: 0
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: AEC=AVh_V2ga1VaCmffS7RpFgeF54FuyF5kskxYyEXDFY4L-Sbkfpmiih51zqw; expires=Sun, 01-Feb-2026 16:24:05 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax
+Set-Cookie: __Secure-ENID=28.SE=MvoLc-gW8MqAWA5I9t43QDWHaP8miLTHv7iLHv6u-GkpQSDyj6wfD7ogZ1AZ9SpZiQHQyDB_RIf2OhNdLxwRxXynjG65Fe_0T-2IBqY0wyPb60E7gceAzgwFL9v1eGEuTUpgR9bo-6tPrTd1yxpirc_Lcy1RLBECvNzIHio3pl5HvP3guNW_EyKcrxb3q0o93FETDv38EA9WbsTsai2crYBEf3KNdZOQNaV38mLDnG0ULhJQax0hyWjcWprk; expires=Sat, 05-Sep-2026 08:42:23 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
