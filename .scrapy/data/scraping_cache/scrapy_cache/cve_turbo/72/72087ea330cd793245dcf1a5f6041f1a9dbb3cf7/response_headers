@@ -1,0 +1,21 @@
+Content-Length: 0
+Content-Type: application/binary
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: Mon, 01 Jan 1990 00:00:00 GMT
+Date: Tue, 05 Aug 2025 16:18:36 GMT
+Location: https://www.google.com/search?q=%22CVE-2023-23397%22+news+security+-site:nvd.nist.gov&tbm=nws&ucbcb=1
+P3P: CP="This is not a P3P policy! See g.co/p3phelp for more info."
+Accept-Ch: Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Model, Sec-CH-UA-WoW64, Sec-CH-UA-Form-Factors, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version
+Cross-Origin-Opener-Policy: unsafe-none
+Content-Security-Policy: require-trusted-types-for 'script';report-uri /_/ConsentUi/cspreport
+Content-Security-Policy: script-src 'report-sample' 'nonce-WDpdspuR5s4lSgWT-uARLA' 'unsafe-inline';object-src 'none';base-uri 'self';report-uri /_/ConsentUi/cspreport;worker-src 'self'
+Content-Security-Policy: script-src 'unsafe-inline' 'unsafe-eval' blob: data: 'self' https://apis.google.com https://ssl.gstatic.com https://www.google.com https://www.googletagmanager.com https://www.gstatic.com https://www.google-analytics.com https://ssl.gstatic.com/external_hosted/lottie/lottie_light.js https://www.google.com/tools/feedback/ https://www.gstatic.com/feedback/js/ https://www.gstatic.com/inproduct_help/ https://www.gstatic.com/support/content/ https://www.gstatic.com/uservoice/feedback/client/web/live/ https://www.gstatic.com/uservoice/surveys/resources/prod/js/survey/ https://support.google.com/inapp/;report-uri /_/ConsentUi/cspreport/allowlist
+Permissions-Policy: ch-ua-arch=*, ch-ua-bitness=*, ch-ua-full-version=*, ch-ua-full-version-list=*, ch-ua-model=*, ch-ua-wow64=*, ch-ua-form-factors=*, ch-ua-platform=*, ch-ua-platform-version=*
+Cross-Origin-Resource-Policy: same-site
+Server: ESF
+X-Xss-Protection: 0
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Set-Cookie: __Secure-ENID=28.SE=Q0VgoC5-N2CnAPuXPFZTcegrKx1jFhx5HWzph5PHPOwRE63nSoRoVr2jAZkBPJXkyq_x3VRJaRLEzf4NsooHgjn63i5HEmMikBbmmL5ukNQa137VPLih7c1GGQso_AeskUcC-B7hYMK8CiDZlLbFHU-il26FyjvUnXZ8qiMFE0DT0v0vFGepxG6-jIoIxzLovcx5K_VLNQDzrCvlLPvX7pT71ZNhgtDnRi-4l8GZe7Tpdak; expires=Sat, 05-Sep-2026 08:36:54 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
