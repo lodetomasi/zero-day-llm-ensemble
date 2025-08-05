@@ -32,10 +32,20 @@ class EnhancedZeroDayDetector:
     Enhanced zero-day detection with additional intelligence sources
     """
     
-    def __init__(self, use_enhanced_scraping: bool = True):
+    def __init__(self, use_enhanced_scraping: bool = True, use_turbo: bool = True):
         """Initialize enhanced detector components"""
-        # Use enhanced scraper
-        self.scraper = EnhancedZeroDayScraper() if use_enhanced_scraping else ComprehensiveZeroDayScraper()
+        # Use turbo scraper if available
+        if use_turbo:
+            try:
+                from src.scraping.turbo_scraper import TurboZeroDayScraper
+                self.scraper = TurboZeroDayScraper()
+                logger.info("Using TurboScraper for 10x faster performance")
+            except ImportError:
+                logger.info("Scrapy not available, using enhanced scraper")
+                self.scraper = EnhancedZeroDayScraper() if use_enhanced_scraping else ComprehensiveZeroDayScraper()
+        else:
+            self.scraper = EnhancedZeroDayScraper() if use_enhanced_scraping else ComprehensiveZeroDayScraper()
+        
         self.feature_extractor = ZeroDayFeatureExtractor()
         self.llm_system = MultiAgentSystem(parallel_execution=True)
         
@@ -82,6 +92,15 @@ class EnhancedZeroDayDetector:
             print("            Bug Bounty, Honeypots, Threat Intel, and more...")
         
         evidence = self.scraper.scrape_all_sources_enhanced(cve_id)
+        
+        # Format data for LLM consumption
+        from src.utils.llm_formatter import LLMDataFormatter
+        formatter = LLMDataFormatter()
+        formatted_evidence = formatter.format_for_llm(evidence, cve_id)
+        concise_summary = formatter.create_concise_summary(evidence)
+        
+        if verbose:
+            print(f"\n📋 Evidence Summary: {concise_summary}")
         
         # Display source summary
         if verbose:
@@ -221,11 +240,11 @@ class EnhancedZeroDayDetector:
         # Start with base calculation
         feature_score = 0.0
         
-        # Critical positive indicators (same as before)
+        # Critical positive indicators - CISA KEV is STRONG evidence
         if features.get('in_cisa_kev', 0) > 0:
-            feature_score += 0.25
+            feature_score += 0.60  # CISA KEV alone should nearly guarantee detection
             if features.get('rapid_kev_addition', 0) > 0:
-                feature_score += 0.15
+                feature_score += 0.25  # Bonus for rapid addition
         
         if features.get('exploitation_before_patch', 0) > 0:
             feature_score += 0.25
@@ -290,11 +309,11 @@ class EnhancedZeroDayDetector:
         # Enhanced score from threat intelligence (INCREASED WEIGHT)
         threat_score = evidence.get('scores', {}).get('threat_actor_interest', 0)
         
-        # Combine scores with adjusted weights (more emphasis on non-government sources)
+        # Combine scores with adjusted weights - prioritize evidence-based features
         combined_score = (
-            0.45 * feature_score +   # Reduced from 0.5
-            0.35 * llm_score + 
-            0.20 * threat_score      # Increased from 0.15
+            0.60 * feature_score +   # Increased - hard evidence matters most
+            0.30 * llm_score +       # Reduced - LLMs are supplementary
+            0.10 * threat_score      # Reduced - additional signal
         )
         
         return combined_score

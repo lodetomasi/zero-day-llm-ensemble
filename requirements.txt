@@ -13,6 +13,7 @@ lxml>=4.6.0
 
 # Web scraping and parsing
 feedparser>=6.0.0
+scrapy>=2.11.0  # Optional but recommended: High-performance parallel scraping (10x faster)
 
 # Caching
 cachetools>=5.0.0
