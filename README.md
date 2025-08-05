@@ -281,22 +281,22 @@ We extract 43+ objective features across four categories:
 
 ```mermaid
 graph TD
-    subgraph "Thompson Sampling Process"
-        A[Initialize Beta(1,1)<br/>for each agent] --> B[Sample weights<br/>from Beta distributions]
-        B --> C[Agents make<br/>predictions]
-        C --> D{Prediction<br/>Correct?}
-        D -->|Yes| E[Update α<br/>Success++]
-        D -->|No| F[Update β<br/>Failure++]
-        E --> G[Update Beta<br/>distributions]
+    subgraph TS["Thompson Sampling Process"]
+        A["Initialize Beta(1,1) for each agent"] --> B["Sample weights from Beta distributions"]
+        B --> C["Agents make predictions"]
+        C --> D{"Prediction Correct?"}
+        D -->|Yes| E["Update α (Success++)"]
+        D -->|No| F["Update β (Failure++)"]
+        E --> G["Update Beta distributions"]
         F --> G
         G --> B
     end
     
-    subgraph "Mathematical Foundation"
-        H[Beta Distribution]
-        I[θᵢ ~ Beta(αᵢ, βᵢ)]
-        J[E[θᵢ] = αᵢ/(αᵢ + βᵢ)]
-        K[Var[θᵢ] decreases<br/>as n increases]
+    subgraph MF["Mathematical Foundation"]
+        H["Beta Distribution"]
+        I["θᵢ ~ Beta(αᵢ, βᵢ)"]
+        J["E[θᵢ] = αᵢ/(αᵢ + βᵢ)"]
+        K["Var[θᵢ] decreases as n increases"]
     end
     
     style A fill:#e3f2fd
