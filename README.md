@@ -30,79 +30,179 @@ We present a system that addresses these challenges through:
 
 ### System Overview
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           Zero-Day Detection Pipeline                         │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  ┌─────────────┐     ┌──────────────────┐     ┌─────────────────────┐      │
-│  │   CVE Input  │────▶│   TurboScraper   │────▶│ Evidence Collection │      │
-│  └─────────────┘     │   (Scrapy-based)  │     │    (21+ Sources)    │      │
-│                      └──────────────────┘     └─────────────────────┘      │
-│                                                           │                   │
-│                                                           ▼                   │
-│                                                ┌─────────────────────┐      │
-│                                                │ Feature Extraction   │      │
-│                                                │  (43+ Indicators)    │      │
-│                                                └─────────────────────┘      │
-│                                                           │                   │
-│                      ┌────────────────────────────────────┴──────────┐      │
-│                      ▼                    ▼                           ▼      │
-│           ┌──────────────────┐ ┌──────────────────┐      ┌──────────────┐  │
-│           │ Multi-Agent LLM  │ │ Thompson Sampling │      │Threat Intel  │  │
-│           │    Ensemble      │ │   Optimization    │      │  Analysis    │  │
-│           └──────────────────┘ └──────────────────┘      └──────────────┘  │
-│                      │                    │                           │      │
-│                      └────────────────────┴───────────────────────────┘      │
-│                                           │                                   │
-│                                           ▼                                   │
-│                                ┌─────────────────────┐                       │
-│                                │   Score Fusion &    │                       │
-│                                │ Decision Making     │                       │
-│                                └─────────────────────┘                       │
-│                                           │                                   │
-│                                           ▼                                   │
-│                                  ┌─────────────────┐                         │
-│                                  │ Detection Result │                         │
-│                                  └─────────────────┘                         │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    %% Input Layer
+    CVE[CVE Input] --> VAL[Input Validation]
+    
+    %% Data Collection Layer
+    VAL --> TS[TurboScraper<br/>Scrapy Engine]
+    TS --> EC[Evidence Collection<br/>21+ Sources]
+    
+    %% Evidence Sources
+    EC --> CISA[CISA KEV]
+    EC --> NVD[NVD Database]
+    EC --> EDB[ExploitDB]
+    EC --> GH[GitHub PoCs]
+    EC --> RE[Reddit/Twitter]
+    EC --> TI[Threat Intel]
+    EC --> HP[Honeypots]
+    EC --> DW[Darkweb]
+    
+    %% Feature Engineering
+    CISA --> FE[Feature Extraction<br/>43+ Indicators]
+    NVD --> FE
+    EDB --> FE
+    GH --> FE
+    RE --> FE
+    TI --> FE
+    HP --> FE
+    DW --> FE
+    
+    %% Multi-Agent Analysis
+    FE --> MA[Multi-Agent Ensemble]
+    MA --> FA[ForensicAnalyst<br/>Mixtral 8x22B]
+    MA --> PD[PatternDetector<br/>Claude Opus 4]
+    MA --> TA[TemporalAnalyst<br/>Llama 3.3 70B]
+    MA --> AE[AttributionExpert<br/>DeepSeek R1]
+    MA --> ME[MetaAnalyst<br/>Gemini 2.5 Pro]
+    
+    %% Optimization Layer
+    FA --> TS2[Thompson Sampling<br/>Dynamic Weights]
+    PD --> TS2
+    TA --> TS2
+    AE --> TS2
+    ME --> TS2
+    
+    %% Decision Layer
+    FE --> SF[Score Fusion]
+    TS2 --> SF
+    SF --> DT[Dynamic Threshold<br/>Decision]
+    DT --> RES[Detection Result]
+    
+    %% Caching System
+    TS -.-> SC[Smart Cache<br/>Hot/Warm/Cold]
+    SC -.-> TS
+    
+    %% Styling
+    classDef input fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef scraper fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef evidence fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef agent fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    classDef decision fill:#ffebee,stroke:#b71c1c,stroke-width:2px
+    classDef cache fill:#f5f5f5,stroke:#424242,stroke-width:1px,stroke-dasharray: 5 5
+    
+    class CVE,VAL input
+    class TS,EC scraper
+    class CISA,NVD,EDB,GH,RE,TI,HP,DW evidence
+    class FA,PD,TA,AE,ME agent
+    class DT,RES decision
+    class SC cache
 ```
 
-### Data Flow
+### Data Flow Pipeline
 
-1. **Input Layer**: CVE identifier validation and normalization
-2. **Data Collection Layer**: Parallel scraping from multiple sources
-3. **Feature Engineering Layer**: Evidence-based feature extraction
-4. **Analysis Layer**: Multi-agent LLM ensemble processing
-5. **Optimization Layer**: Thompson Sampling for weight adaptation
-6. **Decision Layer**: Score fusion and threshold-based classification
+```mermaid
+sequenceDiagram
+    participant User
+    participant CLI
+    participant Scraper
+    participant Cache
+    participant Features
+    participant Agents
+    participant Thompson
+    participant Decision
+    
+    User->>CLI: python zeroday.py CVE-2024-3400
+    CLI->>Cache: Check cache
+    
+    alt Cache Miss
+        CLI->>Scraper: Fetch evidence
+        Scraper->>Scraper: Parallel requests (21+ sources)
+        Scraper->>Cache: Store results
+    end
+    
+    Cache->>Features: Extract 43+ features
+    Features->>Agents: Send to 5 agents
+    
+    par Parallel Agent Analysis
+        Agents->>Agents: ForensicAnalyst
+        and
+        Agents->>Agents: PatternDetector
+        and
+        Agents->>Agents: TemporalAnalyst
+        and
+        Agents->>Agents: AttributionExpert
+        and
+        Agents->>Agents: MetaAnalyst
+    end
+    
+    Agents->>Thompson: Agent predictions
+    Thompson->>Thompson: Update Beta distributions
+    Thompson->>Decision: Weighted scores
+    Features->>Decision: Feature scores
+    Decision->>Decision: Score fusion (60/30/10)
+    Decision->>User: Zero-day: Yes/No (confidence)
+```
 
 ### Component Architecture
 
-```
-src/
-├── agents/                    # LLM Agent Implementations
-│   ├── base_agent.py         # Abstract base class for all agents
-│   ├── forensic.py           # ForensicAnalyst: Technical analysis
-│   ├── pattern.py            # PatternDetector: Historical patterns
-│   ├── temporal.py           # TemporalAnalyst: Timeline anomalies
-│   ├── attribution.py        # AttributionExpert: Threat actors
-│   └── meta.py               # MetaAnalyst: Cross-validation
-│
-├── ensemble/                  # Ensemble Coordination
-│   ├── multi_agent.py        # Parallel agent management
-│   ├── thompson.py           # Thompson Sampling implementation
-│   └── threshold_manager.py  # Dynamic threshold optimization
-│
-├── scraping/                  # Data Collection
-│   ├── turbo_scraper.py      # High-performance Scrapy scraper
-│   ├── comprehensive_scraper.py  # Fallback scraper
-│   └── smart_cache.py        # Multi-tier caching system
-│
-└── utils/                     # Utilities
-    ├── feature_extractor.py   # 43+ feature engineering
-    ├── llm_formatter.py       # Prompt engineering
-    └── credit_monitor.py      # API usage tracking
+```mermaid
+graph LR
+    subgraph "Source Code Structure"
+        direction TB
+        
+        subgraph "src/agents"
+            BA[base_agent.py]
+            FA2[forensic.py]
+            PD2[pattern.py]
+            TA2[temporal.py]
+            AE2[attribution.py]
+            ME2[meta.py]
+        end
+        
+        subgraph "src/ensemble"
+            MAG[multi_agent.py]
+            TSA[thompson.py]
+            THR[threshold_manager.py]
+        end
+        
+        subgraph "src/scraping"
+            TUS[turbo_scraper.py]
+            COM[comprehensive_scraper.py]
+            SMC[smart_cache.py]
+        end
+        
+        subgraph "src/utils"
+            FEX[feature_extractor.py]
+            LLF[llm_formatter.py]
+            CRM[credit_monitor.py]
+        end
+    end
+    
+    %% Connections
+    BA --> FA2
+    BA --> PD2
+    BA --> TA2
+    BA --> AE2
+    BA --> ME2
+    
+    MAG --> TSA
+    MAG --> THR
+    
+    TUS --> SMC
+    COM --> SMC
+    
+    %% Styling
+    classDef base fill:#e3f2fd,stroke:#1565c0
+    classDef impl fill:#f3e5f5,stroke:#6a1b9a
+    classDef core fill:#e8f5e9,stroke:#2e7d32
+    classDef util fill:#fff3e0,stroke:#ef6c00
+    
+    class BA base
+    class FA2,PD2,TA2,AE2,ME2 impl
+    class MAG,TSA,THR,TUS,COM core
+    class FEX,LLF,CRM,SMC util
 ```
 
 ## Key Features
@@ -179,11 +279,30 @@ We extract 43+ objective features across four categories:
 
 ### Thompson Sampling Optimization
 
-Our adaptive weight optimization uses Thompson Sampling to:
-- Maintain Beta distributions for each agent's performance
-- Balance exploration of new patterns with exploitation of known indicators
-- Adapt to evolving threat landscapes in real-time
-- Provide theoretical guarantees on regret bounds
+```mermaid
+graph TD
+    subgraph "Thompson Sampling Process"
+        A[Initialize Beta(1,1)<br/>for each agent] --> B[Sample weights<br/>from Beta distributions]
+        B --> C[Agents make<br/>predictions]
+        C --> D{Prediction<br/>Correct?}
+        D -->|Yes| E[Update α<br/>Success++]
+        D -->|No| F[Update β<br/>Failure++]
+        E --> G[Update Beta<br/>distributions]
+        F --> G
+        G --> B
+    end
+    
+    subgraph "Mathematical Foundation"
+        H[Beta Distribution]
+        I[θᵢ ~ Beta(αᵢ, βᵢ)]
+        J[E[θᵢ] = αᵢ/(αᵢ + βᵢ)]
+        K[Var[θᵢ] decreases<br/>as n increases]
+    end
+    
+    style A fill:#e3f2fd
+    style G fill:#c8e6c9
+    style H fill:#fff3e0
+```
 
 Implementation:
 ```python
@@ -375,12 +494,20 @@ CONFIDENCE_THRESHOLDS = {
 
 ### Performance Comparison
 
-| Method | Precision | Recall | F1-Score | Notes |
-|--------|-----------|--------|----------|-------|
-| **Our System** | **100%** | **70%** | **0.82** | With optimized thresholds |
-| Single LLM | 85% | 55% | 0.67 | Best individual agent |
-| Rule-based | 75% | 45% | 0.56 | CISA KEV + exploits only |
-| ML Baseline | 80% | 60% | 0.69 | Random Forest with features |
+```mermaid
+graph TD
+    subgraph "Performance Metrics"
+        A[Our System<br/>F1: 0.82] --> B[100% Precision<br/>70% Recall]
+        C[Single LLM<br/>F1: 0.67] --> D[85% Precision<br/>55% Recall]
+        E[Rule-based<br/>F1: 0.56] --> F[75% Precision<br/>45% Recall]
+        G[ML Baseline<br/>F1: 0.69] --> H[80% Precision<br/>60% Recall]
+    end
+    
+    style A fill:#4caf50,stroke:#1b5e20,stroke-width:3px
+    style C fill:#2196f3,stroke:#0d47a1,stroke-width:2px
+    style E fill:#ff9800,stroke:#e65100,stroke-width:2px
+    style G fill:#9c27b0,stroke:#4a148c,stroke-width:2px
+```
 
 ### Ablation Study
 
