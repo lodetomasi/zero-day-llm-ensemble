@@ -53,7 +53,7 @@ class EnhancedZeroDayDetector:
         self.cache = get_smart_cache()
         
         # Detection thresholds
-        self.detection_threshold = 0.65
+        self.detection_threshold = 0.45  # Lowered for better recall
         self.high_confidence_threshold = 0.8
         self.low_confidence_threshold = 0.4
         
@@ -631,12 +631,12 @@ class EnhancedZeroDayDetector:
                 config = json.load(f)
                 return config['detection_thresholds']['by_confidence']
         except:
-            # Fallback to default thresholds
+            # Fallback to default thresholds - optimized for better recall
             return {
-                'HIGH': 0.70,
-                'MEDIUM': 0.83,
-                'LOW': 0.67,
-                'VERY_LOW': 0.65
+                'HIGH': 0.50,      # Lowered from 0.70
+                'MEDIUM': 0.45,    # Lowered from 0.83
+                'LOW': 0.40,       # Lowered from 0.67
+                'VERY_LOW': 0.35   # Lowered from 0.65
             }
     
     def _get_confidence_level(self, confidence: float) -> str:

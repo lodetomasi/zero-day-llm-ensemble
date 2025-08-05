@@ -1,1 +1,0 @@
-{'url': 'https://www.exploit-db.com/search?cve=CVE-2023-1234', 'method': 'GET', 'status': 200, 'response_url': 'https://www.exploit-db.com/search?cve=CVE-2023-1234', 'timestamp': 1754412716.202684}

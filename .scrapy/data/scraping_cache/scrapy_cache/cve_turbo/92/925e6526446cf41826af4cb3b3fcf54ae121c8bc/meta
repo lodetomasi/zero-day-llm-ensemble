@@ -1,1 +1,0 @@
-{'url': 'https://www.google.com/search?q=%22CVE-2020-6507%22+exploit+poc+-site:nvd.nist.gov', 'method': 'GET', 'status': 302, 'response_url': 'https://www.google.com/search?q=%22CVE-2020-6507%22+exploit+poc+-site:nvd.nist.gov', 'timestamp': 1754410351.292686}

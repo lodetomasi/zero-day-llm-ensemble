@@ -1,5 +1,0 @@
-Content-Length: 0
-Alt-Svc: h3=":443"; ma=2592000
-Retry-After: 32
-Server: Caddy
-Date: Tue, 05 Aug 2025 16:51:16 GMT

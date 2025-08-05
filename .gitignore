@@ -20,11 +20,20 @@ dmypy.json
 
 # Cache and temporary files
 data/scraping_cache/
+data/cache/
+data/*/cache/
 cache/
 .cache/
 *.cache
 *.tmp
 *.temp
+*_cache/
+*_cache.json
+detection_cache.json
+scrapy_cache/
+hot_cache/
+warm_cache/
+cold_cache/
 
 # Large data files
 data/raw_evidence/
