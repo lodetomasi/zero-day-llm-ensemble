@@ -1,0 +1,202 @@
+[
+  {
+    "cve_id": "CVE-2024-0519",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-21412",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-23222",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-1580",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-21410",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-20399",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-0204",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-27198",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-27199",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-4577",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-4966",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-46805",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-21554",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-28121",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-2982",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-27997",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2023-3640",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2022-27925",
+    "is_zero_day": 1,
+    "source": "verified_public_sources"
+  },
+  {
+    "cve_id": "CVE-2024-3094",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-28995",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-29988",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-30051",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-25600",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-31497",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-6387",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2024-38112",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-36884",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-35708",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-32315",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-49103",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-22518",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-4911",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-38831",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-35082",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-40477",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2023-36802",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2022-33891",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2022-35914",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2022-36804",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  },
+  {
+    "cve_id": "CVE-2022-39197",
+    "is_zero_day": 0,
+    "source": "nvd_high_severity"
+  }
+]

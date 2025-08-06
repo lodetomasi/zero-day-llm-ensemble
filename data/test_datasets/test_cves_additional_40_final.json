@@ -1,0 +1,102 @@
+[
+  {
+    "cve_id": "CVE-2024-0519",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2024-21412",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2024-23222",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2024-27198",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2024-4577",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-20198",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-4966",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-46805",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-21554",
+    "expected": "regular",
+    "category": "regular_vulnerability"
+  },
+  {
+    "cve_id": "CVE-2023-28121",
+    "expected": "regular",
+    "category": "regular_vulnerability"
+  },
+  {
+    "cve_id": "CVE-2022-47966",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2022-41040",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2022-40684",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2024-3094",
+    "expected": "regular",
+    "category": "regular_vulnerability"
+  },
+  {
+    "cve_id": "CVE-2024-21887",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2024-6387",
+    "expected": "regular",
+    "category": "regular_vulnerability"
+  },
+  {
+    "cve_id": "CVE-2024-38112",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-36884",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-4911",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  },
+  {
+    "cve_id": "CVE-2023-38831",
+    "expected": "zero_day",
+    "category": "known_zero_day"
+  }
+]
